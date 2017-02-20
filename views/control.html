@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="shortcut icon" href="favicon.ico" />
+
+  <!--meta content-->
+  
+  <meta name="author" content="Ruth John (@rumyra)">
+  <meta name="dcterms.rightsHolder" content="Built by Ruth John, United Kingdom, 2015">
+  <title>Be A Web AV Artist | Rumyra</title>
+  <meta name="description" content="">
+
+  <link type="text/css" href="visuals.css" rel="stylesheet" media="screen" />
+  <script src="scripts/pusher.min.js"></script>
+  
+</head>
+<body class="page-vis">
+
+  <article id="controls">
+    <div class="image">
+      <img src="images/frontier01.jpg" id="the-image" />
+    </div>
+
+    <header><h2>Control Your Logo!</h2></header>
+
+    <form>
+      <div class="form-field">
+        <input checked type="radio" name="img-color" id="smartWeb" value="smartWeb" class="input-radio" />
+        <label for="smartWeb" class="label-radio">HAT</label>
+        <input type="radio" name="img-color" id="netscape" value="netscape" class="input-radio" />
+        <label for="netscape" class="label-radio">Ghost</label>
+      </div>
+      <div class="form-field field-three">
+        <input checked type="radio" name="img-effect" id="norm" value="norm" class="input-radio" />
+        <label for="norm" class="label-radio">Normal</label>
+        <input type="radio" name="img-effect" id="zoom-big" value="zoom-big" class="input-radio" />
+        <label for="zoom-big" class="label-radio">Zoom</label>
+        <input type="radio" name="img-effect" id="invert" value="invert" class="input-radio" />
+        <label for="invert" class="label-radio">Invert</label>
+      </div>
+
+    </form>
+
+  </article>
+
+<div id="pusher" data-key="{{PUSHKEY}}"></div>
+<script type="text/javascript">
+// pusher stuff
+var pushConfig = document.getElementById('pusher').dataset;
+var pusher = new Pusher(pushConfig.key, {encrypted:true});
+Pusher.channel_auth_endpoint = pushConfig.thisurl+'/pusher/auth';
+pusher.connection.bind('state_change', function(states) {
+    console.log("Pusher's current state is " + states.current);
+});
+// subscribe to channel
+var channel = pusher.subscribe('private-rubies');
+channel.bind('pusher:subscription_succeeded', function() {
+  console.log('subscription succeeded');
+  channel.trigger(
+    'client-audience_joined',
+    {
+      "person": uniqueID
+    }  
+  );
+});
+// when user taps option send data
+//create user id - FUCKING CHANGE THIS
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+var uniqueID = Date.now()+''+getRandomInt(0, 9999);
+var allLabels = document.getElementsByTagName('label');
+var imageEl = document.getElementById('the-image');
+for (var i=0; i<allLabels.length; i++) {
+  allLabels[i].addEventListener("click", function() { sendData(uniqueID, this.previousElementSibling); }, false);
+}
+// send data function
+function sendData(uniqueID, inputEl) {
+  channel.trigger(
+    'client-audience_data',
+    {
+      "person": uniqueID,
+      "param": inputEl.name, //at this point is only input-color
+      "setting": inputEl.value //can be white, red, green or blue
+    }
+  );
+  console.log(inputEl.value);
+  if (inputEl.value === 'netscape') {
+    imageEl.src = "images/frontier02.jpg";
+  } else if (inputEl.value === 'norm') {
+    imageEl.style.transform = "scale(1)";
+    imageEl.style.webkitFilter = "invert(0%)";
+    imageEl.style.filter = "invert(0%)";
+  } else if (inputEl.value === 'zoom-big') {
+    imageEl.style.transform = "scale(1.3)";
+  } else if (inputEl.value === 'invert') {
+    imageEl.style.webkitFilter = "invert(100%)";
+    imageEl.style.filter = "invert(100%)";
+  } else {
+    imageEl.src = "images/frontier01.jpg";
+  }
+}
+//mk robot zoom-norm zoom-big
+// if (window.DeviceOrientationEvent) {
+//   window.addEventListener('deviceorientation', deviceOrientationHandler, false);
+// }
+var rotation = "rotate(0deg) rotate3d(1,0,0, 0deg)";
+// var sendRotate = window.setInterval(function() {
+//   channel.trigger(
+//     'client-audience_data',
+//     {
+//       "person": uniqueID,
+//       "param": "view",
+//       "setting": rotation
+//     }
+//   );
+// }, 1000);
+// var deviceOrientationData;
+// function deviceOrientationHandler(evt) {
+//   deviceOrientationData = evt;
+//   console.log(deviceOrientationData);
+//   rotation = "rotate("+ evt.alpha +"deg) rotate3d(1,0,0, "+ (evt.gamma * -1)+"deg)";
+//   imageEl.style.webkitTransform = rotation;
+//   imageEl.style.transform = rotation;
+// }
+// deviceOrientationHandler();
+</script>
+</body>
+</html>

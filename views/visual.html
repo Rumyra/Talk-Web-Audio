@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="shortcut icon" href="favicon.ico" />
+
+  <!--meta content-->
+  
+  <meta name="author" content="Ruth John (@rumyra)">
+  <meta name="dcterms.rightsHolder" content="Built by Ruth John, United Kingdom, 2015">
+  <title>How to be a Web AV Artist | Rumyra</title>
+  <meta name="description" content="">
+
+  <link type="text/css" href="visuals.css" rel="stylesheet" media="screen" />
+  <script src="scripts/pusher.min.js"></script>
+
+  <script src="scripts/d3.min.js"></script>
+
+</head>
+<body class="page-vismain">
+  <section id="screen"></section>
+
+
+  <audio id="audio-track" src="media/warren.m4a"></audio>
+  <button id="play-audio">Play/Pause Audio</button>
+  <p>JOIN IN! Go To <a href="https://goo.gl/UDLgh4">goo.gl/UDLgh4</a><br /><span>made by @Rumyra</span></p>
+
+<div id="pusher" data-key="{{PUSHKEY}}"></div>
+<script type="text/javascript">
+// pusher stuff
+var pushConfig = document.getElementById('pusher').dataset;
+var pusher = new Pusher(pushConfig.key, {encrypted:true});
+Pusher.channel_auth_endpoint = pushConfig.thisurl+'/pusher/auth';
+pusher.connection.bind('state_change', function(states) {
+    console.log("Pusher's current state is " + states.current);
+});
+// subscribe to channel
+var channel = pusher.subscribe('private-rubies');
+channel.bind('pusher:subscription_succeeded', function() {
+  console.log('subscription succeeded');
+});
+// audio stuff --------------------------------------------
+const soundEl = document.getElementById('audio-track'),
+  playButton = document.getElementById('play-audio');
+
+// set up audio context
+var audioContext = window.AudioContext;
+var audioAPI = new audioContext();
+
+// variables
+var audioBuffer,
+    analyserNode = audioAPI.createAnalyser(),
+    frequencyData = new Uint8Array(128);
+    audioMp3 = audioAPI.createMediaElementSource(soundEl);
+    analyserNode.fftSize = 256;
+
+var playAudio = function playAudio() {
+  audioMp3.connect(analyserNode);
+  audioMp3.connect(audioAPI.destination);
+  analyserNode.connect(audioAPI.destination);
+  soundEl.play();
+  animateSvgs();
+}
+//play track
+playButton.onclick = function() {
+  if (soundEl.paused) {
+    playAudio();
+  } else {
+    soundEl.pause();
+  }
+}
+window.addEventListener('keyup', function(e) {
+  if (e.keyCode === 86) {
+    if (soundEl.paused) {
+      playAudio();
+    } else {
+      soundEl.pause();
+    }
+  }
+}, false);
+
+
+
+function oneGem(id) {
+  this.id = id;
+  this.type = 'smartWeb';
+  this.view = "norm";
+}
+var allGemParams = [],
+  screen = document.getElementById('screen'),
+  firstGem = new oneGem(000);
+// make at least one gem
+allGemParams.push(firstGem);
+// createGem(000, screen);
+function updateGemArray(id, param, value) {
+  for (var i=0; i<allGemParams.length; i++) {
+    if (id === allGemParams[i].id) {
+      switch (param) {
+        case 'img-color':
+          allGemParams[i].type = value;
+        break;
+        case 'img-effect':
+          allGemParams[i].view = value;
+        break;
+      }
+    }
+  }
+}
+channel.bind('client-audience_joined', function(data) {
+  // createGem(data.person, screen);
+  var thisGem = new oneGem(data.person);
+  allGemParams.push(thisGem);
+  
+  restart();
+  updateSvgs();
+});
+channel.bind('client-audience_data', function(data) {
+  updateGemArray(data.person, data.param, data.setting);
+  
+  restart();
+  updateSvgs();
+});
+// high 600 - 250 mid 250 - 100 low 100 - 0
+function updateSvgs() {
+
+  gem
+    .attr('src', d => 
+      d.type === 'netscape' ? 'images/frontier02.jpg' : 'images/frontier01.jpg'
+    )
+    .style('filter', d => 
+      d.view === 'invert' ? 'invert(100%)' : 'invert(0%)'
+    )
+    .attr('width', d =>
+      d.view === 'zoom-big' ? '150' : '100'
+    )
+    // .style('transform', transform)
+
+
+}
+function animateSvgs() {
+  requestAnimationFrame(animateSvgs);
+  analyserNode.getByteFrequencyData(frequencyData);
+  // Animation stuff--------------------------------
+
+  gem.style('opacity', (d,i) => {
+    return (frequencyData[i]/d)+0.1;
+  })
+
+}
+// d3 stuff -------------------------------------
+// var tempAr = [1,2,3,4,5,6,7];
+// for (var i=0; i<tempAr.length; i++) {
+//   createGem(screen);
+// }
+var allDivs = d3.select("#screen");
+var gem = allDivs.selectAll('.gem')
+// set layout
+var w = window.innerWidth;
+var h = window.innerHeight;
+var force = d3.layout
+  .force()
+  .linkDistance(0)
+  .charge(-350)
+  .nodes(allGemParams)
+  .size([w,h])
+  .on("tick", tick);
+
+function tick() {
+  d3.selectAll(".gem")
+    .style('transform', transform)
+}
+
+
+function transform(d) {
+  // var s = d.view === 'zoom-big' ? 1.5 : 1
+  return `translate(${d.x}px, ${d.y}px)`
+}
+
+var nodes = force.nodes();
+
+function restart() {
+
+  gem = gem.data(allGemParams)
+
+  gem.enter()
+    .append('img')
+    .attr('class', 'gem')
+    .attr('src', 'images/frontier01.jpg')
+
+  gem.exit()
+    .remove()
+
+  force.start();
+}
+restart()
+</script>
+</body>
+</html>

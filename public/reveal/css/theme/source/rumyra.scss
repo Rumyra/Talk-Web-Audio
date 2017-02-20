@@ -1,0 +1,144 @@
+/**
+ * Rumyra theme for reveal.js.
+ *
+ * Copyright (C) 2016 Ruth John
+ */
+
+/* Classes you can use
+* .alternate on section makes background dark and font light
+* .plain on img = no border
+* .back-img puts outline on text so it shows
+* .
+* .
+*/
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+
+// Base settings for all themes that can optionally be
+// overridden by the super-theme
+
+
+// colours
+$brown: #463c34;
+$green: #acc486;
+$orange: #ea8d88;
+$purple: #8c4c6f;
+$cream: #eee5c4;
+$grey: #bebebe;
+$white:#efefef;
+$black:#111;
+
+// Fonts
+// Include theme-specific fonts
+@font-face {
+  font-family: 'Montserrat';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../../../fonts/Montserrat/Montserrat-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-weight: bold;
+  font-style: normal;
+  src: url('../../../fonts/Montserrat/Montserrat-Bold.ttf') format('truetype');
+}
+// Include theme-specific fonts
+@font-face {
+  font-family: 'Sac';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../../../fonts/Sacramento/Sacramento-Regular.ttf') format('truetype');
+}
+
+
+$backgroundColor: $white;
+// Primary/body text
+$mainFont: 'Sac', cursive;
+$mainFontSize: 36px;
+$mainColor: $white;
+
+// Vertical spacing between blocks of text
+$blockMargin: 20px;
+
+// Headings
+$headingMargin: 0 0 $blockMargin 0;
+$headingFont: 'Montserrat', Impact, sans-serif;
+$headingColor: $white;
+$headingLineHeight: 1.3;
+$headingLetterSpacing: -0.04em;
+$headingTextTransform: uppercase;
+$headingTextShadow: none;
+$headingFontWeight: bold;
+$heading1TextShadow: $headingTextShadow;
+
+$heading1Size: 2em;
+$heading2Size: 1.6em;
+$heading3Size: 1.4em;
+$heading4Size: 1em;
+
+// Links and actions
+$linkColor: blue;
+$linkColorHover: lighten( $linkColor, 20% );
+
+// Text selection
+$selectionBackgroundColor: #FF5E99;
+$selectionColor: #fff;
+
+// Generates the presentation background, can be overridden
+// to return a background image or gradient
+@mixin bodyBackground() {
+  background: radial-gradient(circle,white,black);
+}
+// ---------------------------------------------
+
+// Fix links so they are not cut off
+.reveal a {
+	line-height: 1.3em;
+}
+
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+.reveal {
+  
+  .slides {text-align:right;}
+
+  h1 {border-bottom: 2px solid $white;}
+  p {font-size:2em;}
+
+} 
+
+.reveal .slides pre code {
+  padding: $blockMargin;
+  font-size: 24px;
+  line-height: 120%;
+}
+
+.reveal {opacity:0.95;}
+// Dif colours
+.slide-background {background-blend-mode: multiply; filter: grayscale(0.2) opacity(0.9);}
+
+// speaker notes
+#current-slide {width: 45% !important;}
+#upcoming-slide {width: 55% !important;}
+#speaker-controls {width: 55% !important;}
+
+
+// specific to av talk
+.reveal .slides .lists {
+  ul {list-style:none; margin-left:0px;}
+  div.list-left {float:left;text-align: left;}
+  div.list-right {
+    h1, ul li {text-align:right;}
+  }
+  p.flash {animation:flash 1s infinite;}
+}
+
+@keyframes flash {
+  0% {opacity:1;}
+  100% {opacity:0;}
+}
+
+

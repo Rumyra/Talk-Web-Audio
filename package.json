@@ -1,0 +1,30 @@
+{
+  "name": "Talk-Web-Audio",
+  "version": "1.0.0",
+  "description": "Talk all about the web audio API",
+  "main": "server.js",
+  "repository": {
+    "url": "git@github.com:Rumyra/Talk-Web-Audio.git",
+    "type": "git"
+  },
+  "author": "Ruth John <rumyra@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "htmling": "^0.0.7",
+    "pusher": "^1.5.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.17.5",
+    "dotenv": "^2.0.0",
+    "node-sass": "^3.10.1",
+    "nodemon": "^1.11.0"
+  },
+  "scripts": {
+    "start": "nodemon server.js",
+    "build-css": "node-sass --output-style compressed -o public/css src/sass",
+    "build-theme": "node-sass --output-style compressed -o public/reveal/css/theme public/reveal/css/theme/source",
+    "watch-css": "nodemon -e scss -x \"npm run build-theme\""
+  }
+}

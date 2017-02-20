@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--char set (lang above)-->
+  <meta charset="utf-8">
+
+  <!--device/browser shizzle-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--meta content-->
+  <link rel="shortcut icon" href="favicon.ico" />
+  
+  <meta name="author" content="Ruth John (@rumyra)">
+  <meta name="dcterms.rightsHolder" content="Ruth John for Rumyra Ltd, United Kingdom, 2015">
+  <title>The Web Audio API</title>
+
+  <link rel="stylesheet" href="reveal/css/reveal.css">
+  <link rel="stylesheet" href="reveal/css/theme/rumyra.css" id="theme">
+  <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
+  <script src="reveal/js/reveal.js"></script>
+  <!-- <script src="scripts/d3.min.js"></script> -->
+
+  <!-- <script src="https://js.pusher.com/3.0/pusher.min.js"></script> -->
+  <!-- <link rel="stylesheet" href="visuals.css"> -->
+
+  <!--<style type="text/css">
+    #screen {
+      position: absolute; top:0px; left:0px;
+      margin: 0px; padding: 0px;
+      width:100vw; height:100vh;
+      background-color: black;
+      display: none;
+    }
+    svg {width: 100vw; height: 100vh; padding:0px; margin:0px;}
+  </style>-->
+  
+</head>
+
+<!--
+$brown: #463c34
+$green: #acc486
+$orange: #ea8d88
+$purple: #8c4c6f
+
+$cream: #eee5c4
+$grey: #bebebe
+-->
+
+<body class="talk">
+  <div class="reveal">
+    <div class="slides">
+      <section>
+
+        <section data-background-color="#8c4c6f" data-state="no-visuals">
+          <h1>Web Audio</h1>
+          <h2>And a little MIDI</h2>
+          <p>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</p>
+          <aside class="notes">
+          </aside>
+        </section>
+
+        <!--COOL DEMO HERE-->
+        <section data-background-color="#8c4c6f" data-state="vis_speakers">
+          <audio src="media/warren.m4a" data-autoplay></audio>
+          <aside class="notes">
+            <p>DANCE!</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-background-image="images/me.jpg" data-state="no-visuals">
+          <h1>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</h1>
+          <p>Hello</p>
+          <aside class="notes">
+            <p>Hello Web Game Day ... How are we doing today?</p>
+            <p>So this is the part of the talk where I introduce myself, and tell you what I do and why I should be up here talking to you about Web Audio and not anyone else.</p>
+            <p>Well here's me with a laptop - pretty qualified. I've been known to write code.</p>
+            <p>I've been doing that for a while now</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-state="no-visuals" data-background-image="images/meProject.png">
+          <h1>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</h1>
+          <p>Hello</p>
+          <aside class="notes">
+            <p>This is me projecting visuals around my city. With a laptop, a projector, a midi controller and hand coded browser software.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-state="no-visuals" data-background-image="images/meLights.jpg">
+          <h1>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</h1>
+          <p>Hello</p>
+          <aside class="notes">
+            <p>This is me at a hardware hackday I run with my friend Gordon, making a string of lights flash in time to sound</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-state="no-visuals" data-background-image="images/meLights.jpg">
+          <h1>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</h1>
+          <p>Hello</p>
+          <aside class="notes">
+            <p>And this is me eating a borrito. Totally qualified to talk about Web Audio.</p>
+            <p>Normally I would say let me show you - so please, let me show you.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-state="no-visuals">
+          <h1>Website playing background music</h1>
+          <aside class="notes">
+            <p>A website playing background music - the modern version of which is something like this:</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-state="no-visuals">
+          <h1>Website with annoying advert popup</h1>
+          <aside class="notes">
+            <p>An annoying advert that autoplays - yes I know.</p>
+            <p>If someone asks you to build this btw, stand up and walk away. You're a developer, there is work for you. Do the right thing. Stand up. Walk away.</p>
+            <p>I'm going to get back to addressing this subject of audio on websites. But before I do - check some of this out, I'm sure we've all seen some of the amazing things we *can* now do.</p>
+          </aside>
+        </section>
+
+        <section>
+          <h1>Appediator</h1>
+          <p>Jake Albergh</p>
+          <aside class="notes">
+            <p>Appediator</p>
+          </aside>
+        </section>
+
+        <section>
+          <h1>Sythesisor</h1>
+          <p>Brighton peeps</p>
+          <aside class="notes">
+            <p>Appediator</p>
+          </aside>
+        </section>
+
+        <section>
+          <h1>Art installation</h1>
+          <p>Brighton peeps</p>
+          <aside class="notes">
+            <p>Appediator</p>
+          </aside>
+        </section>
+
+        <section>
+          <h1>808</h1>
+          <p>Gregor Adams</p>
+          <aside class="notes">
+            <p>Growing trend to replicate synths in a browser</p>
+          </aside>
+        </section>
+
+        <section>
+          <h1>All</h1>
+          <aside class="notes">
+            <p>808 drum machine</p>
+          </aside>
+        </section>
+
+        <section>
+          <h1>These</h1>
+          <aside class="notes">
+            <p>808 drum machine</p>
+          </aside>
+        </section>
+
+        <section>
+          <h1>Synths!</h1>
+          <aside class="notes">
+            <p>808 drum machine</p>
+          </aside>
+        </section>
+
+        <section>
+          <h1>So where do you even begin</h1>
+          <p>MDN docs</p>
+          <aside class="notes">
+            <p>MDN docs of methods, functions, properties, events. I mean what even is a cent. Top tip - it's not a denomination of a currency.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-background-image="images/venn.png" data-state="no-visuals">
+          <h1>Who's seen this?</h1>
+          <p>Source: @ThePracticalDev</p>
+          
+          <aside class="notes">
+            <p>Who saw this venn diagram going round the internet a couple of weeks ago?</p>
+            <p>OK so I'm not doing the keynote but I am a CTO of my own company of which I am also the director, and sole employee, and sole share holder of one share.</p>
+            <p>Really tho I was having talk anxiety, I mean there's nothing really useful in this talk.</p>
+            <p>So let's use this as a guide - right things I must say for this to be useful are on the right - so that's duct tape, workarounds, coffee and bikeshedding.</p><p>Thing's I have to avoid are on the left - orchestration, operational excellence, analytics and chat ops.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" class="lists" data-state="no-visuals">
+          <div class="list-left">
+            <ul>
+              <h1>Avoid</h1>
+              <li><p>Analytics</p></li>
+              <li><p>Operational Excellence</p></li>
+              <li><p>Chat Ops</p></li>
+              <li><p>Orchestration</p></li>
+            </ul>
+          </div>
+          <div class="list-right">
+            <ul>
+              <h1>Include</h1>
+              <li><p>Duct tape</p></li>
+              <li><p>Workarounds</p></li>
+              <li><p>Bikeshedding</p></li>
+              <li><p>Coffee</p></li>
+            </ul>
+          </div>
+          <aside class="notes">
+            <p>Great - now we've got that sorted and my talk anxiety out the way and this becomes a super useful talk - let's begin!</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-background-image="images/vj.jpg" data-state="no-visuals">
+          <h1>What is an AV Artist?</h1>
+          <p>AV stands for audio visual</p>
+          <aside class="notes">
+            <p>A/V stands for audio visual. SO this means audio visual artist. Taking some audio and making visuals from it OR putting visuals to it. Not too much of the audio work, another name for this is a VJ.</p>
+            <p>Who remembers this?...</p>
+            <p>Australia different - talk about VJ - add funny gif</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-background-image="images/winamp.jpg" data-state="no-visuals">
+          <h1>Winamp</h1>
+          <p>The greatest music player</p>
+          <audio src="media/llama.mp3" data-autoplay></audio>
+          <aside class="notes">
+            <p>This is winamp - the greatest mp3 player of all time - simple, lightweight, free</p>
+            <p>But that wasn't the best bit...</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-background-image="media/winampVis.gif" data-state="no-visuals">
+          <h1>Visualisations</h1>
+          <p>Went in time to the music</p>
+          <aside class="notes">
+            <p>Probably the single most influencial thing for any VJ of my generation</p>
+            <p>Visuals that went in time to the music!</p>
+            <p>I am going to go through some of the ways of making these in a browser - and how I came to start building my own software to do so. What's the first thing we need</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-background-image="images/audioCode.jpg" data-state="no-visuals">
+          <h1>Audio</h1>
+          <p>Web Audio API</p>
+          <aside class="notes">
+            <p>Now there's quite a few ways we can get audio in a browser. Especially with the help of the web audio api.</p>
+            <p>Create oscillator - saw this earlier - sound wave, pitch, type of wave.</p>
+            <p>Buffer the sound - load it in from a file.</p>
+            <p>Load them from the DOM</p>
+            <p>Stream - so your audio or mic.</p>
+            <p>These two latter are probably most suitable - easpecially that last one - no line in functionality.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-state="vis_spectrum_sound">
+          <p>Demo with sound</p>
+          <audio src="media/warren.m4a" data-autoplay></audio>
+          <aside class="notes">
+            <p>This is using a sound file</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-state="vis_spectrum_mic">
+        <p>Demo with mic</p>
+          <aside class="notes">
+            <p>This is piping in the sound from my microphone</p>
+            <p>So that's great but how did we make that happen?</p>
+            <p>OK so we've got sound - now we need to analyse it!</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-state="no-visuals">
+          <h1>Create Visuals</h1>
+          <p>Analyse Sound</p>
+          <aside class="notes">
+            <p>Next...</p>
+          </aside>
+        </section>
+
+        <!--either do it this way - or with visuals-->
+        <!-- <section data-background-color="#acc486" data-background-image="images/ben.jpg">
+          <h1>Ben Foxall</h1>
+          <p>@benjaminbenben</p>
+          <aside class="notes">
+            <p>Did earlier - he created sound with an oscillator - now I chatted with Ben</p>
+          </aside>
+        </section> -->
+        
+        <section data-background-color="#acc486" class="lists" data-state="no-visuals">
+          <audio src="media/XPexclaim.m4a" data-autoplay></audio>
+          <div class="list-left">
+            <ul>
+              <h1>Avoid</h1>
+              <li><p class="flash">Analytics</p></li>
+              <li><p>Operational Excellence</p></li>
+              <li><p>Chat Ops</p></li>
+              <li><p>Orchestration</p></li>
+            </ul>
+          </div>
+          <div class="list-right">
+            <ul>
+              <h1>Include</h1>
+              <li><p>Duct tape</p></li>
+              <li><p>Workarounds</p></li>
+              <li><p>Bikeshedding</p></li>
+              <li><p>Coffee</p></li>
+            </ul>
+          </div>
+          <aside class="notes">
+            <p>What? Oh ok I'm not allowed to talk about analytics - ok well I have a whole talk to go I can still pull this back.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-state="no-visuals">
+          <h1>Create Visuals</h1>
+          <p>Analyse Sound</p>
+          <aside class="notes">
+            <p>To begin with we need to analyse the sound</p>
+            <p>This is probably the biggest and most important part of the sound stuff we're going to do</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-background-image="images/analyserCode.jpg" data-state="no-visuals">
+          <h1>Analysing sound</h1>
+          <p>Web Audio API</p>
+          <aside class="notes">
+            <p>Again we can do this is a browser with the web audio api - it has an analyser node. This returns time data and frequency data.</p>
+            <p>Nodes</p>
+            <p>Frequencies human ear</p>
+            <p>Analyser gives back array - bigger array better resolution</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-state="vis_spectrum_sound">
+          <aside class="notes">
+            <p>As this is is a bunch of 'i' elements that I change the height on depending on the volume value of the frequency.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-background-image="images/loopingCode.jpg" data-state="no-visuals">
+          <h1>HTML & CSS</h1>
+          <p>Simple</p>
+          <aside class="notes">
+            <p>So this is our really basic example. Take some repeating DOM elements, loop over them and match them up with an item in our frequencyData array.</p>
+            <p>When the volume for that frequency gets higher, the elements height gets bigger.</p>
+            <p>Just using the DOM - there's plenty we can do with that</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-background-image="images/bridget.jpg" data-state="no-visuals">
+          <h1>Bridget Riley</h1>
+          <p>Super cool artist</p>
+          <aside class="notes">
+            <p>This is Bridget Riley - she's an artist</p>
+            <p>I discovered her in Scotland earlier this year - I wanted to visualise her art - something like this:</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-state="vis_bridget_squares">
+          <aside class="notes">
+            <p>This is just a few sections - flexboxed - expanding to the returned frequency data</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-state="vis_bridget_tri">
+          <aside class="notes">
+            <p>Just a couple of examples of DOM thangs</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" class="lists" data-state="no-visuals">
+          <div class="list-right">
+            <ul>
+              <h1>Lovely CSS Thangs</h1>
+              <li><p>Transforms</p></li>
+            </ul>
+          </div>
+          <aside class="notes">
+            <p>Because we are simply using the DOM we have all the features of code.</p>
+            <p>We've got transforms - I wanted to do some symmetry - so I thought I'd try and create a function wich stole what was in the DOM and reflected and rotated it.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-state="vis_symmetry">
+          
+          <aside class="notes">
+            <p>I wondered if I could put a gif in</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-state="vis_symmetry_gif">
+          
+          <aside class="notes">
+            <p>Yes I could</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" class="lists" data-state="no-visuals">
+          <div class="list-right">
+            <ul>
+              <h1>Lovely CSS Thangs</h1>
+              <li><p>Blends</p></li>
+              <li><p>Filters</p></li>
+            </ul>
+          </div>
+          <aside class="notes">
+            <p>Because we are simply using the DOM we have all the features of code.</p>
+            <p>We've got Filters and Blends.</p>
+            <p>All very suited to what we want to do.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-state="vis_speakers">
+          <aside class="notes">
+            <p>DANCE!</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-background-image="images/filterCode.jpg" data-state="no-visuals">
+          <h1>Filters & Blend modes</h1>
+          <aside class="notes">
+            <p>These are sort of special transparency layer modes for your elements. If you're a user of photoshop you get a similar thing on layers.</p>
+            <p>Although not particularly suited to our DOM element examples here, I couldn't go by without mentioning them.</p>
+            <p>They add filters to images, video - that's super important.</p>
+            <p>Things like greyscale, hue shift, inverting</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" class="lists" data-state="no-visuals">
+          <div class="list-right">
+            <ul>
+              <h1>Lovely CSS Thangs</h1>
+              <li><p>Custom Properties</p></li>
+            </ul>
+          </div>
+          <aside class="notes">
+            <p>We've got Custom Properties, Filters and Blends.</p>
+            <p>All very suited to what we want to do.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-background-image="images/flower.gif" data-state="no-visuals">
+          <aside class="notes">
+            <p>So here I'm using much the same method - just a bunch of HTML elements sitting in the DOM.</p>
+            <p>But we have some fancy new feature which are nice to play with...</p>
+          </aside>
+        </section>
+
+        <!-- make sure code has a workaround-->
+        <section data-background-color="#acc486" data-background-image="images/cusPropCode.jpg" data-state="no-visuals">
+          <h1>Custom Properties</h1>
+          <aside class="notes">
+            <p>Custom properties are basically variables - if you've used pre-processors. You delcare them in the top of your CSS, in a root block, beginning with a double dash.</p>
+            <p>Now the great thing about these, is you can reference them directly in your JavaScript and by doing so they update, realtime, within your CSS.</p>
+            <p>You may have noticed the biggest caveat with all these examples - especially that flower.</p>
+            <p>Performance</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" class="lists" data-state="no-visuals">
+          <audio src="media/XPcritical.m4a" data-autoplay></audio>
+          <div class="list-left">
+            <ul>
+              <h1>Avoid</h1>
+              <li><p><del>Analytics</del></p></li>
+              <li><p class="flash">Operational Excellence</p></li>
+              <li><p>Chat Ops</p></li>
+              <li><p>Orchestration</p></li>
+            </ul>
+          </div>
+          <div class="list-right">
+            <ul>
+              <h1>Include</h1>
+              <li><p>Duct tape</p></li>
+              <li><p>Workarounds</p></li>
+              <li><p>Bikeshedding</p></li>
+              <li><p>Coffee</p></li>
+            </ul>
+          </div>
+          <aside class="notes">
+            <p>Ha - brilliant - yes thank you talk monitor!</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-background-image="images/ben2.jpg" data-state="no-visuals">
+          <h1>Performance</h1>
+          <p>This is Ben</p>
+          <aside class="notes">
+            <p>This is Ben Foxall - you may know him - he does talks with phones.</p>
+            <p>So I was chatting to Ben</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" class="lists" data-state="no-visuals">
+          <audio src="media/XPchord.m4a" data-autoplay></audio>
+          <div class="list-left">
+            <ul>
+              <h1>Avoid</h1>
+              <li><p><del>Analytics</del></p></li>
+              <li><p><del>Operational Excellence</del></p></li>
+              <li><p class="flash">Chat Ops</p></li>
+              <li><p>Orchestration</p></li>
+            </ul>
+          </div>
+          <div class="list-right">
+            <ul>
+              <h1>Include</h1>
+              <li><p>Duct tape</p></li>
+              <li><p>Workarounds</p></li>
+              <li><p>Bikeshedding</p></li>
+              <li><p>Coffee</p></li>
+            </ul>
+          </div>
+          <aside class="notes">
+            <p>Facepalm - I am not going to make it to the end of this talk am I - right i am not allowed to mention orchestration - that should be pretty easy right?</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-background-image="images/ben2.jpg" data-state="no-visuals">
+          <h1>Performance</h1>
+          <p>This is Ben</p>
+          <aside class="notes">
+            <p>So yes I was 'talking' to Ben.</p>
+            <p>He was helping me with one particular interactive piece i was doing. Blog post.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" class="lists" data-state="no-visuals">
+          <div class="list-right">
+            <ul>
+              <h1>d3.js</h1>
+              <li><p>Data</p></li>
+              <li><p>DOM</p></li>
+              <li><p>Maths</p></li>
+              <li><p>SVGs</p></li>
+            </ul>
+          </div>
+          <aside class="notes">
+            <p>Very much in the don't use libraries until I have too.</p>
+            <p>But I started digging around and it had great methods - for creating Dom elements, for simply doing maths on arrays which could come in useful with this frequency data we have.</p>
+            <p>I mean without even trying you get:</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-background-image="images/superGraphic.jpg" data-state="no-visuals">
+          <h1>Super Grahic</h1>
+          <p>Tim Leong</p>
+          <aside class="notes">
+            <p>This is the inspiration for my d3 set - it's a book called super graphic by tim leong - it 'charts' data from comics and graphic novels in a lovely visual way</p>
+          </aside>
+        </section>        
+
+        <section data-background-color="#acc486" data-state="vis_sunburst">
+          <aside class="notes">
+            <p>So we can easily attach each item in our frequency array within d3 - so here I'm drawing SVGs in a sunburst shape.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-state="vis_spiral">
+          <aside class="notes">
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-state="vis_spots">
+          <aside class="notes">
+            <p>And as Nadee pointed out yesterday we can add blend modes</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-state="vis_spots_blend">
+          <aside class="notes">
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-state="vis_chart_better">
+          <aside class="notes">
+            <p>Let's take this vis</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-state="no-visuals">
+          <h1>Analysis</h1>
+          <p>Data can be better</p>
+          <aside class="notes">
+            <p>I want to go back to the analysis for a second - now I've only just started thinking about this - let alone doing something about this</p>
+            <p>Imagine beat detection, high low mid frequency detection, brightness etc...</p>
+            <p>Data we get back isn't so great - 0-20k - 0-5k linear -> log</p>
+          </aside>
+        </section>
+
+        <!-- <section data-background-color="#acc486" data-state="vis_chart">
+          <aside class="notes">
+            <p>Let's take this vis</p>
+          </aside>
+        </section> -->
+
+        
+
+        <section data-background-color="#ea8d88" data-background-image="images/codevember.jpg" data-state="no-visuals">
+          <h1>We Got Visuals</h1>
+          <p>What's Next?</p>
+          <aside class="notes">
+            <p>So many things we can do in the DOM</p>
+            <p>Right - ok we've covered a few techniques there to make the visuals, and I'm going to skip over the software side for just a moment and head straight into...</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#ea8d88" data-state="no-visuals">
+          <h1>Web MIDI API</h1>
+          <p>Controlling</p>
+          <aside class="notes">
+            <p>MIDI is not sound - the bleepy noises you relate to MIDI are not actually MIDI - that is digital audio.</p>
+            <p>MIDI is a standardised data protocol that electronic instruments all use so musical instrument manufacturers, software manufacturers etc can all make sure equipment etc... that's compatible.</p>
+            <p>The first specs came out in 1983 - huge rise of popularity in electronic instruments in the 70s and indutry experts all got together and made the spec, so all thses instruments could talk to each other and the recording studios they found them in</p>
+            <p>I could do a whole talk *just* about MIDI - I have, a lot, this year. You can find it online in some shape or form.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#ea8d88" data-background-image="images/keyboard.jpg" data-state="no-visuals">
+          <h1>MIDI Instrument</h1>
+          <p>Onboard Audio</p>
+          <aside class="notes">
+            <p>This is a musical keyboard</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#ea8d88" class="lists" data-state="no-visuals">
+          <audio src="media/XPbatt.m4a" data-autoplay></audio>
+          <div class="list-left">
+            <ul>
+              <h1>Avoid</h1>
+              <li><p><del>Analytics</del></p></li>
+              <li><p><del>Operational Excellence</del></p></li>
+              <li><p><del>Chat Ops</del></p></li>
+              <li><p class="flash">Orchestration</p></li>
+            </ul>
+          </div>
+          <div class="list-right">
+            <ul>
+              <h1>Include</h1>
+              <li><p>Duct tape</p></li>
+              <li><p>Workarounds</p></li>
+              <li><p>Bikeshedding</p></li>
+              <li><p>Coffee</p></li>
+            </ul>
+          </div>
+          <aside class="notes">
+            <p>I've actually failed</p>
+            <p>But wait - have I? For the keen eyed among you...</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#ea8d88" data-background-image="images/keyboard.jpg" data-state="no-visuals">
+          <h1>MIDI Instrument</h1>
+          <p>Onboard Audio</p>
+          <aside class="notes">
+            <p>This is a musical keyboard - it's MIDI enabled. This means when you play it, it sends MIDI data, it has a USB port and this is how you receive or send that data.</p>
+            <p>This is a MIDI instrument - the big difference between this and this...</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#ea8d88" data-background-image="images/launchpad.jpg" data-state="no-visuals">
+          <h1>MIDI Controller</h1>
+          <p>No Onboard Audio</p>
+          <aside class="notes">
+            <p>This is a MIDI controller - this a Novation Launchpad. It does not have any onboard audio.</p>
+            <p>You would use it to control audio from elsewhere, like software - when you press the buttons it send MIDI data.</p>
+            <p>This is the crux of the Web MIDI API - just picking up on that data and deciding what to do with it.</p>
+            <p>There are loads of MIDI controllers out there</p>
+            <p>I have a few - this is my handbag MIDI controller. It's actually bluetooth, so I don't need a cable to hook it up to my machine so that's pretty sweet.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#ea8d88" data-state="vis_vjing">
+          <h1>Demo</h1>
+          <p>MIDI</p>
+          <aside class="notes">
+            <p>There's one small - ok it's massive thing that I didn't put in earlier - that's video.</p>
+            <p>As a visual artist - I'll probably want to use video, but as it's just a video HTML element, it's simple and nothing to write home about</p>
+            <p>So the big idea with having this controller is I can select different video clips, or afore seen animations and actually *mix* between them.</p>
+            <p>I can also attach different effects to buttons and trigger them too.</p> </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-background-image="images/me.jpg" data-state="no-visuals">
+          <h1>Is this real?</h1>
+          <p>Or Just a Game</p>
+          <aside class="notes">
+            <p>Um its kinda real - this is me with my portable VJ pack.</p>
+            <p>I have a pocket projector, last year at xmas I took it to the streets of Bristol</p>
+            <p>Wrote a blog post - people got in touch</p>
+            <p>Started a slack channel</p>
+            <p>Me and tim did a talk</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-background-image="images/liveJS.jpg" data-state="no-visuals">
+          <h1>{ Live : JS }</h1>
+          <p>@LiveJS_Network</p>
+          <aside class="notes">
+            <p>This is a collective I started - with a few people from all around the world - we're a bunch of musicians and visual artists who create our thangs with JavaScript</p>
+            <p>And we have 3 gigs booked in over the next month. It's really real... all from a pipe dream to re-create a piece of software in a browser.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-background-image="images/asia.jpg" data-state="no-visuals">
+          <h1>Gigs</h1>
+          <aside class="notes">
+            <p>This is me and my friend Tim doing a talk/gig at View Source in Berlin</p>
+            <p>And I even got to play a festival over the summer too</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-background-image="images/github.png" data-state="no-visuals">
+          <h1>Github</h1>
+          <aside class="notes">
+            <p>We even have a github org so it has to be real</p>
+            <p>Why code my own software - there's native? Because code. I'm not the only one!</p>
+            <p>Two software - hacky - real will sit here</p>
+            <p>Demo tonight</p>
+          </aside>
+        </section>
+
+        <!-- <section data-background-color="#8c4c6f" data-state="no-visuals">
+          <h1>Your Turn</h1>
+          <p>Would you like a go?</p>
+          <aside class="notes">
+            <p>So now comes the fun part - we need to create some visuals based on the sound, to do that we need to analyse the sound</p>
+          </aside>
+        </section> -->
+
+        <section data-background-color="#8c4c6f" class="lists" data-state="no-visuals">
+          <div class="list-left">
+            <ul>
+              <h1>Avoid</h1>
+              <li><p><del>Analytics</del></p></li>
+              <li><p><del>Operational Excellence</del></p></li>
+              <li><p><del>Chat Ops</del></p></li>
+              <li><p><del>Orchestration</del></p></li>
+            </ul>
+          </div>
+          <div class="list-right">
+            <ul>
+              <h1>Include</h1>
+              <li><p>Duct tape</p></li>
+              <li><p>Workarounds</p></li>
+              <li><p>Bikeshedding</p></li>
+              <li><p>Coffee</p></li>
+            </ul>
+          </div>
+          <aside class="notes">
+            <p>One last thing</p>
+            <p>But wait - have I? For the keen eyed among you...</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-background-image="images/me.jpg" data-state="no-visuals">
+          <audio src="media/XPtada.m4a" data-autoplay></audio>
+          <h1>Duct tape</h1>
+          <aside class="notes">
+            <p>Duck tape</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-background-image="images/ben2.jpg" data-state="no-visuals">
+          <audio src="media/XPtada.m4a" data-autoplay></audio>
+          <h1>Bike Shedding</h1>
+          <aside class="notes">
+            <p>Bike Shedding - Thank you Ben</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-background-image="images/cusPropCode.jpg" data-state="no-visuals">
+          <audio src="media/XPtada.m4a" data-autoplay></audio>
+          <h1>Workaround</h1>
+          <aside class="notes">
+            <p>A Workaround</p>
+            <p>And...</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" class="lists" data-state="no-visuals">
+          <audio src="media/XPstartup.m4a" data-autoplay></audio>
+          <div class="list-left">
+            <ul>
+              <h1>Avoid</h1>
+              <li><p><del>Analytics</del></p></li>
+              <li><p><del>Operational Excellence</del></p></li>
+              <li><p><del>Chat Ops</del></p></li>
+              <li><p><del>Orchestration</del></p></li>
+            </ul>
+          </div>
+          <div class="list-right">
+            <ul>
+              <h1>Include</h1>
+        <!-- duck tapo, bikeshedding, workaround onboarding-->
+              <li><p>Duct tape ✓</p></li>
+              <li><p>Workarounds ✓</p></li>
+              <li><p>Bikeshedding ✓</p></li>
+              <li><p>Coffee ✓</p></li>
+            </ul>
+          </div>
+          <aside class="notes">
+            <p>I'm drinking coffee!!</p>
+            <p>Most useful talk EVER!</p>
+          </aside>
+        </section>
+        
+        <section data-background-color="#8c4c6f" data-state="no-visuals">
+          <h1>Ruth John</h1>
+          <h1>@Rumyra</h1>
+          <h1>@LiveJS_Network</h1>
+          <p>Thank You Very Much</p>
+          <aside class="notes">
+            <p>Thank you very much, I'm Ruth John</p>
+            <p>All these examples you've seen are on codepen as part of codevember</p>
+            <p>Find me on the internets, follow me - I'm trying to get more followers than a guy named Ben Foxall</p>
+            <p>Go have a relax and I hope you had a lovely conference!</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-state="no-visuals">
+          <h1>Resources</h1>
+          <h3>@jsoxford hack photo: @spikeheap</h3>
+          <aside class="notes">
+            
+          </aside>
+        </section>
+
+<!-- THIS IS IMPORTANT "0x" + x.toString(16); -->
+      </section>
+    </div></div>
+
+    <div id="screen"></div>
+
+<script src="reveal/plugin/notes/notes.js"></script>
+<script src="reveal/plugin/highlight/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script src="scripts/audioVisual.js"></script>
+
+<script type="text/javascript">
+// Reveal~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Reveal.initialize({
+
+  // The "normal" size of the presentation, aspect ratio will be preserved
+  // when the presentation is scaled to fit different resolutions. Can be
+  // specified using percentage units.
+  width: 1024,
+  height: 768,
+
+  // Factor of the display size that should remain empty around the content
+  margin: 0.1,
+
+  // Bounds for smallest/largest possible scale to apply to content
+  minScale: 0.2,
+  maxScale: 1.5,
+
+  center: false,
+
+  // Display controls in the bottom right corner
+  controls: false,
+
+  // Display a presentation progress bar
+  progress: false,
+
+  // Display the page number of the current slide
+  slideNumber: false,
+
+  // Push each slide change to the browser history
+  history: true,
+
+  // Enable keyboard shortcuts for navigation
+  keyboard: true,
+
+  // Transition style
+  transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+  // Transition speed
+  transitionSpeed: 'default', // default/fast/slow
+
+  // Transition style for full page slide backgrounds
+  backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+  // Number of slides away from the current that are visible
+  viewDistance: 2,
+
+  // Parallax background image
+  parallaxBackgroundImage: '', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+
+  // Parallax background size
+  parallaxBackgroundSize: '', // CSS syntax, e.g. "2100px 900px"
+
+  // Amount to move parallax background (horizontal and vertical) on slide change
+  // Number, e.g. 100
+  parallaxBackgroundHorizontal: '',
+  parallaxBackgroundVertical: ''
+
+});
+
+
+window.addEventListener('keyup', function(e) {
+  if (e.keyCode === 86) {
+    document.getElementById('akai').play();
+  }
+}, false);
+
+// set which animation to show
+let currentAnimation = 'vis_speakers',
+  allEls,
+  totalEls,
+  animateDom = function() {},
+  useMic = false;
+
+// spectrum
+Reveal.addEventListener( 'vis_speakers', function(ev) {
+  screen.style.display = 'block';
+  currentAnimation = ev.type;
+
+  screen.innerHTML = '<section class="vis-speakers"><div><img src="images/speakersAU/01.jpg" /></div><div><img src="images/speakersAU/02.jpg" /></div><div><img src="images/speakersAU/03.jpg" /></div><div><img src="images/speakersAU/04.jpg" /></div><div><img src="images/speakersAU/05.jpg" /></div><div><img src="images/speakersAU/06.jpg" /></div><div><img src="images/speakersAU/07.jpg" /></div><div><img src="images/speakersAU/08.jpg" /></div><div><img src="images/speakersAU/09.jpg" /></div><div><img src="images/speakersAU/10.jpg" /></div></section>';
+  allEls = document.querySelectorAll('#screen div');
+  totalEls = allEls.length;
+
+  animateDom = function() {
+    for (let i=0; i<totalEls; i++) {
+      //style i
+      allEls[i].style.backgroundColor = 'hsla('+i*40+',30%,50%,1)';
+
+      var freqOp = (frequencyData[i*4]/255)+0.1;
+      allEls[i].style.opacity = freqOp;
+      allEls[i].style.filter = 'contrast('+(freqOp+1)+')';
+    }
+  }
+}, false);
+
+// spectrum
+Reveal.addEventListener( 'vis_spectrum_sound', function(ev) {
+  screen.style.display = 'block';
+  currentAnimation = ev.type;
+
+  screen.innerHTML = '<section class="vis-spectrum"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></section>';
+  allEls = document.querySelectorAll('#screen i');
+  totalEls = allEls.length;
+
+  animateDom = function() {
+    for (let i=0; i<totalEls; i++) {
+      //style i
+      allEls[i].style.backgroundColor = 'hsla('+i*20+',50%,50%,0.9)';
+      allEls[i].style.border = '1px solid hsla('+i*20+',50%,50%,1)';
+
+      var freqVol = frequencyData[i*3]/4;
+      allEls[i].style.height = freqVol+'vh';
+    }
+  }
+}, false);
+
+// spectrum
+Reveal.addEventListener( 'vis_vjing', function(ev) {
+  screen.style.display = 'block';
+  currentAnimation = ev.type;
+
+  screen.innerHTML = '<div id="two-screens"><section class="vis-spectrum"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></section><section class="vis-speakers"><div><img src="images/speakersAU/01.jpg" /></div><div><img src="images/speakersAU/02.jpg" /></div><div><img src="images/speakersAU/03.jpg" /></div><div><img src="images/speakersAU/04.jpg" /></div><div><img src="images/speakersAU/05.jpg" /></div><div><img src="images/speakersAU/06.jpg" /></div><div><img src="images/speakersAU/07.jpg" /></div><div><img src="images/speakersAU/08.jpg" /></div><div><img src="images/speakersAU/09.jpg" /></div><div><img src="images/speakersAU/10.jpg" /></div></section></div>';
+  var allElsOne = document.querySelectorAll('.vis-spectrum i');
+  var totalElsOne = allElsOne.length;
+  var allElsTwo = document.querySelectorAll('.vis-speakers div');
+  var totalElsTwo = allElsTwo.length;
+  var screenOne = document.querySelector('.vis-spectrum');
+  var screenTwo = document.querySelector('.vis-speakers');
+  screenTwo.style.opacity = 0;
+
+  animateDom = function() {
+    for (let i=0; i<totalElsOne; i++) {
+      //style i
+      allElsOne[i].style.backgroundColor = 'hsla('+i*20+',50%,50%,0.9)';
+      allElsOne[i].style.border = '1px solid hsla('+i*20+',50%,50%,1)';
+
+      var freqVol = frequencyData[i*3]/4;
+      allElsOne[i].style.height = freqVol+'vh';
+    }
+    for (let i=0; i<totalElsTwo; i++) {
+      //style i
+      allElsTwo[i].style.backgroundColor = 'hsla('+i*40+',30%,50%,1)';
+
+      var freqOp = (frequencyData[i*4]/255)+0.1;
+      allElsTwo[i].style.opacity = freqOp;
+      allElsTwo[i].style.filter = 'contrast('+(freqOp+1)+')';
+    }
+
+    if (data[0] === 176) {
+      screenTwo.style.opacity = (data[2]/127);
+      screenOne.style.opacity = 1-(data[2]/127);
+    }
+
+    if (data[0] === 144 && data[1] === 4) {
+      if (data[2] === 64) {
+        screenOne.style.background = 'white';
+        screenTwo.style.background = 'white';
+      } else if (data[2] === 0) {
+        screenOne.style.background = 'transparent';
+        screenTwo.style.background = 'transparent';
+      }
+    }
+  }
+}, false);
+
+// bridget squares
+Reveal.addEventListener( 'vis_bridget_squares', function(ev) {
+  screen.style.display = 'block';
+  currentAnimation = ev.type;
+
+  screen.innerHTML = '<section class="vis-bridget-squares"><section></section><section></section><section></section><section></section><section></section><section></section><section></section><section></section><section></section><section></section><section></section><section></section><section></section><section></section><section></section><section></section></section>';
+  allEls = document.querySelectorAll('.vis-bridget-squares section');
+  totalEls = allEls.length;
+
+  animateDom = function() {
+    for (let i=0; i<totalEls; i++) {
+
+      var freqVol = frequencyData[i*2];
+
+      if (freqVol <= 255 && freqVol > 150) {
+        allEls[i].style.flex = 2;
+      } else if (freqVol <= 150 && freqVol > 90) {
+        allEls[i].style.flex = 1.5;
+      } else if (freqVol <= 90 && freqVol > 40) {
+        allEls[i].style.flex = 0.5;
+      } else { //50 or below
+        allEls[i].style.flex = 1;      
+      }
+    }
+  }
+}, false);
+
+// bridget squares
+Reveal.addEventListener( 'vis_bridget_tri', function(ev) {
+  screen.style.display = 'block';
+  currentAnimation = ev.type;
+
+  screen.innerHTML = '<section class="vis-bridget-tri"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></section>';
+  allEls = document.querySelectorAll('.vis-bridget-tri b');
+  totalEls = allEls.length;
+
+  animateDom = function() {
+    for (let i=0; i<totalEls; i++) {
+      var freqVol = frequencyData[i*2];
+
+      if (freqVol > 50) {
+        allEls[i].style.opacity = freqVol/150;
+      } else {
+        allEls[i].style.opacity = 0;
+      }
+    }
+  }
+}, false);
+
+function createQuarter(fragment, screen) {
+
+  // create a new 'quarter', set styles
+  let quarterEl = document.createElement('div');
+  quarterEl.classList = 'quarter';
+  quarterEl.style.width = '50vw';
+  quarterEl.style.height = '50vh';
+  quarterEl.style.overflow = 'hidden';
+
+  // duplicate original fragment to be mirrored in quarter
+  let newHtml = fragment.outerHTML+fragment.outerHTML;
+  quarterEl.innerHTML = newHtml;
+  screen.removeChild(fragment);
+  screen.appendChild(quarterEl);
+
+  // rotate and set styles on new fragments within quarter
+  let newFragments = document.querySelectorAll('.quarter '+fragment.localName);
+  for (let i = newFragments.length - 1; i >= 0; i--) {
+    newFragments[i].style.width = '50vw';
+    newFragments[i].style.height = '50vh';
+  }
+  newFragments[1].style.transform = 'translateY(-50vh) rotateZ(180deg)';
+
+  // rotate quarter
+  for (var i=3-1; i>=0; i--) {
+    let nextQuarter = quarterEl.cloneNode(true);
+    screen.appendChild(nextQuarter);
+  }
+  const allQuarters = document.querySelectorAll('.quarter');
+  for (var i=allQuarters.length-1; i>0; i--) {
+    allQuarters[i].style.transform = 'translateY('+i*-50+'vh) rotateZ('+i*90+'deg)';
+    allQuarters[i].style.transformOrigin = 'right bottom';
+  }
+  
+}
+
+// symmetry
+Reveal.addEventListener( 'vis_symmetry', function(ev) {
+  screen.style.display = 'block';
+  currentAnimation = ev.type;
+
+  screen.innerHTML = '<section class="vis-symmetry"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></section>';
+  
+  // set which element to be symmetry'd
+  const fragmentedSection = document.querySelector('.vis-symmetry');
+
+  createQuarter(fragmentedSection, screen);
+
+  animateDom = function() {
+    document.documentElement.style.setProperty('--level', frequencyData[5]/220);
+  }
+}, false);
+// symmetry gif
+Reveal.addEventListener( 'vis_symmetry_gif', function(ev) {
+  screen.style.display = 'block';
+  currentAnimation = ev.type;
+
+  screen.innerHTML = '<section class="vis-symmetry-gif"><img src="images/explode.gif" /></section>';
+  
+  // set which element to be symmetry'd
+  const fragmentedSection = document.querySelector('.vis-symmetry-gif');
+
+  createQuarter(fragmentedSection, screen);
+
+  animateDom = function() {
+    document.documentElement.style.setProperty('--level', frequencyData[5]/220);
+  }
+}, false);
+
+// sunburst
+Reveal.addEventListener( 'vis_sunburst', function(ev) {
+  screen.style.display = 'block';
+  currentAnimation = ev.type;
+
+  screen.innerHTML = '<section class="vis-sunburst"><svg></svg></section>';
+  
+  var width = window.innerWidth,
+    height = window.innerHeight,
+    radius = Math.min(width, height) / 2;
+
+  var svg = d3.select("svg")
+    .append("g")
+    .attr("transform", "translate(" + width / 2 + "," + height * .52 + ")");
+  var g = d3.select("g");
+  var arcs = g.selectAll("path");
+
+  var arc = d3.svg.arc()
+    .startAngle(function(d, i) { return (i/8)*Math.PI; })
+    .endAngle(function(d, i) { return ((i+1)/8)*Math.PI; })
+    .innerRadius(function(d, i) { return radius/3; })
+    .outerRadius(function(d, i) { return d*2; });
+
+  animateDom = function() {
+    arcs = arcs.data(frequencyData.slice(0,32));
+
+    arcs
+      .enter().append("path")
+      .style("stroke", "#fff");
+
+    arcs
+      .attr("d", arc)
+      .style("fill", function(d,i) { return 'hsla('+i*6+',60%,'+Math.floor(d/2.5)+'%,'+d/255+')'; })
+      .exit().remove();
+  }
+}, false);
+
+// spiral
+Reveal.addEventListener( 'vis_spiral', function(ev) {
+  screen.style.display = 'block';
+  currentAnimation = ev.type;
+
+  screen.innerHTML = '<section class="vis-spiral"><svg></svg></section>';
+  
+  var width = window.innerWidth,
+    height = window.innerHeight,
+    radius = Math.min(width, height) / 2;
+
+  var svg = d3.select("svg")
+    .append("g")
+    .attr("transform", "translate(" + width / 2 + "," + height * .52 + ")");
+  var g = d3.select("g");
+  var arcs = g.selectAll("path");
+
+  var arc = d3.svg.arc()
+    .startAngle(function(d, i) { return (i/8)*Math.PI; })
+    .endAngle(function(d, i) { return ((i+1)/8)*Math.PI; })
+    .innerRadius(function(d, i) { return 0; })
+    .outerRadius(function(d, i) { return (i*15)+(d); });
+
+  animateDom = function() {
+    arcs = arcs.data(frequencyData.slice(0,32));
+
+    arcs
+      .enter().append("path")
+      .style("stroke", "#222");
+
+    arcs
+      .attr("d", arc)
+      .style("fill", function(d,i) { return 'hsla('+i*6+',60%,'+Math.floor(d/2.5)+'%,'+d/255+')'; })
+      .exit().remove();
+  }
+}, false);
+
+// spots
+Reveal.addEventListener( 'vis_spots', function(ev) {
+  screen.style.display = 'block';
+  currentAnimation = ev.type;
+
+  screen.innerHTML = '<section class="vis-spots"><svg></svg></section>';
+  
+  var svg = d3.select('svg');
+  var circle = svg.selectAll('circle'),
+    line = svg.selectAll('line'),
+    radius = window.innerHeight/2.5-50;
+
+  animateDom = function() {
+    circle = circle.data(frequencyData.slice(0,24));
+  
+    circle
+      .enter().append('circle')
+      .attr("cy", function(d, i) {
+        // return Math.round( () + (i*Math.random) );
+        return Math.round(window.innerHeight*Math.random());
+      })
+      .attr("cx", function(d, i) {
+        // return Math.round( () + (i*Math.random) );
+        return Math.round(window.innerWidth*Math.random());
+      });
+    
+    circle
+      .attr("r", function(d, i) { return ((d/2)*(i/2))+i*2; })
+      .attr("fill", function(d,i) {return "hsla("+Math.round( i*(20+(d/255)) )+",50%,60%,0.7)"} )
+      .attr("stroke","white")
+      .exit().remove();
+    }
+
+}, false);
+
+// spots blend
+Reveal.addEventListener( 'vis_spots_blend', function(ev) {
+  screen.style.display = 'block';
+  currentAnimation = ev.type;
+
+  screen.innerHTML = '<section class="vis-spots-blend"><svg></svg></section>';
+  
+  var svg = d3.select('svg');
+  var circle = svg.selectAll('circle'),
+    line = svg.selectAll('line'),
+    radius = window.innerHeight/2.5-50;
+
+  animateDom = function() {
+    circle = circle.data(frequencyData.slice(0,24));
+  
+    circle
+      .enter().append('circle')
+      .attr("cy", function(d, i) {
+        // return Math.round( () + (i*Math.random) );
+        return Math.round(window.innerHeight*Math.random());
+      })
+      .attr("cx", function(d, i) {
+        // return Math.round( () + (i*Math.random) );
+        return Math.round(window.innerWidth*Math.random());
+      });
+    
+    circle
+      .attr("r", function(d, i) { return ((d/2)*(i/2))+i*2; })
+      .attr("fill", function(d,i) {return "hsla("+Math.round( i*(20+(d/255)) )+",50%,60%,0.7)"} )
+      .attr("stroke","white")
+      .exit().remove();
+    }
+      
+}, false);
+
+
+// chart
+Reveal.addEventListener( 'vis_chart', function(ev) {
+  screen.style.display = 'block';
+  currentAnimation = ev.type;
+
+  screen.innerHTML = '<section class="vis-chart"><svg></svg></section>';
+  
+  var svg = d3.select('svg');
+  var circle = svg.selectAll('circle'),
+    line = svg.selectAll('line'),
+    radius = window.innerHeight/2.5-50;
+
+  animateDom = function() {
+
+    circle = circle.data(newFreq);
+  
+    circle
+      .enter().append('circle')
+      .attr("cy", function(d, i) {
+        return Math.round(window.innerHeight/2 + (radius*Math.sin((2*i*Math.PI)/16)) );
+      })
+      .attr("cx", function(d, i) {
+        return Math.round(window.innerWidth/2 + (radius*Math.cos((2*i*Math.PI)/16)) );
+      });
+    
+    circle
+      .attr("r", function(d) { return d/2; })
+      .attr("fill", "hsla(200,50%,80%,0.7)")
+      .exit().remove();
+
+    line = line.data(frequencyData);
+
+    line
+      .enter().append('line')
+      .attr("x1", function(d, i) {
+        return Math.round(window.innerWidth/2 + (radius*Math.cos((2*i*Math.PI)/16)) );
+      })
+      .attr("y1", function(d, i) {
+        return Math.round(window.innerHeight/2 + (radius*Math.sin((2*i*Math.PI)/16)) );
+      })
+      .attr("stroke-width","3")
+      .attr("stroke","hsla(320,60%,50%,0.9)");
+    line
+      .attr("x2",function(d, i) {
+        return Math.round(window.innerWidth/2 + ( (radius-d)*Math.cos((2*i*Math.PI)/16)) );
+      })
+      .attr("y2",function(d, i) {
+        return Math.round(window.innerHeight/2 + ( (radius-d)*Math.sin((2*i*Math.PI)/16)) );
+      })
+      .exit().remove();
+  }
+      
+}, false);
+
+// chart
+Reveal.addEventListener( 'vis_chart_better', function(ev) {
+  screen.style.display = 'block';
+  currentAnimation = ev.type;
+
+  screen.innerHTML = '<section class="vis-chart-better"><svg></svg></section>';
+  
+  var svg = d3.select('svg');
+  var circle = svg.selectAll('circle'),
+    line = svg.selectAll('line'),
+    radius = window.innerHeight/2.5-50;
+
+  animateDom = function() {
+      circle = circle.data(frequencyData.slice(0,16));
+  
+    circle
+      .enter().append('circle')
+      .attr("cy", function(d, i) {
+        return Math.round(window.innerHeight/2 + (radius*Math.sin((2*i*Math.PI)/16)) );
+      })
+      .attr("cx", function(d, i) {
+        return Math.round(window.innerWidth/2 + (radius*Math.cos((2*i*Math.PI)/16)) );
+      });
+    
+    circle
+      .attr("r", function(d) { return d/2; })
+      .attr("fill", "hsla(200,50%,80%,0.7)")
+      .exit().remove();
+
+    line = line.data(frequencyData);
+
+    line
+      .enter().append('line')
+      .attr("x1", function(d, i) {
+        return Math.round(window.innerWidth/2 + (radius*Math.cos((2*i*Math.PI)/16)) );
+      })
+      .attr("y1", function(d, i) {
+        return Math.round(window.innerHeight/2 + (radius*Math.sin((2*i*Math.PI)/16)) );
+      })
+      .attr("stroke-width","3")
+      .attr("stroke","hsla(320,60%,50%,0.9)");
+    line
+      .attr("x2",function(d, i) {
+        return Math.round(window.innerWidth/2 + ( (radius-d)*Math.cos((2*i*Math.PI)/16)) );
+      })
+      .attr("y2",function(d, i) {
+        return Math.round(window.innerHeight/2 + ( (radius-d)*Math.sin((2*i*Math.PI)/16)) );
+      })
+      .exit().remove();
+  }
+      
+}, false);
+
+
+
+
+Reveal.addEventListener( 'no-visuals', function() {
+  screen.style.display = 'none';
+}, false);
+
+</script>
+
+
+</body>
+</html>
