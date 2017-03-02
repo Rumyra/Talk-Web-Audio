@@ -317,57 +317,109 @@ $grey: #bebebe
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-state="no-visuals">
+        <section data-background-color="#8c4c6f">
           <h1>MIDI</h1>
-          <h2>Musical Instrument Digital Interface</h2>
+          <h2>Musical Instrument</h2>
+          <h2 class="fragment fade-in">Digital Interface</h2>
           <aside class="notes">
             <p>MIDI came around in the early 80's. It was born from rise of papularity of electronic instruments in the 70's</p>
             <p>A group of industry experts and musical instrument manufacturers got together and thought wouldn't it be nice if we had a spec where instruments could all talk to each other.</p>
+            <p>So it's basically a data prototcol</p>
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-state="no-visuals">
-          <h1>MIDI == data</h1>
+        <section data-background-color="#8c4c6f" data-background-image="media/techSpec.jpg">
+          <h1>MIDI</h1>
+          <h2 class="fragment fade-in">Data</h2>
           <aside class="notes">
             <p>Data protocal and a pretty basic one at that.</p>
             <p>The spec has moved on - 1->2. There have been other specs. DMX controls lighting heavily based on MIDI. Pyrotechnics use something similar too. There's a BLE spec, a polyphonic spec, visual spec.</p>
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-state="no-visuals">
-          <h1>MIDI instruments</h1>
+        <section data-background-color="#8c4c6f" data-background-image="media/midiToday.png">
+          <aside class="notes">
+            <p>BLE, polyphony - go and see</p>
+            <p>Today there's more - I’m not going to go into every single spec, we simply don’t have enough time and also there’s parts that are more relevant to us as developers which you will see. If you want to find out more all the spec docs are on www.midi.org.</p>
+            <p>Back to the data (show you?)</p>
+          </aside>
+        </section>
+
+        <!-- <section>
+          <h2>Let me show you</h2>
+          <p><a href="https://goo.gl/Hhv8up">https://goo.gl/Hhv8up</a></p>
+          <p>Top</p>
+          <aside class="notes">
+            <p>The easiest way for me to explain this to you is for me to illustrate this to you. Let’s take probably one of the most common MIDI enabled instruments - a keyboard.</p>
+          </aside>
+        </section> -->
+
+        <section data-background-color="#8c4c6f">
+          <h1>Demo</h1>
+          <p data-height="697" data-theme-id="1345" data-slug-hash="NxdbzL" data-default-tab="result" data-user="Rumyra" data-embed-version="2" data-preview="true" class="codepen">See the Pen <a href="http://codepen.io/Rumyra/pen/NxdbzL/">Web MIDI API Example</a> by Rumyra (<a href="http://codepen.io/Rumyra">@Rumyra</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+          <aside class="notes">
+            <p>So if I plug in a MIDI instrument or controller and instigate the web MIDI api in my brwoser - this is the data you'll get</p>
+            <p>You should all see a keyboard - one of the most common MIDI enabled instruments. Now this is the data that the web MIDI api passes back to us when a MIDI device is plugged in. So let's take a look at the code.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f">
+          <h1>Web MIDI API</h1>
+          <h2>[144, 60, 100]</h2>
+          <pre><code data-trim>// call requestMIDIAccess
+navigator.requestMIDIAccess({ sysex: false }).then(onMIDISuccess, onMIDIFailure);
+
+// on success of MIDI device recognised
+function onMIDISuccess(midiControl) {
+  var MIDI = midiControl;
+
+  // log each input data
+  MIDI.inputs.forEach(function (input) {
+    console.log(input.onmidimessage.data)
+  }
+}
+          </code></pre>
+          <aside class="notes">
+            <p>You make sure it’s avail, listen for attached device, when plugged in you can receive these afore mentioned messages. All I’m doing here is logging those messages - you can do whatever you want with them. Notice the sysex false - this is related to system messages and I will get back to that in a moment.</p>
+            <p>Now there’s a window of opportunity - there’s plenty of stuff we can start coding with that!</p>
+            <p>But what are these values?</p>
+            <p>the first byte 144 is the message type and channel, 144 is 90 in hex and the 9 says it's a 'Note on' message and the 0 is the channel number. A 'Note on' message has two data bytes, the first is the 'key number' which I'm guessing is the note number, so 60 would be C the second is 'note on velocity' and this has a value of 100, - 0-127 (I'm guessing this means the rate at which the note is turned on)</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-background-image="media/keyboard.jpg">
           <aside class="notes">
             <p>These are MIDI instruments. They have onboard audio. There's classic ones, synths, drum machines</p>
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-state="no-visuals">
-          <h1>MIDI Controllers</h1>
+        <section data-background-color="#8c4c6f" data-background-image="media/launchpad.jpg">
           <aside class="notes">
-            <p>These are MIDI controllers. They're basically just hardware. No onboard audio. All these things send the same data - pretty much. You're playing a different thing and pressing different buttons, so they're sending different values - but, same thing.</p>
+            <p>This is a launchpad - probably one of the most popular MIDI controllers for developers - you might have seen one - it's an array of buttons - it sends similar data to what we werre seeing before</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-background-image="media/controllers.jpg">
+          <aside class="notes">
+            <p>These are MIDI controllers. They're basically just hardware. No onboard audio.</p>
+            <p>Check this one out - it's a game controller</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#8c4c6f" data-background-image="media/orbit.jpg">
+          <aside class="notes">
+            <p>These are MIDI controllers. They're basically just hardware. No onboard audio.</p>
+            <p>Check this one out - it's a game controller</p>
           </aside>
         </section>
 
         <section data-background-color="#8c4c6f" data-state="no-visuals">
-          <h1>Wed MIDI API</h1>
+          <h1>RUTH ➡️ Games?</h1>
           <aside class="notes">
-            <p>This is the Web MIDI API. You detect things that are plugged in, grant access and then detect events coming in</p>
-            <p>By the way - if you want to hardware enable your browser, this is a great way to do it.</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#8c4c6f" data-state="no-visuals">
-          <h1>Codepen value demo</h1>
-          <aside class="notes">
-            <p>This is the Web MIDI API. You detect things that are plugged in, grant access and then detect events coming in</p>
-            <p>By the way - if you want to hardware enable your browser, this is a great way to do it.</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#8c4c6f" data-state="no-visuals">
-          <h1>Brilliant</h1>
-          <aside class="notes">
-            <p>This is all brilliant. Everything you've seen is fun, exciting, makes you go and play and build crazy sythesisers.</p>
+            <p>Yeh sorry I've been totally distracted, this is a game conference and yes I've been talking about all these weird and wonderful things you can do with crazy APIs</p>
+            <p>Big thanks to Belen who really helped me with this btw - I said at the top of the talk I'm not a game dev. She pointed me int he right direction.</p>
+            <p>So it's pretty obvious which bits are useful. Creating, timing, spacialising sounds. Maybe controlling - ther eis a gamepad api.</p>
           </aside>
         </section>
 
