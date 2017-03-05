@@ -17,7 +17,7 @@
 
   <link rel="stylesheet" href="reveal/css/reveal.css">
   <link rel="stylesheet" href="reveal/css/theme/rumyra.css" id="theme">
-  <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
+  <link rel="stylesheet" href="reveal/lib/css/eighties.css">
   <script src="reveal/js/reveal.js"></script>
   <!-- <script src="scripts/d3.min.js"></script> -->
 
@@ -116,13 +116,13 @@ $grey: #bebebe
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-background-video="media/cameronsworld.mp4">
+        <section data-background-color="#ea8d88" data-background-video="media/cameronsworld.mp4">
           <aside class="notes">
             <p>A website playing background music - the modern version of which is something like this:</p>
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-background-video="media/annoy.mp4">
+        <section data-background-color="#ea8d88" data-background-video="media/annoy.mp4">
           <aside class="notes">
             <p>An annoying advert that autoplays - yes I know.</p>
             <p>http://afternooncareer.com/lp/int/uk/dn24/clx.htm</p>
@@ -131,13 +131,13 @@ $grey: #bebebe
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-background-video="media/chord.mp4">
+        <section data-background-color="#ea8d88" data-background-video="media/chord.mp4">
           <aside class="notes">
             <p>This is Jake Alburgh's appegiator - it's on codepen. It's such a simple idea, but it's illustrates soemthing so perfectly. The match between maths and music. I'm not going to go into it - but you should really check it out.</p>
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-background-video="media/block.mp4">
+        <section data-background-color="#ea8d88" data-background-video="media/block.mp4">
           <aside class="notes">
             <p>This is blokdust. Built by Luke Twyman, Luke Phillips and Edward Silverton in Brighton.</p>
             <p>It's well mental. A beautiful interface for a synth - you just pull things in, sound inputs, add effects, chain them together and output them. You can add controls.</p>
@@ -145,7 +145,7 @@ $grey: #bebebe
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-background-image="media/piano.jpg">
+        <section data-background-color="#ea8d88" data-background-image="media/piano.jpg">
           <aside class="notes">
             <p>This is piano - an art installation built with three.js and p5.js by Patrik Hubner - it harnesses web audio and web midi.</p>
             <p>An audio visualisation is displayed in a window and MIDI controller used to by passers by to interact with it.</p>
@@ -183,111 +183,189 @@ $grey: #bebebe
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-background-video="media/mdnDocs.mp4">
+        <section data-background-color="#ea8d88" data-background-video="media/mdnDocs.mp4">
           <aside class="notes">
             <p>MDN docs of methods, functions, properties, events. I mean what even is a cent. Top tip - it's not a denomination of a currency.</p>
             <p>So I've popped all these into categories for you, and I'm going to take you through them. I'm not going to cover every single parameter? of every method in depth, or go into signal processing in depth, we simply don't have the time and audio is a huge topic. I'm here to talk about the web audio API, you wanna talk about any other thing, come find me after. Please :)</p>
           </aside>
         </section>
 
-        <section>
-          <h1>Create Audio Context</h1>
-          <p>Pic of moz dev tools</p>
-          <aside class="notes">
-            <p>A concept to understand when you are working with web audio is the concept</p>
-          </aside>
-        </section>
-
-
-
-        <section>
+        <section data-background-color="#463c34" class="lists">
           <div class="list-right">
-            <ul>
-              <h1>Creating Sounds</h1>
-              <li><h2>Waveform (Osillator)</h2></li>
-              <li><h2>DOM &lt;audio></h2></li>
-              <li><h2>Streams</h2></li>
-              <li><h2>Buffers</h2></li>
-            </ul>
-          </div>
-          <aside class="notes">
-            <p>MDN docs of methods, functions, properties, events. I mean what even is a cent. Top tip - it's not a denomination of a currency.</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#8c4c6f" class="lists" data-state="no-visuals">
-          <div class="list-right">
+            <h1>Web Audio API</h1>
             <ul>
               <li><h2>Create & load sounds</h2></li>
-              <li><h2>Alter sounds</h2></li>
-              <li><h2>Analyse sounds</h2></li>
-              <li><h2>Modify global audio space</h2></li>
-              <li><h2>Output audio</h2></li>
+              <li class="fragment fade-in"><h2>Alter sounds</h2></li>
+              <li class="fragment fade-in"><h2>Analyse sounds</h2></li>
+              <li class="fragment fade-in"><h2>Output audio</h2></li>
             </ul>
           </div>
           <aside class="notes">
-            <p>Great - now we've got that sorted and my talk anxiety out the way and this becomes a super useful talk - let's begin!</p>
+            <p>So I've tried to break it down into managable sections</p>
+            <p>But there is too much to cover in one talk and there's a variety of different levels in the audience - some of you are going to know all of this and some of you none of it.</p>
+            <p>CODE WARNING</p>
           </aside>
         </section>
 
-        <section>
+        <section data-background-color="#463c34">
+          <h1>Audio Context</h1>
+          <pre><code class="js">const context = window.AudioContext</code></pre>
+          <aside class="notes">
+            <p>A concept to understand when you are working with web audio is the context</p>
+            <p>This is sort of the area where everything happens.</p>
+            <p>Think of it like a sound track. You have a start, middle, end. You have loads of intruments, there's volume, effects, soundscape. This is the context you're instantiating.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#463c34">
           <h1>Nodes</h1>
-          <p>Chains everything together</p>
+          <p>Chains everything together (moz dev tools)</p>
           <aside class="notes">
             <p>Mozilla dev tools</p>
           </aside>
         </section>
 
-        <section>
-          <h1>Create & load sounds</h1>
-          <p>code</p>
+        <section data-background-color="#463c34">
+        <h1>Make Sounds</h1>
+        <pre><code data-trim class="js">// waveform
+const oscillator = context.createOscillator();
+context.createPeriodicWave(params)
+
+// DOM (audio, video element)
+const mediaSource = context.createMediaElementSource(element);
+
+// Streams (data, camera, mic)
+const streamSource = context.createMediaStreamSource(stream);
+
+// Buffer (file, data)
+fetch('soundFile.mp4')
+  // read into memomry as array buffer
+  .then(response => response.arrayBuffer())
+  // turn into raw audio data
+  .then(arrayBuffer => context.decodeAudioData(arrayBuffer))
+  // then play (see https://jakearchibald.com/2016/sounds-fun/)
+          </code></pre>
           <aside class="notes">
-            <p>MDN docs of methods, functions, properties, events. I mean what even is a cent. Top tip - it's not a denomination of a currency.</p>
+            <p>So once you have your context, you need some sounds.</p>
+            <p>There are four main ways of creating or loading sounds into this context.</p>
+            <p>periodic waveform - sine, sawtooth, triangle, sqaure</p>
+            <p>buffers are containers data - samples. sample rate. create your own</p>
           </aside>
         </section>
 
-        <section>
+        <section data-background-color="#463c34">
+        <h1>Buffers</h1>
+        <pre><code data-trim class="js">// make your own!
+const node = context.createBufferSource(),
+  buffer = context.createBuffer(channels, frameCount, sampleRate),
+  data = buffer.getChannelData(0);
+
+for (var i = 0; i < 4096; i++) {
+ data[i] = Math.random();
+}
+
+node.buffer = buffer;
+
+// thanks http://www.justgoscha.com/programming/2014/04/08/creating-dynamic-audiobuffers-with-webaudio.html
+          </code></pre>
+          <aside class="notes">
+            <p>So once you have your context, you need some sounds.</p>
+            <p>There are four main ways of creating or loading sounds into this context.</p>
+            <p>periodic waveform - sine, sawtooth, triangle, sqaure</p>
+            <p>buffers are containers data - samples. sample rate. create your own</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#463c34">
           <h1>Alter sounds</h1>
-          <p>code</p>
+          <pre><code data-trim class="js">// filter/accentuate frequencies
+const biquadFilter = context.audioCtx.createBiquadFilter();
+biquadFilter.type = "lowpass";
+biquadFilter.frequency.value = 500;
+
+// manipulate waveform
+const shaper = context.createWaveShaper();
+shaper.curve = someCraMathsFunction();
+
+// repeat buffer data
+const reverb = context.createConvolver();
+// fetch file to use as buffer or make here ...
+reverb.buffer = bufferedFile;
+          </code></pre>
           <aside class="notes">
-            <p>MDN docs of methods, functions, properties, events. I mean what even is a cent. Top tip - it's not a denomination of a currency.</p>
+            <p>Biquad filter - algorithms on data - to enhance frequencies or filter them out. There's lots of types. High pass, low pass, high shelf, low sheif, peaking</p>
+            <p>Defines an array of numbers to multiply to the sample</p>
+            <p>often generated by recording a percussive noise or frequency sweep in a space. Does this all sound convoluted? Well, technically, it is!</p>
           </aside>
         </section>
 
-        <section>
+        <section data-background-color="#463c34">
+          <h1>Alter sounds</h1>
+          <pre><code data-trim class="js">// even out velocity
+var compressor = context.createDynamicsCompressor();
+// set values threshold, knee, ratio, reduction, attack, release
+
+// delay sound
+const delay = context.createDelay(5.0);
+
+// volume
+const gainNode = context.createGain();
+gainNode.gain.value = 0;
+
+// spatualisation
+const simplePanner = context.createStereoPanner();
+
+const craSpacePanner = context.createPanner();
+          </code></pre>
+          <aside class="notes">
+            <p>Ear is a clever thing, it can here very quiet sound & very loud sounds. It evens them out for you. It's a very good dynamic compressor.</p>
+            <p>Panner takes into account distance, orientation adn 3D space. There's a whole bunch of params to set for this one - I strongly suggest looking at the docs.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#463c34">
           <h1>Analyse sounds</h1>
-          <p>code</p>
+          <pre><code data-trim class="js">// frequency & time
+const analyserNode = context.createAnalyser();
+
+// larger for more resolution
+analyser.fftSize = 1024;
+
+var dataArray = new Uint8Array(2048);
+// pass values into dataArray
+analyser.getByteFrequencyData(dataArray);
+          </code></pre>
           <aside class="notes">
-            <p>MDN docs of methods, functions, properties, events. I mean what even is a cent. Top tip - it's not a denomination of a currency.</p>
+            <p>This is my all time favourite feature. No doubt!</p>
+            <p>We can anlayse frequency and time.</p>
           </aside>
         </section>
 
-        <section>
-          <h1>Modify global audio</h1>
-          <p>code</p>
-          <aside class="notes">
-            <p>MDN docs of methods, functions, properties, events. I mean what even is a cent. Top tip - it's not a denomination of a currency.</p>
-          </aside>
-        </section>
-
-        <section>
+        <section data-background-color="#463c34">
           <h1>Output</h1>
-          <p>code</p>
+          <pre><code data-trim class="js">// speakers
+node.connect(context.destination);
+
+// MOAR streams
+const streamDest = context.createMediaStreamDestination();
+// create stream to connect here ...
+node.connect(streamDest);
+          </code></pre>
           <aside class="notes">
             <p>Phew that was a *lot* of information!</p>
             <p>Here's a picture of my friend Ben</p>
           </aside>
         </section>
 
-        <section>
-          <h1>Ben</h1>
+        <section data-background-color="#463c34">
+          <h1>Ben? Puppy?</h1>
           <aside class="notes">
             <p>Ben wrote a thing called co js - it's a bit like codepen, jsbin, js fiddle. But specifically for a co-op environment. Workshops, hacks etc... I can code, you can ll watch, you can modify. My code remains. It's pretty cool.</p>
             <p>I'm going to use it...</p>
           </aside>
         </section>
 
-        <section>
+        <section data-background-color="#463c34">
           <h1>URL OR STEP SEQ DEMO</h1>
           <aside class="notes">
             <p>Shall we see all this in action?</p>
@@ -295,7 +373,7 @@ $grey: #bebebe
           </aside>
         </section>
 
-        <section>
+        <section data-background-color="#463c34">
           <h1>Mario?</h1>
           <aside class="notes">
             <p>Shall we see all this in action?</p>
@@ -303,21 +381,21 @@ $grey: #bebebe
           </aside>
         </section>
 
-        <section>
+        <section data-background-color="#acc486">
           <h1>MIDI</h1>
           <aside class="notes">
             <p>This is literally my favourite subject</p>
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-background-video="media/cameronsworld.mp4">
+        <section data-background-color="#acc486" data-background-video="media/cameronsworld.mp4">
           <h1>This is not MIDI</h1>
           <aside class="notes">
             <p>This is not MIDI</p>
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f">
+        <section data-background-color="#acc486">
           <h1>MIDI</h1>
           <h2>Musical Instrument</h2>
           <h2 class="fragment fade-in">Digital Interface</h2>
@@ -328,7 +406,7 @@ $grey: #bebebe
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-background-image="media/techSpec.jpg">
+        <section data-background-color="#acc486" data-background-image="media/techSpec.jpg">
           <h1>MIDI</h1>
           <h2 class="fragment fade-in">Data</h2>
           <aside class="notes">
@@ -337,7 +415,7 @@ $grey: #bebebe
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-background-image="media/midiToday.png">
+        <section data-background-color="#acc486" data-background-image="media/midiToday.png">
           <aside class="notes">
             <p>BLE, polyphony - go and see</p>
             <p>Today there's more - I’m not going to go into every single spec, we simply don’t have enough time and also there’s parts that are more relevant to us as developers which you will see. If you want to find out more all the spec docs are on www.midi.org.</p>
@@ -354,7 +432,7 @@ $grey: #bebebe
           </aside>
         </section> -->
 
-        <section data-background-color="#8c4c6f">
+        <section data-background-color="#acc486">
           <h1>Demo</h1>
           <p data-height="697" data-theme-id="1345" data-slug-hash="NxdbzL" data-default-tab="result" data-user="Rumyra" data-embed-version="2" data-preview="true" class="codepen">See the Pen <a href="http://codepen.io/Rumyra/pen/NxdbzL/">Web MIDI API Example</a> by Rumyra (<a href="http://codepen.io/Rumyra">@Rumyra</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
@@ -364,7 +442,7 @@ $grey: #bebebe
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f">
+        <section data-background-color="#acc486">
           <h1>Web MIDI API</h1>
           <h2>[144, 60, 100]</h2>
           <pre><code data-trim>// call requestMIDIAccess
@@ -388,26 +466,26 @@ function onMIDISuccess(midiControl) {
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-background-image="media/keyboard.jpg">
+        <section data-background-color="#acc486" data-background-image="media/keyboard.jpg">
           <aside class="notes">
             <p>These are MIDI instruments. They have onboard audio. There's classic ones, synths, drum machines</p>
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-background-image="media/launchpad.jpg">
+        <section data-background-color="#acc486" data-background-image="media/launchpad.jpg">
           <aside class="notes">
             <p>This is a launchpad - probably one of the most popular MIDI controllers for developers - you might have seen one - it's an array of buttons - it sends similar data to what we werre seeing before</p>
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-background-image="media/controllers.jpg">
+        <section data-background-color="#acc486" data-background-image="media/controllers.jpg">
           <aside class="notes">
             <p>These are MIDI controllers. They're basically just hardware. No onboard audio.</p>
             <p>Check this one out - it's a game controller</p>
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-background-image="media/orbit.jpg">
+        <section data-background-color="#acc486" data-background-image="media/orbit.jpg">
           <aside class="notes">
             <p>These are MIDI controllers. They're basically just hardware. No onboard audio.</p>
             <p>Check this one out - it's a game controller</p>

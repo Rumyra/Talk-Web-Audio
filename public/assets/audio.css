@@ -1,0 +1,20 @@
+body {
+  margin:0px; padding:0px;
+  background-color: hsla(240,35%,98%,1);
+}
+
+button {
+  display: block;
+  margin:0px auto; padding:30px 50px;
+
+  border:3px solid hsla(290,35%,70%,1); border-radius:2px;
+  background-color:hsla(290,35%,60%,1);
+  background-image: linear-gradient(0deg,
+    300,35%,60%,1,
+    270,35%,60%,1);
+
+  font-family: "Avenir Light", sans-serif;
+  font-size: 2em; color: hsla(290,35%,98%,1);
+
+  cursor:pointer;
+}

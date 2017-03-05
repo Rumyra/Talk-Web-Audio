@@ -24,6 +24,10 @@ app.set('view engine', 'html');
 app.get('/', (req, res) => {
   res.render('index');
 });
+app.get('/audio', (req, res) => {
+  res.render('audio');
+});
+
 app.get('/visual', (req, res) => {
   req.PUSHKEY = process.env.PUSHKEY;
   res.render('visual', req);

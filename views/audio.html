@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="assets/audio.css" />
+
+  <title>Audio API</title>
+</head>
+
+<body>
+<div>
+  <button>Play/Pause</button>
+</div>
+
+
+<script type="text/javascript">
+
+// steps
+// 1 create audio context
+// 2 create noise
+// 3 create loop - current time & raf
+
+// 1
+const ourAudioContext = new window.AudioContext;
+
+
+// 2
+const oscillator = ourAudioContext.createOscillator();
+oscillator.frequency.value = 440;
+
+function play() {
+  oscillator.connect(ourAudioContext.destination);
+  oscillator.start();
+}
+console.log(ourAudioContext.state);
+
+
+// play button stuff
+const playButton = document.querySelector('button');
+var playing = null;
+
+playButton.addEventListener("click", function() {
+  if (playing) {
+    ourAudioContext.suspend();
+    playing = false;
+  } else if (playing === false) {
+    ourAudioContext.resume();
+    playing = true;
+  } else {
+    play();
+    playing = true;
+  }
+});
+
+
+</script>
+</body>
