@@ -218,6 +218,16 @@ $grey: #bebebe
         </section>
 
         <section data-background-color="#463c34">
+          <h1>Timing</h1>
+          <pre><code class="js">const now = context.currentTime</code></pre>
+          <aside class="notes">
+            <p>See loads of code!</p>
+            <p>Timing is super important in audio. In web audio we have this currentTime property. It accesses the audio subsystems hardware clock</p>
+            <p>Long story short - we don't have to use javascript timing functions - which are dodgy.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#463c34">
           <h1>Nodes</h1>
           <p>Chains everything together (moz dev tools)</p>
           <aside class="notes">
@@ -357,15 +367,37 @@ node.connect(streamDest);
           </aside>
         </section>
 
-        <section data-background-color="#463c34">
-          <h1>Ben? Puppy?</h1>
+        <section data-background-color="#eee5c4" data-background-image="media/fistBump.gif">
           <aside class="notes">
+            <p>Well done everyone - fist bump!</p>
             <p>Ben wrote a thing called co js - it's a bit like codepen, jsbin, js fiddle. But specifically for a co-op environment. Workshops, hacks etc... I can code, you can ll watch, you can modify. My code remains. It's pretty cool.</p>
             <p>I'm going to use it...</p>
           </aside>
         </section>
 
         <section data-background-color="#463c34">
+          <div class="list-right">
+            <h1>Important bits?</h1>
+            <ul>
+              <li><h2>Time</h2></li>
+              <li class="fragment fade-in"><h2>Buffer</h2></li>
+              <li class="fragment fade-in"><h2>Reverb</h2></li>
+              <li class="fragment fade-in"><h2>Compressor</h2></li>
+              <li class="fragment fade-in"><h2>Volume</h2></li>
+              <li class="fragment fade-in"><h2>Delay</h2></li>
+              <li class="fragment fade-in"><h2>Panner</h2></li>
+            </ul>
+          </div>
+          <aside class="notes">
+            <p>Timing, to accurately load and playback sounds at the right time, you'll need your currentTime property and use that.</p>
+            <p>Sound spriting</p>
+            <p>Loading files into the buffer for playback</p>
+            <p>Reverb for your sound scape - different game levels might be different environments</p>
+            <p>Second alter sounds slide -> dynamic compressor, gain, delay, spacialisation (panner).</p>
+          </aside>
+        </section>
+
+        <!-- <section data-background-color="#463c34">
           <h1>URL OR STEP SEQ DEMO</h1>
           <aside class="notes">
             <p>Shall we see all this in action?</p>
@@ -379,7 +411,7 @@ node.connect(streamDest);
             <p>Shall we see all this in action?</p>
             <p>Copy basic code in - say what it's doing - then code some of the above.</p>
           </aside>
-        </section>
+        </section> -->
 
         <section data-background-color="#acc486">
           <h1>MIDI</h1>
@@ -496,89 +528,81 @@ function onMIDISuccess(midiControl) {
           <h1>RUTH ➡️ Games?</h1>
           <aside class="notes">
             <p>Yeh sorry I've been totally distracted, this is a game conference and yes I've been talking about all these weird and wonderful things you can do with crazy APIs</p>
-            <p>Big thanks to Belen who really helped me with this btw - I said at the top of the talk I'm not a game dev. She pointed me int he right direction.</p>
+            <p>Big thanks to Belen who really helped me with this btw - I said at the top of the talk I'm not a game dev. She pointed me in the right direction.</p>
             <p>So it's pretty obvious which bits are useful. Creating, timing, spacialising sounds. Maybe controlling - ther eis a gamepad api.</p>
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-state="no-visuals">
-          <h1>Reality - pop up</h1>
+        <section data-background-color="#463c34" data-background-image="media/library.jpg">
+          <h1>Audio Libraries</h1>
           <aside class="notes">
-            <p>But what's the reality here. Let's talk - builder to builder. We would all luv the chance and time to learn and play and make all the amazing shiny things, but we have that website ot build or we have that app to build, or that prototype. How can we put *any* of this into reality?</p>
+            <p>You're probably not gonna see much MIDI but audio is big in HTML games.</p>
+            <p>This was actually quite tricky for me. I don't play games and if you google there's loads of Audio games - but they're not necessarily web.</p>
+            <p>So I asked my friend.</p>
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-state="no-visuals">
-          <h1>Rule #1</h1>
+        <section data-background-color="#ea8d88" data-background-image="media/tone.png">
           <aside class="notes">
-            <p>Fuck it</p>
+            <p>Tone js my favourite. Really complete, nice to use - lodas of effects, timing functionality, instrumentation.</p>
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-state="no-visuals">
-          <h1><del>Rule #1</del> The only rule</h1>
-          <h2 class="fragment fade-in">No background music on load</h2>
-          <h2 class="fragment fade-in">No unsolicity music</h2>
+        <section data-background-color="#ea8d88" data-background-image="media/tuna.png">
           <aside class="notes">
-            <p>Don't play music unless the user wants you to - or expects it.</p>
+            <p>Tuna - sound effects library. Useful for games.</p>
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-state="no-visuals">
-          <h1>Let's be clever</h1>
+        <section data-background-color="#ea8d88" data-background-image="media/howler.png">
+          <aside class="notes">
+            <p>Howler is the big one - has everything I just spoke about, but it makes it easier to use and has cross platform support as well.</p>
+            <p>Supports codecs, sound sprites etc...</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#ea8d88" data-background-image="media/phaser.png">
+          <aside class="notes">
+            <p>Phaser uses web audio - I don't think I need to talk about this - everyone is.</p>
+            <p>It's pretty good, as far as I can tell. Has spacialisation, loading, sound spriting.</p>
+          </aside>
+        </section>
+
+        <!-- <section data-background-color="#463c34">
+          <h1>In the wild</h1>
+          <aside class="notes">
+            <p>You're probably not gonna see much MIDI but audio is big in HTML games.</p>
+            <p>This was actually quite tricky for me. I don't play games and if you google there's loads of Audio games - but they're not necessarily web.</p>
+            <p>So I asked my friend.</p>
+          </aside>
+        </section> -->
+        
+        <section data-background-color="#463c34">
           <div class="list-right">
+            <h1>Resources</h1>
             <ul>
-              <li><h2 class="fragment fade-in">Hover & interactions</h2></li>
-              <li><h2 class="fragment fade-in">Animations</h2></li>
-              <li><h2 class="fragment fade-in">Loading</h2></li>
-              <li><h2 class="fragment fade-in">User feedback</h2></li>
-              <li><h2 class="fragment fade-in">Notifications</h2></li>
+              <li><h2><a href="https://www.html5rocks.com/en/tutorials/audio/scheduling/">Chris Wilson: A Tale of Two Clocks</a></h2></li>
+              <li class="fragment fade-in"><h2><a href="https://www.html5rocks.com/en/tutorials/webaudio/games/">Boris Smus: Game Audio with Web Audio API</a></h2></li>
+              <li class="fragment fade-in"><h2><a href="https://developer.mozilla.org/en-US/docs/Games/Techniques/Audio_for_Web_Games">MDN: Audio for Web Games</a></h2></li>
+              <li class="fragment fade-in"><h2><a href="https://www.sitepoint.com/creating-accessible-breakout-game-using-web-audio-svg/">David Rousset: Accessible Breakout using Web Audio</a></h2></li>
             </ul>
           </div>
           <aside class="notes">
-            <p>Don't play music unless the user wants you to - or expects it.</p>
-            <p>We can add sound to a UI without it being intrusive - in fact it can be used to enhance it</p>
-            <p>Think about things like hover states, a nice loading sound, error or success sounds. Forms.</p>
+            <p>A few articles worth noting</p>
+            <p>Chris Wilson explains time really well</p>
+            <p>A couple of articles on using the api for game dev - boris smus on html5 rocks and one on MDN</p>
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-state="no-visuals">
-          <h1>Example no 1 - nice sound on website</h1>
+        <section data-background-color="#463c34">
+          <h1>Lunchtime!</h1>
           <aside class="notes">
-            <p>Don't play music unless the user wants you to - or expects it.</p>
+            <p>I would say I've only scratched the surface - but this is a pretty cnprehensable guide. There's a lot of good info there.</p>
+            <p>Even if you go ahead and just use Phasers capabilities - it's good to know this stuff and how it works</p>
+            <p>There's so much and I didn't even mention Audio Workers!</p>
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-state="no-visuals">
-          <h1>Example no 2 - my site</h1>
-          <aside class="notes">
-            <p>Don't play music unless the user wants you to - or expects it.</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#8c4c6f" data-state="no-visuals">
-          <h1>Example no 3 - how I hear the css tricks header</h1>
-          <aside class="notes">
-            <p>Two important things before I leave you with your new found knowledge.</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#8c4c6f" data-state="no-visuals">
-          <h1>This is a JavaScript API</h1>
-          <h2>Also known as HTML5</h2>
-          <aside class="notes">
-            <p>It doesn't work without JavaScript. Don't make anything depend on sound. Unless you're making spotify in javascript - or a synth</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#8c4c6f" data-state="no-visuals">
-          <h1>Mute ability</h1>
-          <aside class="notes">
-            <p>Give the user the ability to turn in off/down etc...</p>
-          </aside>
-        </section>
-
- 
         <section data-background-color="#8c4c6f" data-state="no-visuals">
           <h1>Go Forth&nbsp;&nbsp;|&nbsp;&nbsp;Make Noise</h1>
           <h1>Ruth John</h1>
@@ -594,7 +618,7 @@ function onMIDISuccess(midiControl) {
         </section>
 
         <section data-background-color="#8c4c6f" data-state="no-visuals">
-          <h1>Resources</h1>
+          <h1>Credits</h1>
           <h3>@jsoxford hack photo: @spikeheap</h3>
           <h3>Apeggiator: https://codepen.io/jakealbaugh/pen/qNrZyw</h3>
           <h3>Blokdust: https://blokdust.com/</h3>

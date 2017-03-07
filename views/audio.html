@@ -29,7 +29,9 @@ const ourAudioContext = new window.AudioContext;
 
 // 2
 const oscillator = ourAudioContext.createOscillator();
-oscillator.frequency.value = 440;
+oscillator.frequency.value = 20;
+// const filter = ourAudioContext.createBiquadFilter();
+// filter.
 
 function play() {
   oscillator.connect(ourAudioContext.destination);
