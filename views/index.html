@@ -50,7 +50,7 @@ $grey: #bebebe
 <body class="talk">
   <div class="reveal">
     <div class="slides">
-      <section>
+      <!-- <section> -->
 
         <section data-background-color="#8c4c6f" data-state="no-visuals">
           <h1>Web Audio</h1>
@@ -61,14 +61,14 @@ $grey: #bebebe
         </section>
 
         <!--COOL DEMO HERE-->
-        <section data-background-color="#8c4c6f" data-state="vis_speakers">
+        <!-- <section data-background-color="#8c4c6f" data-state="vis_speakers">
           <audio src="media/warren.m4a" data-autoplay></audio>
           <aside class="notes">
             <p>DANCE!</p>
           </aside>
-        </section>
+        </section> -->
 
-        <section data-background-color="#8c4c6f" data-background-image="media/talk2med.jpg" data-state="no-visuals">
+        <section data-background-color="#8c4c6f" data-background-image="media/talk2med.jpg">
           <h1>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</h1>
           <p>Hello</p>
           <aside class="notes">
@@ -108,11 +108,18 @@ $grey: #bebebe
         <section data-background-color="#8c4c6f">
           <h1>Not a game dev</h1>
           <h2>😱</h2>
-
           <aside class="notes">
             <p>I'm going to try and orientate this towards what I think you'll need as game devs - but I'm not one.</p>
             <p>I know one - she's amazing - if you have any game dev quesitons -> her name is Belen</p>
-            <p>Where do we start - I can tell you where we do't start...</p>
+            <p>Not even a gamer - yeeaaahh - the last game I played was this:</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#ea8d88" data-background-video="media/chuckie.mp4">
+          <aside class="notes">
+            <p>Does anyone actually remember this?</p>
+            <p>Kinda shows my age right. But I do know a little bit about audio - I know a little bit about audio on the web</p>
+            <p>Namely this</p>
           </aside>
         </section>
 
@@ -134,6 +141,7 @@ $grey: #bebebe
         <section data-background-color="#ea8d88" data-background-video="media/chord.mp4">
           <aside class="notes">
             <p>This is Jake Alburgh's appegiator - it's on codepen. It's such a simple idea, but it's illustrates soemthing so perfectly. The match between maths and music. I'm not going to go into it - but you should really check it out.</p>
+            <p>It also illustrates the amazing things you can do with the audio api</p>
           </aside>
         </section>
 
@@ -142,6 +150,7 @@ $grey: #bebebe
             <p>This is blokdust. Built by Luke Twyman, Luke Phillips and Edward Silverton in Brighton.</p>
             <p>It's well mental. A beautiful interface for a synth - you just pull things in, sound inputs, add effects, chain them together and output them. You can add controls.</p>
             <p>Note this interface - it'll be important later.</p>
+            <p>And it's not just synths & appediators - there's art too</p>
           </aside>
         </section>
 
@@ -158,27 +167,28 @@ $grey: #bebebe
           </aside>
         </section>
 
-        <section data-background-color="#ea8d88" data-background-image="media/novation.png">
+        <section data-background-color="#ea8d88" data-background-image="media/novation.png" data-transition="none">
           <aside class="notes">
             <p>synth</p>
           </aside>
         </section>
 
-        <section data-background-color="#ea8d88" data-background-image="media/viktor.png">
+        <section data-background-color="#ea8d88" data-background-image="media/viktor.png" data-transition="none">
           <aside class="notes">
             <p>the</p>
           </aside>
         </section>
 
-        <section data-background-color="#ea8d88" data-background="media/html909.png">
+        <section data-background-color="#ea8d88" data-background="media/html909.png" data-transition="none">
           <aside class="notes">
             <p>sis</p>
           </aside>
         </section>
 
-        <section data-background-color="#ea8d88" data-background="media/mod.png">
+        <section data-background-color="#ea8d88" data-background="media/mod.png" data-transition="none">
           <aside class="notes">
             <p>sers</p>
+            <p>There are all these fabulous things being built with the web audio api</p>
             <p>We'll get to what a sythesiser is later in the talk... but for now, back to audio... web audio. I mean look at this where do you even begin.</p>
           </aside>
         </section>
@@ -186,6 +196,7 @@ $grey: #bebebe
         <section data-background-color="#ea8d88" data-background-video="media/mdnDocs.mp4">
           <aside class="notes">
             <p>MDN docs of methods, functions, properties, events. I mean what even is a cent. Top tip - it's not a denomination of a currency.</p>
+            <p>Was this article helpful? To be honest it actually is. These docs are the most helpful. Go here.</p>
             <p>So I've popped all these into categories for you, and I'm going to take you through them. I'm not going to cover every single parameter? of every method in depth, or go into signal processing in depth, we simply don't have the time and audio is a huge topic. I'm here to talk about the web audio API, you wanna talk about any other thing, come find me after. Please :)</p>
           </aside>
         </section>
@@ -203,7 +214,7 @@ $grey: #bebebe
           <aside class="notes">
             <p>So I've tried to break it down into managable sections</p>
             <p>But there is too much to cover in one talk and there's a variety of different levels in the audience - some of you are going to know all of this and some of you none of it.</p>
-            <p>CODE WARNING</p>
+            <p>CODE WARNING lots of code ready?</p>
           </aside>
         </section>
 
@@ -227,9 +238,8 @@ $grey: #bebebe
           </aside>
         </section>
 
-        <section data-background-color="#463c34">
+        <section data-background-color="#463c34" data-background-image="media/nodes.png">
           <h1>Nodes</h1>
-          <p>Chains everything together (moz dev tools)</p>
           <aside class="notes">
             <p>Mozilla dev tools</p>
           </aside>
@@ -375,25 +385,61 @@ node.connect(streamDest);
           </aside>
         </section>
 
-        <section data-background-color="#463c34">
-          <div class="list-right">
-            <h1>Important bits?</h1>
-            <ul>
-              <li><h2>Time</h2></li>
-              <li class="fragment fade-in"><h2>Buffer</h2></li>
-              <li class="fragment fade-in"><h2>Reverb</h2></li>
-              <li class="fragment fade-in"><h2>Compressor</h2></li>
-              <li class="fragment fade-in"><h2>Volume</h2></li>
-              <li class="fragment fade-in"><h2>Delay</h2></li>
-              <li class="fragment fade-in"><h2>Panner</h2></li>
-            </ul>
-          </div>
+        <section data-background-color="#eee5c4">
+          <h1>Why don't you code Ruth?</h1>
           <aside class="notes">
-            <p>Timing, to accurately load and playback sounds at the right time, you'll need your currentTime property and use that.</p>
-            <p>Sound spriting</p>
-            <p>Loading files into the buffer for playback</p>
-            <p>Reverb for your sound scape - different game levels might be different environments</p>
-            <p>Second alter sounds slide -> dynamic compressor, gain, delay, spacialisation (panner).</p>
+            <p>Well done everyone - fist bump!</p>
+            <p>Ben wrote a thing called co js - it's a bit like codepen, jsbin, js fiddle. But specifically for a co-op environment. Workshops, hacks etc... I can code, you can ll watch, you can modify. My code remains. It's pretty cool.</p>
+            <p>I'm going to use it...</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#eee5c4" data-background-image="media/fistBump.gif">
+          <aside class="notes">
+            <p>Well done everyone - fist bump!</p>
+            <p>Ben wrote a thing called co js - it's a bit like codepen, jsbin, js fiddle. But specifically for a co-op environment. Workshops, hacks etc... I can code, you can ll watch, you can modify. My code remains. It's pretty cool.</p>
+            <p>I'm going to use it...</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#ea8d88" data-background-image="media/jsfx.png" data-transition="none">
+          <aside class="notes">
+            <p>So the sound you just heard was very much like the ones you can create with jsfx - an audio library for 8 bit sounds. I've actually got it open to show you.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#463c34" data-background-image="media/library.jpg">
+          <h1>Audio Libraries</h1>
+          <aside class="notes">
+            <p>You're probably not gonna see much MIDI but audio is big in HTML games.</p>
+            <p>This was actually quite tricky for me. I don't play games and if you google there's loads of Audio games - but they're not necessarily web.</p>
+            <p>So I asked my friend.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#ea8d88" data-background-image="media/tone.png" data-transition="none">
+          <aside class="notes">
+            <p>Tone js my favourite. Really complete, nice to use - lodas of effects, timing functionality, instrumentation.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#ea8d88" data-background-image="media/tuna.png" data-transition="none">
+          <aside class="notes">
+            <p>Tuna - sound effects library. Useful for games.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#ea8d88" data-background-image="media/howler.png" data-transition="none">
+          <aside class="notes">
+            <p>Howler is the big one - has everything I just spoke about, but it makes it easier to use and has cross platform support as well.</p>
+            <p>Supports codecs, sound sprites etc...</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#ea8d88" data-background-image="media/phaser.png">
+          <aside class="notes">
+            <p>Phaser uses web audio - I don't think I need to talk about this - everyone is.</p>
+            <p>It's pretty good, as far as I can tell. Has spacialisation, loading, sound spriting.</p>
           </aside>
         </section>
 
@@ -498,26 +544,26 @@ function onMIDISuccess(midiControl) {
           </aside>
         </section>
 
-        <section data-background-color="#acc486" data-background-image="media/keyboard.jpg">
+        <section data-background-color="#acc486" data-background-image="media/keyboard.jpg" data-transition="none">
           <aside class="notes">
             <p>These are MIDI instruments. They have onboard audio. There's classic ones, synths, drum machines</p>
           </aside>
         </section>
 
-        <section data-background-color="#acc486" data-background-image="media/launchpad.jpg">
+        <section data-background-color="#acc486" data-background-image="media/launchpad.jpg" data-transition="none">
           <aside class="notes">
             <p>This is a launchpad - probably one of the most popular MIDI controllers for developers - you might have seen one - it's an array of buttons - it sends similar data to what we werre seeing before</p>
           </aside>
         </section>
 
-        <section data-background-color="#acc486" data-background-image="media/controllers.jpg">
+        <section data-background-color="#acc486" data-background-image="media/controllers.jpg" data-transition="none">
           <aside class="notes">
             <p>These are MIDI controllers. They're basically just hardware. No onboard audio.</p>
             <p>Check this one out - it's a game controller</p>
           </aside>
         </section>
 
-        <section data-background-color="#acc486" data-background-image="media/orbit.jpg">
+        <section data-background-color="#acc486" data-background-image="media/orbit.jpg" data-transition="none">
           <aside class="notes">
             <p>These are MIDI controllers. They're basically just hardware. No onboard audio.</p>
             <p>Check this one out - it's a game controller</p>
@@ -533,40 +579,7 @@ function onMIDISuccess(midiControl) {
           </aside>
         </section>
 
-        <section data-background-color="#463c34" data-background-image="media/library.jpg">
-          <h1>Audio Libraries</h1>
-          <aside class="notes">
-            <p>You're probably not gonna see much MIDI but audio is big in HTML games.</p>
-            <p>This was actually quite tricky for me. I don't play games and if you google there's loads of Audio games - but they're not necessarily web.</p>
-            <p>So I asked my friend.</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#ea8d88" data-background-image="media/tone.png">
-          <aside class="notes">
-            <p>Tone js my favourite. Really complete, nice to use - lodas of effects, timing functionality, instrumentation.</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#ea8d88" data-background-image="media/tuna.png">
-          <aside class="notes">
-            <p>Tuna - sound effects library. Useful for games.</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#ea8d88" data-background-image="media/howler.png">
-          <aside class="notes">
-            <p>Howler is the big one - has everything I just spoke about, but it makes it easier to use and has cross platform support as well.</p>
-            <p>Supports codecs, sound sprites etc...</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#ea8d88" data-background-image="media/phaser.png">
-          <aside class="notes">
-            <p>Phaser uses web audio - I don't think I need to talk about this - everyone is.</p>
-            <p>It's pretty good, as far as I can tell. Has spacialisation, loading, sound spriting.</p>
-          </aside>
-        </section>
+        
 
         <!-- <section data-background-color="#463c34">
           <h1>In the wild</h1>
@@ -576,8 +589,30 @@ function onMIDISuccess(midiControl) {
             <p>So I asked my friend.</p>
           </aside>
         </section> -->
+
+        <section data-background-color="#463c34" class="lists">
+          <div class="list-right">
+            <h1>Important bits?</h1>
+            <ul>
+              <li><h2>Time</h2></li>
+              <li class="fragment fade-in"><h2>Buffer</h2></li>
+              <li class="fragment fade-in"><h2>Reverb</h2></li>
+              <li class="fragment fade-in"><h2>Compressor</h2></li>
+              <li class="fragment fade-in"><h2>Volume</h2></li>
+              <li class="fragment fade-in"><h2>Delay</h2></li>
+              <li class="fragment fade-in"><h2>Panner</h2></li>
+            </ul>
+          </div>
+          <aside class="notes">
+            <p>Timing, to accurately load and playback sounds at the right time, you'll need your currentTime property and use that.</p>
+            <p>Sound spriting</p>
+            <p>Loading files into the buffer for playback</p>
+            <p>Reverb for your sound scape - different game levels might be different environments</p>
+            <p>Second alter sounds slide -> dynamic compressor, gain, delay, spacialisation (panner).</p>
+          </aside>
+        </section>
         
-        <section data-background-color="#463c34">
+        <section data-background-color="#463c34" class="lists">
           <div class="list-right">
             <h1>Resources</h1>
             <ul>
@@ -629,7 +664,7 @@ function onMIDISuccess(midiControl) {
         </section>
 
 <!-- THIS IS IMPORTANT "0x" + x.toString(16); -->
-      </section>
+      <!-- </section> -->
     </div></div>
 
     <div id="screen"></div>
@@ -638,7 +673,7 @@ function onMIDISuccess(midiControl) {
 <script src="reveal/plugin/highlight/highlight.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
-<script src="scripts/audioVisual.js"></script>
+<!-- <script src="scripts/audioVisual.js"></script> -->
 
 <script type="text/javascript">
 // Reveal~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -672,7 +707,9 @@ Reveal.initialize({
   history: true,
 
   // Enable keyboard shortcuts for navigation
-  keyboard: true,
+  keyboard: {
+    25: 'next' // go to the next slide when the DOWN key is pressed
+  },
 
   // Transition style
   transition: 'fade', // none/fade/slide/convex/concave/zoom

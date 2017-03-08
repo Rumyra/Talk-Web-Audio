@@ -131,7 +131,10 @@ $selectionColor: #fff;
   ul {list-style:none; margin-left:0px;}
   div.list-left {float:left;text-align: left;}
   div.list-right {
-    h1, ul li {text-align:right;}
+    h1, ul li {
+      text-align:right;
+      a {color:$white; text-decoration:underline;}
+    }
   }
   p.flash {animation:flash 1s infinite;}
 }

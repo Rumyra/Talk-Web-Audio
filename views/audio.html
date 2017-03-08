@@ -12,49 +12,53 @@
 
 <body>
 <div>
-  <button>Play/Pause</button>
+  <button>Laser</button>
 </div>
 
 
 <script type="text/javascript">
 
 // steps
-// 1 create audio context
-// 2 create noise
-// 3 create loop - current time & raf
+// 1.1 create audio context
+// 1.2 create oscillator and set frequency
+// 1.3 create play function
 
-// 1
+// 1.1
 const ourAudioContext = new window.AudioContext;
 
+// 1.2
 
-// 2
-const oscillator = ourAudioContext.createOscillator();
-oscillator.frequency.value = 20;
-// const filter = ourAudioContext.createBiquadFilter();
-// filter.
-
+// 1.3
 function play() {
-  oscillator.connect(ourAudioContext.destination);
-  oscillator.start();
+
+  const oscillator = ourAudioContext.createOscillator();
+  oscillator.frequency.value = 750;
+  oscillator.type = 'sawtooth';
+
+  oscillator.frequency.exponentialRampToValueAtTime(0.01, ourAudioContext.currentTime+0.5);
+
+  const gainNode = ourAudioContext.createGain();
+  // set value to 1 'now'
+  gainNode.gain.setValueAtTime(1, ourAudioContext.currentTime);
+  // decrease suddenly but smoothly
+  gainNode.gain.exponentialRampToValueAtTime(0.001, ourAudioContext.currentTime + 0.5);
+
+
+  // connect everything together & play
+  oscillator.connect(gainNode);
+  gainNode.connect(ourAudioContext.destination);
+  oscillator.start(ourAudioContext.currentTime);
+  oscillator.stop(ourAudioContext.currentTime+0.5);
 }
 console.log(ourAudioContext.state);
 
 
 // play button stuff
-const playButton = document.querySelector('button');
-var playing = null;
+const buttons = document.getElementsByTagName('button');
+const laserButton = buttons[0];
 
-playButton.addEventListener("click", function() {
-  if (playing) {
-    ourAudioContext.suspend();
-    playing = false;
-  } else if (playing === false) {
-    ourAudioContext.resume();
-    playing = true;
-  } else {
-    play();
-    playing = true;
-  }
+laserButton.addEventListener("click", function() {
+  play();
 });
 
 
