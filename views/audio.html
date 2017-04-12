@@ -18,17 +18,54 @@
 
 <script type="text/javascript">
 
-// steps
-// 1.1 create audio context
-// 1.2 create oscillator and set frequency
-// 1.3 create play function
+// const context = new window.AudioContext;
 
-// 1.1
+
+
+// function play() {
+//   const oscillator = context.createOscillator();
+//   oscillator.frequency.value = 750;
+//   oscillator.type = 'square';
+
+//   oscillator.frequency.exponentialRampToValueAtTime(0.01, context.currentTime+0.5);
+
+//   const gainNode = context.createGain();
+//   gainNode.gain.setValueAtTime(1, context.currentTime);
+//   gainNode.gain.exponentialRampToValueAtTime(0.001,context.currentTime+0.5);
+
+//   oscillator.connect(context.gainNode);
+//   oscillator.connect(context.destination);
+
+
+
+//   oscillator.start(context.currentTime);
+//   oscillator.stop(context.currentTime+0.5);
+// }
+
+
+
+
+
+// play button stuff
+const buttons = document.getElementsByTagName('button');
+const laserButton = buttons[0];
+
+laserButton.addEventListener("click", function() {
+  play();
+});
+
+
+
+
+
+
+
+
+
+
+
 const ourAudioContext = new window.AudioContext;
 
-// 1.2
-
-// 1.3
 function play() {
 
   const oscillator = ourAudioContext.createOscillator();
@@ -52,14 +89,6 @@ function play() {
 }
 console.log(ourAudioContext.state);
 
-
-// play button stuff
-const buttons = document.getElementsByTagName('button');
-const laserButton = buttons[0];
-
-laserButton.addEventListener("click", function() {
-  play();
-});
 
 
 </script>
