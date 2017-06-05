@@ -50,7 +50,7 @@ $grey: #bebebe
 <body class="talk">
   <div class="reveal">
     <div class="slides">
-      <!-- <section> -->
+      <section>
 
         <section data-background-color="#8c4c6f">
           <h1>Web Audio</h1>
@@ -72,28 +72,30 @@ $grey: #bebebe
           <h1>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</h1>
           <p>Hello</p>
           <aside class="notes">
-            <p>Hello Web Game Day ... How are we doing today?</p>
-            <p>Soeak slowly</p>
-            <p>So this is the part of the talk where I introduce myself, and tell you what I do and why I should be up here talking to you about Web Audio and not anyone else.</p>
-            <p>Well here's me with a laptop - pretty qualified. I've been known to write code.</p>
-            <p>I've been doing that for a while now</p>
+            <p>Hey! Web API Day!</p>
+            <p>Speak slowly</p>
+            <p>So this is the part of the talk where I introduce myself, and tell you what my job title is... </p>
+            <p>My name is Ruth, I'm here to talk to u about audio & midi, on the web.</p>
           </aside>
         </section>
 
         <section data-background-color="#8c4c6f" data-background-image="media/meProject.jpg">
           <h1>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</h1>
-          <p>Hello</p>
+          <p>Street VJ</p>
           <aside class="notes">
             <p>This is me projecting visuals around my city. With a laptop, a projector, a midi controller and hand coded browser software.</p>
+            <p>AKA Legacy FED</p>
+            <p>How long I've been doing this for...</p>
           </aside>
         </section>
 
         <section data-background-color="#8c4c6f" data-background-image="media/meLights.jpg">
           <h1>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</h1>
-          <p>Hello</p>
+          <p>~ 15 Years</p>
           <aside class="notes">
+            <p>How long is a string of audio reactive LEDs</p>
             <p>This is me at a hardware hackday I run with my friend Gordon, making a string of lights flash in time to sound</p>
-            <p>There is code</p>
+            <p>And of course the clients I work with...</p>
           </aside>
         </section>
 
@@ -101,29 +103,59 @@ $grey: #bebebe
           <h1>Ruth John&nbsp;&nbsp;|&nbsp;&nbsp;@Rumyra</h1>
           <p>Hello</p>
           <aside class="notes">
-            <p>And this is me paddle boarding in Australia with Bobby the dog. Totally qualified to talk about Web Audio.</p>
-            <p>Normally I would say let me show you - so please, let me show you.</p>
-            <p>Full disclosure...</p>
+            <p>And this is me paddle boarding in Australia with Bobby the dog.</p>
+            <p>Yup totally qualified to talk about the whole of the web audio API...</p>
+            <p>And really the WHOLE - I mean it's a huge spec. Just to put it into perpective:</p>
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f">
-          <h1>Not a game dev</h1>
-          <h2>😱</h2>
+        <section data-background-color="#8c4c6f" data-background-image="media/paddle.jpg">
           <aside class="notes">
-            <p>I'm going to try and orientate this towards what I think you'll need as game devs - but I'm not one.</p>
-            <p>I know one - she's amazing - if you have any game dev quesitons -> her name is Belen</p>
-            <p>Not even a gamer - yeeaaahh - the last game I played was this:</p>
+            <!--video of web audio spec-->
+            <p>And this is me paddle boarding in Australia with Bobby the dog.</p>
+            <p>Yup totally qualified to talk about the whole of the web audio API...</p>
           </aside>
         </section>
 
-        <section data-background-color="#eee5c4" data-background-video="media/chuckie.mp4">
+
+        <section data-background-color="#eee5c4" data-background-video="media/mdnDocs.mp4">
           <aside class="notes">
-            <p>Does anyone actually remember this?</p>
-            <p>My game knowledge might be limited. But I do know a little bit about audio - I know a little bit about audio on the web</p>
-            <p>Namely this</p>
+            <p>MDN docs of methods, functions, properties, events. I mean what even is a cent. Top tip - it's not a denomination of a currency.</p>
+            <p>Was this article helpful? To be honest it actually is. These docs are the most helpful. Go here.</p>
+            <p>So I've popped all these into categories for you, and I'm going to take you through them. I'm not going to cover every single parameter? of every method in depth, or go into signal processing in depth, we simply don't have the time and audio is a huge topic. I'm here to talk about the web audio API, you wanna talk about any other thing, come find me after. Please :)</p>
           </aside>
         </section>
+
+        <!-- it's amazing u can do cool stuff with it-->
+        <!-- people are relunctant to use it on the web -->
+        <!-- I want to readdress this -->
+        <!-- let's start with the practical stuff, what do u need to know to use it to it's full advantage ona  website -->
+        <!-- let's begin with a little lesson about digital audio -->
+        <!-- now let's say you want to load a sound to use - this can be for anything, website, app, your crazy synth, you have to make sure the audio api can understand this data -->
+        <!-- create new audio api - recording studio -->
+        <!-- learn saving data -->
+        <!-- example of hover, or menu or something -->
+        <!-- portfolio example -->
+        <!-- volume, anything else? Timing - jakes article - library -->
+        <!-- Other reasons u may use it -->
+        <!-- Games & VR - very different things, but methods similar -->
+        <!-- panning, spatialisation, sound spriting -->
+        <!-- VR example? or phone -->
+        <!-- phaser -->
+        <!-- But what if you do want to create your own sounds, or make your own sound machine - 4th way -->
+        <!-- oscialltor -->
+        <!-- modification nodes, distorting, filtering - under the hood maths -->
+        <!-- create a small synth - demo they can have on their phone -->
+        <!-- controlling -> hardware -->
+        <!-- MIDI subject unto itself -->
+        <!-- 10 min version... MIDI came about -->
+        <!-- have it on the web -->
+        <!-- press button demo -->
+        <!-- demo with synth -->
+        <!-- think about sound - think about it as part of design, it can be something simple (forms), animation is always enhanced - it's 2017, we don't need horrible load blaring music when we land on a page, we have all this power at our fingertips to make it really mature -->
+        <!-- support for music file types -->
+
+        
 
         <section data-background-color="#eee5c4" data-background-video="media/cameronsworld.mp4">
           <aside class="notes">
@@ -196,13 +228,7 @@ $grey: #bebebe
           </aside>
         </section>
 
-        <section data-background-color="#eee5c4" data-background-video="media/mdnDocs.mp4">
-          <aside class="notes">
-            <p>MDN docs of methods, functions, properties, events. I mean what even is a cent. Top tip - it's not a denomination of a currency.</p>
-            <p>Was this article helpful? To be honest it actually is. These docs are the most helpful. Go here.</p>
-            <p>So I've popped all these into categories for you, and I'm going to take you through them. I'm not going to cover every single parameter? of every method in depth, or go into signal processing in depth, we simply don't have the time and audio is a huge topic. I'm here to talk about the web audio API, you wanna talk about any other thing, come find me after. Please :)</p>
-          </aside>
-        </section>
+        
 
         <section data-background-color="#463c34" class="lists">
           <div class="list-right">
@@ -671,7 +697,7 @@ function onMIDISuccess(midiControl) {
         </section>
 
 <!-- THIS IS IMPORTANT "0x" + x.toString(16); -->
-      <!-- </section> -->
+      </section>
     </div></div>
 
     <div id="screen"></div>
