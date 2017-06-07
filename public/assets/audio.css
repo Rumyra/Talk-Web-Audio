@@ -3,8 +3,9 @@ body {
   background-color: hsla(240,35%,98%,1);
   font-size:100%;
 }
+.container {margin:0px; padding:0px;}
 
-div {
+#synth {
   width:260px;
   margin:0px auto; padding:30px;
 }

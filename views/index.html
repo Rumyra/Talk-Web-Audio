@@ -109,10 +109,10 @@ $grey: #bebebe
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-background-image="media/paddle.jpg">
+        <section data-background-color="#8c4c6f" data-background-image="media/specScroll.mp4">
           <aside class="notes">
             <!--video of web audio spec-->
-            <p>It's a spec unto itself really</p>
+            <p>It's a spec unto itself really - by the way the length of that video before I sped it up was 2 1/2 mins!</p>
             <p>But don't worry we have mdn docs is probably better for learning...</p>
           </aside>
         </section>
@@ -200,42 +200,64 @@ $grey: #bebebe
           </aside>
         </section>
 
-        
-
         <!-- I want to readdress this -->
-        <section data-background-color="#eee5c4" data-background-video="media/annoy.mp4">
+        <section data-background-color="#eee5c4" data-background-video="media/abletonSite.jpgq">
           <!-- ableton learn music -->
+          <p>learningmusic.ableton.com</p>
           <aside class="notes">
             <p>Ableton just launched this website giving users an overview to learn music.</p>
             <p>Sure the subject matter is audio, but without the extensive functionality of the audio api this wouldn't be possible.</p>
           </aside>
         </section>
 
-        <section data-background-color="#eee5c4" data-background-video="media/annoy.mp4">
+        <section data-background-color="#eee5c4" data-background-video="media/futureLibrary.mp4">
           <!-- future library -->
+          <p>futurelibrary.no</p>
           <aside class="notes">
             <p>This is my favourite, this is a project from Norway called future library, where they're growing a forest and getting authors to write books for every tree and every year.</p>
             <p>Sounds are playing throughout, but it really enhances the experience.</p>
+            <p>Mute fades it out</p>
           </aside>
         </section>
 
-        <section data-background-color="#eee5c4" data-background-video="media/annoy.mp4">
+        <section data-background-color="#eee5c4" data-background-video="media/86years.mp4">
           <!-- portfolio -->
+          <p>86andahalfyears.com</p>
           <aside class="notes">
-            <p>And this is my own portfolio (as always still a teeny bit away from going live) but when you load the work page I've treid to bring the animation and hover to live with audio and I think it adds really depth</p>
+            <p>This is 86 and half years. A story website about the musings of an 86 1/2 yesr old man. But presented so excellently.</p>
+            <p>None of the sounds on these websites are intrusive, they enhance the experience, these aren't websites you flick to, you sit and discover them. There is a place for audio.</p>
           </aside>
         </section>
 
-        <section data-background-color="#eee5c4" data-background-video="media/annoy.mp4">
+        <section data-background-color="#eee5c4" data-background-video="media/mute.jpg">
+          <div class="list-left">
+            <h1>Mute 👍</h1>
+            <!-- <ul>
+              <li><h2>Time</h2></li>
+              <li class="fragment fade-in"><h2>Buffer</h2></li>
+              <li class="fragment fade-in"><h2>Oscillator</h2></li>
+              <li class="fragment fade-in"><h2>Panner</h2></li>
+              <li class="fragment fade-in"><h2>Reverb, Compressor, Gain, Delay</h2></li>
+            </ul> -->
+          </div>
+          <div class="list-right">
+            <h1>No mute @ intro 👎</h1>
+            <!-- <ul>
+              <li><h2>Time</h2></li>
+              <li class="fragment fade-in"><h2>Buffer</h2></li>
+              <li class="fragment fade-in"><h2>Oscillator</h2></li>
+              <li class="fragment fade-in"><h2>Panner</h2></li>
+              <li class="fragment fade-in"><h2>Reverb, Compressor, Gain, Delay</h2></li>
+            </ul> -->
+          </div>
           <!-- mute controls -->
           <aside class="notes">
-            <p>And don't worry you can easily notice the mute control on both of the last two examples!</p>
+            <p>Forest has a mute control</p>
+            <p>Years doesn't - although at the start it does say, best experience with headphones.</p>
+            <p>Both very thoughtful features. We'll get back to mute in a minute because</p>
+            <p>So I wanted to take out the more practical parts of the audio api - there's simply not enough time to go through it all. So as an introduction, let's have a quick overview of digital audio, as I think that will help.</p>
           </aside>
         </section>
-
-        <!-- let's start with the practical stuff, what do u need to know to use it to it's full advantage on a  website -->
-
-        <!-- MAYBE let's begin with a little lesson about digital audio -->
 
         <section data-background-color="#eee5c4">
           <h1>Digital Audio</h1>
@@ -518,13 +540,14 @@ node.buffer = buffer;
             <p>That audio buffer we passed the file data into earlier, to load the file. We don't have to load a file into a buffer, we can create that data ourselves. We know now it's just numbers.</p>
             <p>The loop you see in the code here creates numbers that when passed into the buffer and played play pink noise.</p>
             <p>And this is where we can really start to have some fun with the other filter nodes the api gives us.</p>
+            <p>But you can also create your own buffer data. So if you think back to earlier, your own numbers to pass into a buffer and use them.</p>
+            <p>This code creates some pink noise - it sounds a little like this, but if we add some effects and shorten it we can make it sound like a ...</p>
           </aside>
         </section>
         
         <!-- oscialltor -->
 
-        <p>But you can also create your own buffer data. So if you think back to earlier, your own numbers to pass into a buffer and use them.</p>
-        <p>This code creates some pink noise - it sounds a little like this, but if we add some effects and shorten it we can make it sound like a ...</p>
+        
         <!-- modification nodes, distorting, filtering - under the hood maths -->
 
         <section data-background-color="#463c34">
@@ -741,7 +764,7 @@ function onMIDISuccess(midiControl) {
         
 
 
-        
+
 
         <section data-background-color="#463c34">
           <h1>Analyse sounds</h1>

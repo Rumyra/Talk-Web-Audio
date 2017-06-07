@@ -11,83 +11,205 @@
 </head>
 
 <body>
-<div>
-  <button>Laser</button>
+<div class="container">
+  <section id="synth">
+    <button data-sound="arps" data-mute="undef">Arps</button>
+    <button data-sound="laser">Laser</button>
+    <button data-sound="kick">Kick</button>
+    <button data-sound="snare">Snare?</button>
+    <button data-sound="hh" data-mute="undef">Hi Hat</button>
+  </section>
 </div>
 
 
 <script type="text/javascript">
 
-// const context = new window.AudioContext;
+// dom / buttons
+const buttons = document.querySelectorAll('button'),
+  arpButton = document.querySelector('button[data-sound="arps"]'),
+  hhButton = document.querySelector('button[data-sound="hh"]'),
+  synth = document.querySelector('#synth');
+console.log(buttons);
 
+synth.addEventListener("click", function(evt) {
+  let button = evt.target;
+  console.log(button);
 
+  // arpegiator controls
+  if (button.dataset.sound === "arps") {
 
-// function play() {
-//   const oscillator = context.createOscillator();
-//   oscillator.frequency.value = 750;
-//   oscillator.type = 'square';
+    if (button.dataset.mute === "true") {
 
-//   oscillator.frequency.exponentialRampToValueAtTime(0.01, context.currentTime+0.5);
+      arpsGain.gain.value = 1;
+      button.dataset.mute = "false";
 
-//   const gainNode = context.createGain();
-//   gainNode.gain.setValueAtTime(1, context.currentTime);
-//   gainNode.gain.exponentialRampToValueAtTime(0.001,context.currentTime+0.5);
+    } else if (button.dataset.mute === "false") {
 
-//   oscillator.connect(context.gainNode);
-//   oscillator.connect(context.destination);
+      arpsGain.gain.value = 0;
+      button.dataset.mute = "true";
 
+    } else {
 
+      arpsSource.connect(arpsGain).connect(context.destination);
+      arpsSource.start();
+      arpsSource.loop = true;
+      button.dataset.mute = "false";
+    }
+      
+  }
 
-//   oscillator.start(context.currentTime);
-//   oscillator.stop(context.currentTime+0.5);
-// }
+  if (button.dataset.sound === "laser") {
+    playLaser();
+  }
 
+  if (button.dataset.sound === "snare") {
+    playSnare();
+  }
 
+  if (button.dataset.sound === "kick") {
+    playKick();
+  }
 
-
-
-// play button stuff
-const buttons = document.getElementsByTagName('button');
-const laserButton = buttons[0];
-
-laserButton.addEventListener("click", function() {
-  play();
+  // if (button.dataset.sound === "hh") {
+  //   playHiHat();
+  // }
+  // play();
 });
 
+// start audio stuff
+
+const context = new window.AudioContext;
+
+// nodes
+const arpsSource = context.createBufferSource(),
+  arpsGain = context.createGain();
+
+fetch('media/100_C_G_Arps_SP_01.wav')
+  // read into memory as array buffer
+  .then(response => response.arrayBuffer())
+  // turn into raw audio data
+  .then(arrayBuffer => context.decodeAudioData(arrayBuffer))
+  .then(audioBuffer => {
+    arpsSource.buffer = audioBuffer;
+  })
+// (see https://jakearchibald.com/2016/sounds-fun/)
+
+// hi hat
+fetch('media/808CHH.wav')
+  // read into memory as array buffer
+  .then(response => response.arrayBuffer())
+  // turn into raw audio data
+  .then(arrayBuffer => context.decodeAudioData(arrayBuffer))
+  .then(audioBuffer => {
+
+    hhButton.addEventListener("click", function(evt) {
+      const hh = context.createBufferSource();
+      hh.buffer = audioBuffer;
+      hh.connect(context.destination);
+      hh.start();
+      hh.stop(context.currentTime+0.5);
+    });
+
+  })
 
 
+// function playHiHat() {
+//   const hh = context.createBufferSource();
+//   hh.buffer = hhBuffer;
+//   hh.connect(context.destination);
+//   hh.start();
+//   hh.stop(context.currentTime+0.5);
+// }
 
+function playLaser() {
+  const laser = context.createOscillator();
+  laser.frequency.value = 523.251;
+  laser.type = 'square';
+  laser.frequency.exponentialRampToValueAtTime(10, context.currentTime+1);
 
-
-
-
-
-
-
-const ourAudioContext = new window.AudioContext;
-
-function play() {
-
-  const oscillator = ourAudioContext.createOscillator();
-  oscillator.frequency.value = 750;
-  oscillator.type = 'sawtooth';
-
-  oscillator.frequency.exponentialRampToValueAtTime(0.01, ourAudioContext.currentTime+0.5);
-
-  const gainNode = ourAudioContext.createGain();
-  // set value to 1 'now'
-  gainNode.gain.setValueAtTime(1, ourAudioContext.currentTime);
-  // decrease suddenly but smoothly
-  gainNode.gain.exponentialRampToValueAtTime(0.001, ourAudioContext.currentTime + 0.5);
-
-
-  // connect everything together & play
-  oscillator.connect(gainNode);
-  gainNode.connect(ourAudioContext.destination);
-  oscillator.start(ourAudioContext.currentTime);
-  oscillator.stop(ourAudioContext.currentTime+0.5);
+  const laserGain = context.createGain();
+  // set gain value to 1 'now'
+  laserGain.gain.setValueAtTime(1, context.currentTime)
+  // decease suddenly but smoothly
+  laserGain.gain.exponentialRampToValueAtTime(0.001, context.currentTime+0.9);
+  laser.connect(laserGain).connect(context.destination);
+  laser.start(context.currentTime);
+  laser.stop(context.currentTime+1);
 }
-console.log(ourAudioContext.state);
+
+function playSnare() {
+  const snareBufferSize = context.sampleRate;
+  // pass in channels, frame count, sample rate
+  const snareBuffer = context.createBuffer(1, snareBufferSize, context.sampleRate);
+  const snare = context.createBufferSource();
+
+  // create some data for the buffer
+  var snareData = snareBuffer.getChannelData(0);
+
+  for (let i=0; i<snareBufferSize; i++) {
+    snareData[i] = Math.random()*2 - 1;
+  }
+
+  snare.buffer = snareBuffer;
+
+  // create a filter
+  const snareFilter = context.createBiquadFilter();
+  snareFilter.type = "bandpass";
+  snareFilter.frequency = 15000;
+  snareFilter.Q = 0.0001;
+
+  // create gain
+  const snareGain = context.createGain();
+  snareGain.gain.setValueAtTime(3,context.currentTime);
+  snareGain.gain.exponentialRampToValueAtTime(0.01, context.currentTime+0.3);
+
+  snare.connect(snareFilter).connect(snareGain).connect(context.destination);
+  snare.start(context.currentTime);
+  snare.stop(context.currentTime+0.5);
+}
+
+function playKick() {
+  const kick = context.createOscillator();
+  kick.frequency = 150;
+  kick.frequency.setValueAtTime(150, context.currentTime);
+  kick.frequency.exponentialRampToValueAtTime(0.01, context.currentTime+0.5);
+
+  kickGain = context.createGain();
+  kickGain.gain.setValueAtTime(2,context.currentTime);
+  kickGain.gain.exponentialRampToValueAtTime(0.01,context.currentTime+0.4);
+
+  kick.connect(kickGain).connect(context.destination);
+  kick.start(context.currentTime);
+  kick.stop(context.currentTime+0.5);
+}
+// see Chris Lowis https://dev.opera.com/articles/drum-sounds-webaudio/
+
+// hi hat
+
+
+// hhGain = context.createGain();
+
+
+
+// function playSnare() {
+//   const snareBufferSize = context.sampleRate;
+//   // pass in channels, frame count, sample rate
+//   const snareBuffer = context.createBuffer(1, snareBufferSize, context.sampleRate);
+//   const snare = context.createBufferSource();
+
+//   // create some data for the buffer
+//   var snareData = snareBuffer.getChannelData(0);
+
+//   for (let i=0; i<snareBufferSize; i++) {
+//     snareData[i] = Math.random()*2 - 1;
+//   }
+//   console.log(snareData);
+
+//   snare.buffer = snareBuffer;
+//   snare.connect(context.destination);
+//   snare.start(context.currentTime);
+//   snare.stop(context.currentTime+0.5);
+// }
 
 
 
