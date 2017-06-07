@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="reveal/css/theme/rumyra.css" id="theme">
   <link rel="stylesheet" href="reveal/lib/css/eighties.css">
   <script src="reveal/js/reveal.js"></script>
-  <!-- <script src="scripts/d3.min.js"></script> -->
+  <script src="scripts/d3.min.js"></script>
 
   <!-- <script src="https://js.pusher.com/3.0/pusher.min.js"></script> -->
   <!-- <link rel="stylesheet" href="visuals.css"> -->
@@ -109,7 +109,7 @@ $grey: #bebebe
           </aside>
         </section>
 
-        <section data-background-color="#8c4c6f" data-background-image="media/specScroll.mp4">
+        <section data-background-color="#8c4c6f" data-background-video="media/specScroll.mp4">
           <aside class="notes">
             <!--video of web audio spec-->
             <p>It's a spec unto itself really - by the way the length of that video before I sped it up was 2 1/2 mins!</p>
@@ -201,7 +201,7 @@ $grey: #bebebe
         </section>
 
         <!-- I want to readdress this -->
-        <section data-background-color="#eee5c4" data-background-video="media/abletonSite.jpgq">
+        <section data-background-color="#eee5c4" data-background-image="media/abletonSite.jpg">
           <!-- ableton learn music -->
           <p>learningmusic.ableton.com</p>
           <aside class="notes">
@@ -229,7 +229,7 @@ $grey: #bebebe
           </aside>
         </section>
 
-        <section data-background-color="#eee5c4" data-background-video="media/mute.jpg">
+        <section data-background-color="#eee5c4" data-background-image="media/mute.jpg">
           <div class="list-left">
             <h1>Mute 👍</h1>
             <!-- <ul>
@@ -270,6 +270,7 @@ $grey: #bebebe
         <section data-background-color="#eee5c4">
           <h1>Sound wave</h1>
           <h1>Sine Wave</h1>
+          <svg id="wave-graph"></svg>
           <aside class="notes">
             <p>You've probably seen a dipiction of a sound wave that looks a little something like this - this is what we call a sine wave, it's a nice pure wave, a nice pure sound.</p>
             <p>On the x axis is time and the y axis is amplitude, or volume.</p>
@@ -296,6 +297,7 @@ $grey: #bebebe
             <p>A concept to understand when you are working with web audio is the context</p>
             <p>This is sort of the area where everything happens.</p>
             <p>Think of it like a sound track. You have a start, middle, end. You have loads of intruments, there's volume, effects, soundscape. This is the context you're instantiating.</p>
+            <p>prefix still needed in safari everyone</p>
           </aside>
         </section>
 
@@ -323,36 +325,6 @@ fetch('soundFile.mp4')
           </aside>
         </section>
 
-        <!-- learn saving data -->
-        <!-- example of hover, or menu or something -->
-        <section data-background-color="#463c34">
-        <h1>Loading Sounds</h1>
-        <pre><code data-trim class="js">// DOM (audio, video element)
-const source = context.createMediaElementSource(element);
-
-// Streams (data, camera, mic)
-const source = context.createMediaStreamSource(stream);
-
-// Buffer (file, data)
-fetch('soundFile.mp4')
-  // read into memory as array buffer
-  .then(response => response.arrayBuffer())
-  // turn into raw audio data
-  .then(arrayBuffer => context.decodeAudioData(arrayBuffer))
-  .then(audioBuffer => {
-    const source = context.createBufferSource();
-    source.buffer = audioBuffer;
-  })
-  // then play (see https://jakearchibald.com/2016/sounds-fun/)
-          </code></pre>
-          <aside class="notes">
-            <p>Let's start with loading sounds - on a website this is important.</p>
-            <p>There are three main ways of loading sounds into this context.</p>
-            <p>buffers are containers data - samples. sample rate. create your own</p>
-            <p>With the top two we by pass the buffer stuff, but there's no preload - when we fetch the file in the last method we load it into memory and get retreive it at any time. As a rule top one for not many and long tracks. Middle for streams, last for lots of short sounds.</p>
-          </aside>
-        </section>
-
         <section data-background-color="#463c34">
         <h1>Play Sounds</h1>
         <pre><code data-trim class="js">// connect to output
@@ -363,12 +335,21 @@ source.start();
 (see https://jakearchibald.com/2016/sounds-fun/)
           </code></pre>
           <aside class="notes">
-            <p>Now that we have the sound we need to connect it to the speakers and set it to play.</p>
-            <p>There's a couple more destinations, speakers are default. There's stream destination using MediaStream API, so you can broadcast to peers with Web RTC, of save to file, or you can collect the data in a buffer.</p>
+            <p>Once you've got your sound we need to play it. This means connect it to the speakers and set it to play.</p>
+            <p>There's a couple more destinations, speakers are default. There's stream destination using MediaStream API, so you can broadcast to peers with Web RTC, or save to file, or you can collect the data in a buffer.</p>
           </aside>
         </section>
 
         <section data-background-color="#463c34">
+        <h1>Play Sounds</h1>
+        <button data-sound="arps">Arps</button>
+          <aside class="notes">
+            <p>Now using the code that we have just seen, I've done this. I've got a sound, I've loaded it into a buffer, attached it to an event listener so I can set it to play when the button is pressed.</p>
+            <p>Great</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#463c34" data-background-image="media/aGraph1.png">
         <h1>Audio Graph & Nodes</h1>
         <!-- picture of graph here -->
           <aside class="notes">
@@ -396,6 +377,15 @@ source.start();
         </section>
 
         <section data-background-color="#463c34">
+        <h1>Mute Sounds</h1>
+        <button data-sound="arps">Arps</button>
+          <aside class="notes">
+            <p>Now using the code that we have just seen, I've done this. I've got a sound, I've loaded it into a buffer, attached it to an event listener so I can set it to play when the button is pressed.</p>
+            <p>Great</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#463c34" data-background-image="media/aGraph2.png">
         <h1>Our Audio Graph</h1>
         <!-- picture of graph here -->
           <aside class="notes">
@@ -428,6 +418,7 @@ const simplePanner = context.createStereoPanner();
         </section>
 
         <section data-background-color="#ea8d88" data-background-image="media/howler.png" data-transition="none">
+          <h1>howler.js</h1>
           <aside class="notes">
             <p>Howler is the big one - has everything I just spoke about, but it makes it easier to use and has cross platform support as well.</p>
             <p>It's a bit like the jquery of the audio api at the moment.</p>
@@ -488,14 +479,6 @@ const simplePanner = context.createStereoPanner();
           </aside>
         </section>
 
-        <section data-background-color="#ea8d88" data-background-image="media/tuna.png" data-transition="none">
-          <aside class="notes">
-            <p>Tuna - sound effects library. Useful for games.</p>
-            <p>But what if you wanted to create your own sound effects - from scratch. Not loading in a sound. You can do that.</p>
-          </aside>
-        </section>
-
-
         <!-- But what if you do want to create your own sounds, or make your own sound machine - 4th way -->
         <section data-background-color="#463c34">
         <h1>Make Sounds</h1>
@@ -511,13 +494,39 @@ context.createPeriodicWave(params)
         </section>
 
         <section data-background-color="#463c34">
+        <h1>Oscillator</h1>
+        <button data-sound="osc">Oscillator</button>
+          <aside class="notes">
+            <p>This is an oscillator - it doesn't really sound like much, but if we change a few params and add a gain like we did earlier we can do some fun stuff with it.</p>
+            <p>Great</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#463c34">
         <h1>Laser Demo</h1>
-        <pre><code data-trim class="js">// waveform
-const oscillator = context.createOscillator();
-context.createPeriodicWave(params)
+        <pre><code data-trim class="js">// code for frequency, oscillator type and gain
           </code></pre>
           <aside class="notes">
-            <p>Going back to our games, this code here distorts an ocsillator to make a laser sound.</p>
+            <p>Here I'm harnessing all the functionalitly we get with the nodes I'm using - I can change the frequncy, ocillator type and add a gain node</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#463c34">
+        <h1>Laser</h1>
+        <button data-sound="laser">Laser</button>
+          <aside class="notes">
+            <p>And simply with that we have a laser sound - super cool - there's plenty of others you can create this way.</p>
+            <p>Great</p>
+          </aside>
+        </section>
+
+        <!-- maybe put kick example in here -->
+
+        <section data-background-color="#ea8d88" data-background-image="media/tuna.png" data-transition="none">
+          <h1>Tuna</h1>
+          <aside class="notes">
+            <p>Tuna - sound effects library. Useful for games.</p>
+            <p>The other way to create sounds is to create your own data for a buffer rather than an oscialltor.</p>
           </aside>
         </section>
 
@@ -537,18 +546,15 @@ node.buffer = buffer;
 // thanks http://www.justgoscha.com/programming/2014/04/08/creating-dynamic-audiobuffers-with-webaudio.html
           </code></pre>
           <aside class="notes">
+            <!-- play noise here? -->
             <p>That audio buffer we passed the file data into earlier, to load the file. We don't have to load a file into a buffer, we can create that data ourselves. We know now it's just numbers.</p>
-            <p>The loop you see in the code here creates numbers that when passed into the buffer and played play pink noise.</p>
+            <p>The loop you see in the code here creates numbers that when passed into the buffer and played play white noise.</p>
+            <p>Are you ready it doesn't sound great.</p>
+            <p>Pink noise is better than white noise, it's softer, it reduces the harsher tones, we can use a function for that, or we can use another of the built in methods the api gives us.</p>
             <p>And this is where we can really start to have some fun with the other filter nodes the api gives us.</p>
-            <p>But you can also create your own buffer data. So if you think back to earlier, your own numbers to pass into a buffer and use them.</p>
-            <p>This code creates some pink noise - it sounds a little like this, but if we add some effects and shorten it we can make it sound like a ...</p>
           </aside>
         </section>
-        
-        <!-- oscialltor -->
 
-        
-        <!-- modification nodes, distorting, filtering - under the hood maths -->
 
         <section data-background-color="#463c34">
           <h1>Alter sounds</h1>
@@ -567,35 +573,68 @@ const reverb = context.createConvolver();
 reverb.buffer = bufferedFile;
           </code></pre>
           <aside class="notes">
+            <p>Here are some ways to alter sounds - remember these can be used on any nodes.</p>
             <p>Biquad filter - algorithms on data - to enhance frequencies or filter them out. There's lots of types. High pass, low pass, high shelf, low sheif, peaking</p>
             <p>Defines an array of numbers to multiply to the sample</p>
             <p>often generated by recording a percussive noise or frequency sweep in a space. Does this all sound convoluted? Well, technically, it is!</p>
+            <p>If we put a bandpass type biquad filter on the white noise it now sounds like this:</p>
           </aside>
         </section>
 
-        <p>So if we add say ... and ... to the buffer data. We get something that sounds like ...</p>
+        <section data-background-color="#463c34">
+        <h1>Snare</h1>
+        <button data-sound="snare">Snare</button>
+          <aside class="notes">
+            <p>Then if we do what we did before and add a little gain drop odd - boom, we got a snare!</p>
+          </aside>
+        </section>
 
-        <p>I just want to step back - our audio graph now looks a little like this:</p>
-        <p>Lots of inputs - it's almost like weve made one of these crazy synths. Bet you didn't think we were going to get there!</p>
-        <!-- create a small synth - demo they can have on their phone -->
-        <p>So what about all these synths - well we're nearly there, the only issue now to create a track really is timing - this is super important in music. SUPER important.</p>
         <section data-background-color="#463c34">
           <h1>Timing</h1>
           <pre><code class="js">const now = context.currentTime</code></pre>
           <aside class="notes">
             <p>See loads of code!</p>
-            <p>Timing is super important in audio. In web audio we have this currentTime property. It accesses the audio subsystems hardware clock</p>
+            <p>Timing is super important in audio. Whether you're just loading in and playing sounds, or you do want to take it further.</p>
+            <p>In web audio we have this currentTime property on the context itself. It accesses the audio subsystems hardware clock.</p>
             <p>Long story short - we don't have to use javascript timing functions - which are dodgy.</p>
           </aside>
         </section>
-        <p>The web audio Api has a currentTime property. This starts when you instigate the api right at the start, but it uses system hardware for the clock and can be used as a benchmark all the way through. So let's say we load in a hi hat sound. We can simple create a loop and using currentTime, we can play the hi hat four times equally ina loop.</p>
-        <p>Music works like this, it has beats and these are mad eup into bars. Sometimes you have 4 beats in a bar, sometimes 3, sometimes two, sometimes 8 half beats. It's all just maths.</p>
 
-        <section data-background-color="#ea8d88" data-background-image="media/tone.png" data-transition="none">
+        <section data-background-color="#463c34">
+          <h1>Timing</h1>
+          <h2>context.currentTime</h2>
+          <pre><code data-trim class="js">// current time loop code
+          </code></pre>
           <aside class="notes">
-            <p>Tone js my favourite. Really complete, nice to use - lodas of effects, timing functionality, instrumentation.</p>
+            <p>The web audio Api has a currentTime property. This starts when you instigate the api right at the start, but it uses system hardware for the clock and can be used as a benchmark all the way through. So let's say we load in a hi hat sound. We can simple create a loop and using currentTime, we can play the hi hat four times equally ina loop.</p>
+            <p>Music works like this, it has beats and these are mad eup into bars. Sometimes you have 4 beats in a bar, sometimes 3, sometimes two, sometimes 8 half beats. It's all just maths.</p>
           </aside>
         </section>
+
+        <section data-background-color="#463c34">
+        <h1>Hi Hat</h1>
+        <button data-sound="hh">Hi Hat</button>
+          <aside class="notes">
+            <p>Then if we do what we did before and add a little gain drop odd - boom, we got a snare!</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#ea8d88" data-background-image="media/tone.png" data-transition="none">
+          <h1>tone.js</h1>
+          <aside class="notes">
+            <p>Tone js my favourite. Really complete, nice to use - loads of effects, timing functionality, instrumentation.</p>
+            
+          </aside>
+        </section>
+
+        <section data-background-color="#eee5c4" data-background-image="media/fistBump.gif">
+          <aside class="notes">
+            <p>Well done everyone - fist bump!</p>
+            <p>Cos we haven't seen enough code right!</p>
+            <p>So wait - I think we might have just created a sound, a laser, and a drum kit... it's almost like we've created a mini synth, in 35 minutes. Now I have 10 to control it!</p>
+          </aside>
+        </section>
+
         <!-- controlling -> hardware -->
         <!-- MIDI subject unto itself -->
         <!-- 10 min version... MIDI came about -->
@@ -605,14 +644,16 @@ reverb.buffer = bufferedFile;
         <section data-background-color="#acc486">
           <h1>MIDI</h1>
           <aside class="notes">
+            <p>The web midi api is a different api altogether and I will explain why...</p>
             <p>This is literally my favourite subject</p>
+            <p>This is not MIDI...</p>
           </aside>
         </section>
 
         <section data-background-color="#acc486" data-background-video="media/cameronsworld.mp4">
           <h1>This is not MIDI</h1>
           <aside class="notes">
-            <p>This is not MIDI</p>
+            <p>Those bleepy noises, that is audio - that is what we just spent the talk doing, MIDI is simple data, a protocol built around musical instruments.</p>
           </aside>
         </section>
 
@@ -640,6 +681,24 @@ reverb.buffer = bufferedFile;
           <aside class="notes">
             <p>BLE, polyphony - go and see</p>
             <p>Today there's more - I’m not going to go into every single spec, we simply don’t have enough time and also there’s parts that are more relevant to us as developers which you will see. If you want to find out more all the spec docs are on www.midi.org.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-background-image="media/keyboard.jpg" data-transition="none">
+          <aside class="notes">
+            <p>These are MIDI instruments. They have onboard audio. There's classic ones, synths, drum machines</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-background-image="media/launchpad.jpg" data-transition="none">
+          <aside class="notes">
+            <p>This is a launchpad - probably one of the most popular MIDI controllers for developers - you might have seen one - it's an array of buttons - it sends similar data to what we werre seeing before</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-background-image="media/controllers.jpg" data-transition="none">
+          <aside class="notes">
+            <p>These are MIDI controllers. They're basically just hardware. No onboard audio.</p>
             <p>Back to the data (show you?)</p>
           </aside>
         </section>
@@ -687,58 +746,29 @@ function onMIDISuccess(midiControl) {
           </aside>
         </section>
 
-        <section data-background-color="#acc486" data-background-image="media/keyboard.jpg" data-transition="none">
-          <aside class="notes">
-            <p>These are MIDI instruments. They have onboard audio. There's classic ones, synths, drum machines</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#acc486" data-background-image="media/launchpad.jpg" data-transition="none">
-          <aside class="notes">
-            <p>This is a launchpad - probably one of the most popular MIDI controllers for developers - you might have seen one - it's an array of buttons - it sends similar data to what we werre seeing before</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#acc486" data-background-image="media/controllers.jpg" data-transition="none">
-          <aside class="notes">
-            <p>These are MIDI controllers. They're basically just hardware. No onboard audio.</p>
-            <p>Check this one out - it's a game controller</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#eee5c4" data-background-image="media/fistBump.gif">
-          <aside class="notes">
-            <p>Well done everyone - fist bump!</p>
-            <p>Cos we haven't seen enough code right!</p>
-            <p>What's the best sound you can get in a game?</p>
-            <p>I'm going to use it...</p>
-          </aside>
-        </section>
 
         <section data-background-color="#8c4c6f" class="lists">
           <div class="list-right">
             <h1>Important bits?</h1>
             <ul>
-              <li><h2>Time</h2></li>
-              <li class="fragment fade-in"><h2>Buffer</h2></li>
-              <li class="fragment fade-in"><h2>Oscillator</h2></li>
-              <li class="fragment fade-in"><h2>Panner</h2></li>
-              <li class="fragment fade-in"><h2>Reverb, Compressor, Gain, Delay</h2></li>
+              <li><h2>Loading sounds</h2></li>
+              <li class="fragment fade-in"><h2>Buffers</h2></li>
+              <li class="fragment fade-in"><h2>Nodes</h2></li>
+              <li class="fragment fade-in"><h2>Time</h2></li>
+              <li class="fragment fade-in"><h2>MIDI API</h2></li>
             </ul>
           </div>
           <aside class="notes">
-            <p>Timing, to accurately load and playback sounds at the right time, you'll need your currentTime property and use that.</p>
-            <p>Sound spriting</p>
-            <p>As is the buffer Loading files into the for playback</p>
-            <p>We saw how useful the oscillator was for making sounds</p>
-            <p>I would hightly recommend reading the MDN docs for panner node for spacialisation</p>
-            <p>Reverb for your sound scape - different game levels might be different environments</p>
-            <p>Second alter sounds slide -> dynamic compressor, gain, delay, spacialisation (panner).</p>
+            <p>Just a quick recap - loading sounds - don't forget streams, or simply pulling it from the DOM, these are more simple, so I didn't cover them in detail</p>
+            <p>Buffers and it's really all about data</p>
+            <p></p>
           </aside>
         </section>
 
         <section data-background-color="#8c4c6f">
-          <h1>Audio Design in Web Design</h1>
+          <h1>Audio Design</h1>
+          <h2>in</h2>
+          <h1>Web Design</h1>
           <aside class="notes">
             <p>think about sound - think about it as part of design, it can be something simple (forms), animation is always enhanced - it's 2017, we don't need horrible load blaring music when we land on a page, we have all this power at our fingertips to make it really mature</p>
           </aside>
@@ -748,12 +778,10 @@ function onMIDISuccess(midiControl) {
           <h1>Go Forth&nbsp;&nbsp;|&nbsp;&nbsp;Make Noise</h1>
           <h1>Ruth John</h1>
           <h1>@Rumyra</h1>
-          <h1>@LiveJS_Network</h1>
           <p>Thank You Very Much</p>
           <aside class="notes">
             <p>Thank you very much, I'm Ruth John</p>
             <p>All these examples you've seen are on codepen as part of codevember</p>
-            <p>Find me on the internets, follow me - I'm trying to get more followers than a guy named Ben Foxall</p>
             <p>Go have a relax and I hope you had a lovely conference!</p>
           </aside>
         </section>
@@ -766,7 +794,7 @@ function onMIDISuccess(midiControl) {
 
 
 
-        <section data-background-color="#463c34">
+        <!-- <section data-background-color="#463c34">
           <h1>Analyse sounds</h1>
           <pre><code data-trim class="js">// frequency & time
 const analyserNode = context.createAnalyser();
@@ -782,7 +810,7 @@ analyser.getByteFrequencyData(dataArray);
             <p>This is my all time favourite feature. No doubt!</p>
             <p>We can anlayse frequency and time.</p>
           </aside>
-        </section>
+        </section> -->
 
         
         <!-- <section data-background-color="#ea8d88" data-background-image="media/library.jpg">
@@ -834,68 +862,11 @@ analyser.getByteFrequencyData(dataArray);
 <script src="reveal/plugin/highlight/highlight.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
-<!-- <script src="scripts/audioVisual.js"></script> -->
+<script src="scripts/talkEvents.js"></script>
 
 <script type="text/javascript">
 // Reveal~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Reveal.initialize({
 
-  // The "normal" size of the presentation, aspect ratio will be preserved
-  // when the presentation is scaled to fit different resolutions. Can be
-  // specified using percentage units.
-  width: 1024,
-  height: 768,
-
-  // Factor of the display size that should remain empty around the content
-  margin: 0.1,
-
-  // Bounds for smallest/largest possible scale to apply to content
-  minScale: 0.2,
-  maxScale: 1.5,
-
-  center: false,
-
-  // Display controls in the bottom right corner
-  controls: false,
-
-  // Display a presentation progress bar
-  progress: false,
-
-  // Display the page number of the current slide
-  slideNumber: false,
-
-  // Push each slide change to the browser history
-  history: true,
-
-  // Enable keyboard shortcuts for navigation
-  keyboard: {
-    25: 'next' // go to the next slide when the DOWN key is pressed
-  },
-
-  // Transition style
-  transition: 'fade', // none/fade/slide/convex/concave/zoom
-
-  // Transition speed
-  transitionSpeed: 'default', // default/fast/slow
-
-  // Transition style for full page slide backgrounds
-  backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
-
-  // Number of slides away from the current that are visible
-  viewDistance: 2,
-
-  // Parallax background image
-  parallaxBackgroundImage: '', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
-
-  // Parallax background size
-  parallaxBackgroundSize: '', // CSS syntax, e.g. "2100px 900px"
-
-  // Amount to move parallax background (horizontal and vertical) on slide change
-  // Number, e.g. 100
-  parallaxBackgroundHorizontal: '',
-  parallaxBackgroundVertical: ''
-
-});
 
 </script>
 

@@ -113,14 +113,6 @@ fetch('media/808CHH.wav')
   })
 
 
-// function playHiHat() {
-//   const hh = context.createBufferSource();
-//   hh.buffer = hhBuffer;
-//   hh.connect(context.destination);
-//   hh.start();
-//   hh.stop(context.currentTime+0.5);
-// }
-
 function playLaser() {
   const laser = context.createOscillator();
   laser.frequency.value = 523.251;
@@ -183,12 +175,6 @@ function playKick() {
   kick.stop(context.currentTime+0.5);
 }
 // see Chris Lowis https://dev.opera.com/articles/drum-sounds-webaudio/
-
-// hi hat
-
-
-// hhGain = context.createGain();
-
 
 
 // function playSnare() {
