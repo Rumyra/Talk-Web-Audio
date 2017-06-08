@@ -19,6 +19,11 @@
     <button data-sound="snare">Snare?</button>
     <button data-sound="hh" data-mute="undef">Hi Hat</button>
   </section>
+
+  <section id="space">
+    <span data-object="source">Source</span>
+    <span data-object="listener">Listener</span>
+  </section>
 </div>
 
 
@@ -196,6 +201,46 @@ function playKick() {
 //   snare.start(context.currentTime);
 //   snare.stop(context.currentTime+0.5);
 // }
+
+const space = document.querySelector('#space'),
+  spaceSource = document.querySelector('span[data-object="source"]'),
+  spaceListener = document.querySelector('span[data-object="listener"]');
+
+console.log(spaceSource.offsetLeft);
+//offsetTop
+
+// audio stuff
+const soundSource = context.createPanner();
+const listener = context.listener;
+
+// set position of listener (z pos abituary)
+// listener.setPosition(spaceListener.offsetLeft, spaceListener.offsetTop, 300);
+listener.setPosition(0, 0, 0);
+// soundSource.setPosition(spaceSource.offsetLeft, spaceSource.offsetTop, 295);
+soundSource.setPosition(0, 0, 0);
+
+fetch('media/100_C_G_Arps_SP_01.wav')
+  // read into memory as array buffer
+  .then(response => response.arrayBuffer())
+  // turn into raw audio data
+  .then(arrayBuffer => context.decodeAudioData(arrayBuffer))
+  .then(audioBuffer => {
+    const music = context.createBufferSource();
+    music.buffer = audioBuffer;
+    music.loop = true;
+    music.connect(soundSource).connect(context.destination);
+    // click & move person
+    spaceSource.addEventListener("mousedown", function(evt) {
+      console.log(spaceListener.getBoundingClientRect());
+      music.start();
+      // soundSource.setPosition(evt.clientX, evt.clientY, 295);
+    })
+
+  })
+
+
+
+
 
 
 

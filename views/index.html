@@ -385,7 +385,7 @@ source.start();
           </aside>
         </section>
 
-        <section data-background-color="#463c34" data-background-image="media/aGraph2.png">
+        <section data-background-color="#ea8d88" data-background-image="media/aGraph2.png">
         <h1>Our Audio Graph</h1>
         <!-- picture of graph here -->
           <aside class="notes">
@@ -450,12 +450,17 @@ const simplePanner = context.createStereoPanner();
         <section data-background-color="#463c34">
           <h1>Spatialisation</h1>
           <pre><code data-trim class="js">// create panner node
-3dSoundScape = context.createPanner();
+const soundSource = context.createPanner();
+const listener = context.listener;
 
-// gives us...
+// grab representive dom els with their positions
+
+// set positions on audio nodes
+
           </code></pre>
           <aside class="notes">
             <p>The panner node gives us a 3D sound scape to work with.</p>
+            <p>For this you need a sound source - where sound is coming from and a listener, where it is picked up from.</p>
             <p>We can make sounds appear as if they are infront or you, above you, to the left to the right.</p>
           </aside>
         </section>

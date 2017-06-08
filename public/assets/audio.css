@@ -44,3 +44,36 @@ button:nth-of-type(4) {
     hsla(180,35%,60%,1));
   border-color: hsla(200,35%,70%,1);
 }
+
+
+#space {
+  width:50%; height:40vh; margin:0px auto 100px;
+  border:2px solid grey;
+  background:hsla(270, 10%, 60%, 0.5);
+}
+
+#space span {
+  display: block; margin:0px auto;
+  width: 80px; height: 80px;
+  border-radius: 50%;
+}
+
+span[data-object="source"] {
+  background: blue;
+}
+span[data-object="listener"] {
+  background: red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
