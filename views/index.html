@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="reveal/css/reveal.css">
   <link rel="stylesheet" href="reveal/css/theme/rumyra.css" id="theme">
   <link rel="stylesheet" href="reveal/lib/css/eighties.css">
+  <link rel="stylesheet" href="assets/audio.css">
   <script src="reveal/js/reveal.js"></script>
   <script src="scripts/d3.min.js"></script>
 
@@ -229,27 +230,14 @@ $grey: #bebebe
           </aside>
         </section>
 
-        <section data-background-color="#eee5c4" data-background-image="media/mute.jpg">
+        <section data-background-color="#eee5c4" data-background-image="media/mute.jpg" class="lists">
           <div class="list-left">
-            <h1>Mute 👍</h1>
-            <!-- <ul>
-              <li><h2>Time</h2></li>
-              <li class="fragment fade-in"><h2>Buffer</h2></li>
-              <li class="fragment fade-in"><h2>Oscillator</h2></li>
-              <li class="fragment fade-in"><h2>Panner</h2></li>
-              <li class="fragment fade-in"><h2>Reverb, Compressor, Gain, Delay</h2></li>
-            </ul> -->
+            <h2>Mute 👍</h2>
           </div>
           <div class="list-right">
-            <h1>No mute @ intro 👎</h1>
-            <!-- <ul>
-              <li><h2>Time</h2></li>
-              <li class="fragment fade-in"><h2>Buffer</h2></li>
-              <li class="fragment fade-in"><h2>Oscillator</h2></li>
-              <li class="fragment fade-in"><h2>Panner</h2></li>
-              <li class="fragment fade-in"><h2>Reverb, Compressor, Gain, Delay</h2></li>
-            </ul> -->
+            <h2>No mute 👎</h2>
           </div>
+          
           <!-- mute controls -->
           <aside class="notes">
             <p>Forest has a mute control</p>
@@ -268,8 +256,7 @@ $grey: #bebebe
         </section>
 
         <section data-background-color="#eee5c4">
-          <h1>Sound wave</h1>
-          <h1>Sine Wave</h1>
+          <h1>Digital Audio</h1>
           <svg id="wave-graph"></svg>
           <aside class="notes">
             <p>You've probably seen a dipiction of a sound wave that looks a little something like this - this is what we call a sine wave, it's a nice pure wave, a nice pure sound.</p>
@@ -330,9 +317,8 @@ fetch('soundFile.mp4')
         <pre><code data-trim class="js">// connect to output
 source.connect(context.destination);
 
+// start our sound!
 source.start();
-
-(see https://jakearchibald.com/2016/sounds-fun/)
           </code></pre>
           <aside class="notes">
             <p>Once you've got your sound we need to play it. This means connect it to the speakers and set it to play.</p>
@@ -340,7 +326,7 @@ source.start();
           </aside>
         </section>
 
-        <section data-background-color="#463c34">
+        <section data-background-color="#463c34" data-state="play-arps">
         <h1>Play Sounds</h1>
         <button data-sound="arps">Arps</button>
           <aside class="notes">
@@ -349,7 +335,7 @@ source.start();
           </aside>
         </section>
 
-        <section data-background-color="#463c34" data-background-image="media/aGraph1.png">
+        <section data-background-color="#463c34" data-background-image="media/aGraph1.png" data-state="stop-arps">
         <h1>Audio Graph & Nodes</h1>
         <!-- picture of graph here -->
           <aside class="notes">
@@ -376,7 +362,7 @@ source.start();
           </aside>
         </section>
 
-        <section data-background-color="#463c34">
+        <section data-background-color="#463c34" data-state="mute-arps">
         <h1>Mute Sounds</h1>
         <button data-sound="arps">Arps</button>
           <aside class="notes">
@@ -450,18 +436,20 @@ const simplePanner = context.createStereoPanner();
         <section data-background-color="#463c34">
           <h1>Spatialisation</h1>
           <pre><code data-trim class="js">// create panner node
-const soundSource = context.createPanner();
 const listener = context.listener;
+const soundSource = context.createPanner();
 
-// grab representive dom els with their positions
+// set positions
+listener.setPosition(0, 0, 0);
+soundSource.setPosition(0, 0, 0);
 
-// set positions on audio nodes
-
+// also set orientation, velocity, cones of panner
           </code></pre>
           <aside class="notes">
             <p>The panner node gives us a 3D sound scape to work with.</p>
             <p>For this you need a sound source - where sound is coming from and a listener, where it is picked up from.</p>
             <p>We can make sounds appear as if they are infront or you, above you, to the left to the right.</p>
+            <p>Cones are like lights - ambient and spotlight.</p>
           </aside>
         </section>
         <!-- VR example? or phone -->

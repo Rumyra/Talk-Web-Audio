@@ -1,10 +1,18 @@
+@font-face {
+  font-family: 'Montserrat';
+  font-weight: bold;
+  font-style: normal;
+  src: url('../fonts/Montserrat/Montserrat-Bold.ttf') format('truetype');
+}
+
 body {
   margin:0px; padding:0px;
-  background-color: hsla(240,35%,98%,1);
+  background-color: hsla(240,5%,18%,1);
   font-size:100%;
 }
 .container {margin:0px; padding:0px;}
 
+/*synth ~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 #synth {
   width:260px;
   margin:0px auto; padding:30px;
@@ -14,38 +22,114 @@ button {
   box-sizing: border-box;
   margin:20px 0px; padding:20px 0px;
 
-  border:3px solid hsla(290,35%,70%,1); border-radius:2px;
-  background-color:hsla(290,35%,60%,1);
+  border:10px solid hsla(280,45%,50%,1); border-radius:2px;
+  box-shadow: 0px 0px 5px black;
+  background-color:hsla(280,45%,40%,1);
   background-image: linear-gradient(0deg,
-    hsla(300,35%,60%,1),
-    hsla(270,35%,60%,1));
+    hsla(280,45%,45%,1),
+    hsla(280,45%,40%,1));
 
-  font-family: "Avenir Light", sans-serif;
-  font-size: 1.9em; color: hsla(290,35%,98%,1);
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold; text-transform: uppercase;
+  font-size: 1.9em; color: hsla(290,45%,98%,1);
 
   cursor:pointer;
 }
-button:hover {opacity:0.8;}
-button:nth-of-type(2) {
+.slides button {max-width:40%; font-size: 1.2em; margin:50px auto 0px;}
+button:hover, button.on {
+  background-color:hsla(280,45%,50%,1);
+  border-color:hsla(280,45%,60%,1);
   background-image: linear-gradient(0deg,
-    hsla(270,35%,60%,1),
-    hsla(240,35%,60%,1));
-  border-color: hsla(260,35%,70%,1);
+    hsla(280,45%,50%,1),
+    hsla(280,45%,55%,1),
+    hsla(280,45%,50%,1));
 }
-button:nth-of-type(3) {
+button[data-sound="laser"], button[data-sound="osc"] {
+  background-color:hsla(70,45%,40%,1);
   background-image: linear-gradient(0deg,
-    hsla(240,35%,60%,1),
-    hsla(210,35%,60%,1));
-  border-color: hsla(250,35%,70%,1);
+    hsla(70,45%,45%,1),
+    hsla(70,45%,50%,1));
+  border-color: hsla(70,45%,50%,1);
 }
-button:nth-of-type(4) {
+button[data-sound="laser"]:hover, button[data-sound="laser"].on, button[data-sound="osc"]:hover, button[data-sound="osc"].on {
+  background-color:hsla(70,45%,50%,1);
+  border-color:hsla(70,45%,60%,1);
   background-image: linear-gradient(0deg,
-    hsla(210,35%,60%,1),
-    hsla(180,35%,60%,1));
-  border-color: hsla(200,35%,70%,1);
+    hsla(70,45%,50%,1),
+    hsla(70,45%,55%,1),
+    hsla(70,45%,50%,1));
+}
+button[data-sound="kick"] {
+  background-color:hsla(0,45%,40%,1);
+  background-image: linear-gradient(0deg,
+    hsla(0,45%,45%,1),
+    hsla(0,45%,50%,1));
+  border-color: hsla(0,45%,50%,1);
+}
+button[data-sound="kick"]:hover, button[data-sound="kick"].on {
+  background-color:hsla(0,45%,50%,1);
+  border-color:hsla(0,45%,60%,1);
+  background-image: linear-gradient(0deg,
+    hsla(0,45%,50%,1),
+    hsla(0,45%,55%,1),
+    hsla(0,45%,50%,1));
+}
+button[data-sound="snare"] {
+  background-color:hsla(230,45%,40%,1);
+  background-image: linear-gradient(0deg,
+    hsla(230,45%,45%,1),
+    hsla(230,45%,50%,1));
+  border-color: hsla(230,45%,50%,1);
+}
+button[data-sound="snare"]:hover, button[data-sound="snare"].on {
+  background-color:hsla(230,45%,50%,1);
+  border-color:hsla(230,45%,60%,1);
+  background-image: linear-gradient(0deg,
+    hsla(230,45%,50%,1),
+    hsla(230,45%,55%,1),
+    hsla(230,45%,50%,1));
+}
+button[data-sound="hh"] {
+  background-color:hsla(190,45%,40%,1);
+  background-image: linear-gradient(0deg,
+    hsla(190,45%,45%,1),
+    hsla(190,45%,50%,1));
+  border-color: hsla(190,45%,50%,1);
+}
+button[data-sound="hh"]:hover, button[data-sound="hh"].on {
+  background-color:hsla(190,45%,50%,1);
+  border-color:hsla(190,45%,60%,1);
+  background-image: linear-gradient(0deg,
+    hsla(190,45%,50%,1),
+    hsla(190,45%,55%,1),
+    hsla(190,45%,50%,1));
 }
 
+/*svg graph ~~~~~~~~~~~~~~~~~~*/
+#wave-graph {
+  width:90vw; height:70vh;
+  padding-left:20px;
+  transform: translateX(-10%);
+  font-family: "Montserrat";
+  font-size: 0.6em;
+  color:white;
+}
+.axis path, .axis line {
+  fill: none;
+  stroke: #fff;
+  shape-rendering: crispEdges;
+}
+.axis text {fill:white;}
+.x.axis line {
+  shape-rendering: auto;
+}
+.line {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2px;
+}
 
+/*spacialised sound ~~~~~~~~~~~~~~~~~*/
 #space {
   width:50%; height:40vh; margin:0px auto 100px;
   border:2px solid grey;

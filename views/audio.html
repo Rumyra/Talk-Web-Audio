@@ -13,7 +13,7 @@
 <body>
 <div class="container">
   <section id="synth">
-    <button data-sound="arps" data-mute="undef">Arps</button>
+    <button data-sound="arps" data-mute="undef" class="on">Arps</button>
     <button data-sound="laser">Laser</button>
     <button data-sound="kick">Kick</button>
     <button data-sound="snare">Snare?</button>
@@ -215,9 +215,12 @@ const listener = context.listener;
 
 // set position of listener (z pos abituary)
 // listener.setPosition(spaceListener.offsetLeft, spaceListener.offsetTop, 300);
-listener.setPosition(0, 0, 0);
+listener.setPosition(0, 0, 5);
 // soundSource.setPosition(spaceSource.offsetLeft, spaceSource.offsetTop, 295);
-soundSource.setPosition(0, 0, 0);
+soundSource.setPosition(0, 0, 5);
+
+// 000 = top right boundingRect.top
+var startPosX, startPosY;
 
 fetch('media/100_C_G_Arps_SP_01.wav')
   // read into memory as array buffer
@@ -230,10 +233,14 @@ fetch('media/100_C_G_Arps_SP_01.wav')
     music.loop = true;
     music.connect(soundSource).connect(context.destination);
     // click & move person
-    spaceSource.addEventListener("mousedown", function(evt) {
-      console.log(spaceListener.getBoundingClientRect());
+    space.addEventListener("mousedown", function(evt) {
       music.start();
-      // soundSource.setPosition(evt.clientX, evt.clientY, 295);
+      startPosX = evt.clientX;
+      startPosY = evt.clientY;
+
+      this.addEventListener("mousemove", function(evt) {
+        soundSource.setPosition((evt.clientX-startPosX)/10, (evt.clientY-startPosY)/10, (evt.clientY-startPosY)/10);
+      })
     })
 
   })

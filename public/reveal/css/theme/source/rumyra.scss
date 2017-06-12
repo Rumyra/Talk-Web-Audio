@@ -59,7 +59,7 @@ $mainFontSize: 36px;
 $mainColor: $white;
 
 // Vertical spacing between blocks of text
-$blockMargin: 20px;
+$blockMargin: 24px;
 
 // Headings
 $headingMargin: 0 0 $blockMargin 0;
@@ -112,8 +112,8 @@ $selectionColor: #fff;
 
 .reveal .slides pre code {
   padding: $blockMargin;
-  font-size: 24px;
-  line-height: 120%;
+  font-size: 22px;
+  line-height: 140%;
 }
 
 .reveal {opacity:0.95;}
