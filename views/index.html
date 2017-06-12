@@ -328,7 +328,7 @@ source.start();
 
         <section data-background-color="#463c34" data-state="play-arps">
         <h1>Play Sounds</h1>
-        <button data-sound="arps">Arps</button>
+        <button data-sound="play-arps">Arps</button>
           <aside class="notes">
             <p>Now using the code that we have just seen, I've done this. I've got a sound, I've loaded it into a buffer, attached it to an event listener so I can set it to play when the button is pressed.</p>
             <p>Great</p>
@@ -364,7 +364,7 @@ source.start();
 
         <section data-background-color="#463c34" data-state="mute-arps">
         <h1>Mute Sounds</h1>
-        <button data-sound="arps">Arps</button>
+        <button data-sound="arps" data-mute="undef">Arps</button>
           <aside class="notes">
             <p>Now using the code that we have just seen, I've done this. I've got a sound, I've loaded it into a buffer, attached it to an event listener so I can set it to play when the button is pressed.</p>
             <p>Great</p>
@@ -394,7 +394,6 @@ const delay = context.createDelay(5.0);
 // panning
 const simplePanner = context.createStereoPanner();
 
-//const craSpacePanner = context.createPanner();
           </code></pre>
           <aside class="notes">
             <p>Here are some other simple nodes we can use to modify sounds.</p>
@@ -417,13 +416,13 @@ const simplePanner = context.createStereoPanner();
 
         <section data-background-color="#463c34">
         <h1>Sound Spriting</h1>
-        <!-- picture of graph here -->
+        <p>Loading lots of sounds in one file</p>
           <aside class="notes">
             <p>This is the idea you actually have a lot of little sounds in one file, so you only have to load it once. A little like image spriting we're I'm sure we're all used to doing here.</p>
           </aside>
         </section>
 
-        <section data-background-color="#463c34">
+        <section data-background-color="#463c34" data-background-image="media/gamesvr.jpg">
         <h1>HTML Games & VR</h1>
         <!-- picture of graph here -->
           <aside class="notes">
@@ -453,21 +452,29 @@ soundSource.setPosition(0, 0, 0);
           </aside>
         </section>
         <!-- VR example? or phone -->
-        <section data-background-color="#463c34">
+        <section data-background-color="#463c34" data-state="space">
           <h1>Demo</h1>
-          <pre><code data-trim class="js">// create panner node
-3dSoundScape = context.createPanner();
-
-// gives us...
-          </code></pre>
+          <div id="space">
+            <span data-object="source"></span>
+            <span data-object="listener"></span>
+          </div>
           <aside class="notes">
             <p>A frame?</p>
           </aside>
         </section>
+        
+        <!-- phaser -->
+        <section data-background-color="#ea8d88" data-background-image="media/threea.jpg">
+          <h1>three.js & A-Frame</h1>
+          <aside class="notes">
+            <p>Both three.js and a-frame include this panner functionality. So you can position audio within your 3d space when using those libraries.</p>
+          </aside>
+        </section>
         <!-- phaser -->
         <section data-background-color="#ea8d88" data-background-image="media/phaser.png">
+          <h1>Phaser</h1>
           <aside class="notes">
-            <p>Phaser uses web audio - I don't think I need to talk about this - everyone is.</p>
+            <p>And a shout to phaser for html5 games.</p>
             <p>It's pretty good, as far as I can tell. Has spacialisation, loading, sound spriting.</p>
           </aside>
         </section>
@@ -477,16 +484,21 @@ soundSource.setPosition(0, 0, 0);
         <h1>Make Sounds</h1>
         <pre><code data-trim class="js">// waveform
 const oscillator = context.createOscillator();
-context.createPeriodicWave(params)
+oscillator.type = 'triangle';
+oscillator.frequency = 440;
+
+// custom waveform
+var wave = context.createPeriodicWave(real, imag, constraints);
+oscillator.setPeriodicWave(wave);
           </code></pre>
           <aside class="notes">
             <p>Instead of loading sounds, like we saw before, we can create them. There's an osciallator node. The sin wave you saw ealier, this can create one of those.</p>
             <p>It can also create a number of default waves (specifically ones that are easy to generate) - square, triangle and sawtooth.</p>
-            <p>You can even make your own wave form to be generated.</p>
+            <p>You can even make your own wave form to be generated. The PeriodicWave interface defines a periodic waveform that can be used to shape the output of an OscillatorNode.</p>
           </aside>
         </section>
 
-        <section data-background-color="#463c34">
+        <section data-background-color="#463c34" data-state="osc">
         <h1>Oscillator</h1>
         <button data-sound="osc">Oscillator</button>
           <aside class="notes">
@@ -496,20 +508,26 @@ context.createPeriodicWave(params)
         </section>
 
         <section data-background-color="#463c34">
-        <h1>Laser Demo</h1>
-        <pre><code data-trim class="js">// code for frequency, oscillator type and gain
+        <h1>Built in stuff</h1>
+        <pre><code data-trim class="js">// jump frequency down
+oscillator.frequency.exponentialRampToValueAtTime(10, context.currentTime+1);
+
+// jump volume down too!
+gainNode.gain.exponentialRampToValueAtTime(0.001, context.currentTime+0.9);
           </code></pre>
           <aside class="notes">
-            <p>Here I'm harnessing all the functionalitly we get with the nodes I'm using - I can change the frequncy, ocillator type and add a gain node</p>
+            <p>The audio api comes with some nice mathods - here's a good one - I use it commonly, so I wanted to share it.</p>
+            <p>exponential ramp to value at time</p>
+            <p>changes the value of the node at a set time - use it on frequency of osc AND if we create a gain node before, change volume</p>
+            <p>also linear value at time method. Exponential ramp is curve & nicer to hear.</p>
           </aside>
         </section>
 
-        <section data-background-color="#463c34">
+        <section data-background-color="#463c34" data-state="laser">
         <h1>Laser</h1>
         <button data-sound="laser">Laser</button>
           <aside class="notes">
-            <p>And simply with that we have a laser sound - super cool - there's plenty of others you can create this way.</p>
-            <p>Great</p>
+            <p>So by simply adding a bit of built in functionality - boom we have a laser. With an oscillator.</p>
           </aside>
         </section>
 
@@ -574,7 +592,7 @@ reverb.buffer = bufferedFile;
           </aside>
         </section>
 
-        <section data-background-color="#463c34">
+        <section data-background-color="#463c34" data-state="snare">
         <h1>Snare</h1>
         <button data-sound="snare">Snare</button>
           <aside class="notes">
@@ -589,22 +607,14 @@ reverb.buffer = bufferedFile;
             <p>See loads of code!</p>
             <p>Timing is super important in audio. Whether you're just loading in and playing sounds, or you do want to take it further.</p>
             <p>In web audio we have this currentTime property on the context itself. It accesses the audio subsystems hardware clock.</p>
-            <p>Long story short - we don't have to use javascript timing functions - which are dodgy.</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#463c34">
-          <h1>Timing</h1>
-          <h2>context.currentTime</h2>
-          <pre><code data-trim class="js">// current time loop code
-          </code></pre>
-          <aside class="notes">
             <p>The web audio Api has a currentTime property. This starts when you instigate the api right at the start, but it uses system hardware for the clock and can be used as a benchmark all the way through. So let's say we load in a hi hat sound. We can simple create a loop and using currentTime, we can play the hi hat four times equally ina loop.</p>
             <p>Music works like this, it has beats and these are mad eup into bars. Sometimes you have 4 beats in a bar, sometimes 3, sometimes two, sometimes 8 half beats. It's all just maths.</p>
+            <p>Long story short - we don't have to use javascript timing functions - which are dodgy.</p>
+            <p>Gives u benchmark throughout</p>
           </aside>
         </section>
 
-        <section data-background-color="#463c34">
+        <section data-background-color="#463c34" data-state="hi-hat">
         <h1>Hi Hat</h1>
         <button data-sound="hh">Hi Hat</button>
           <aside class="notes">
@@ -707,7 +717,7 @@ reverb.buffer = bufferedFile;
 
         <section data-background-color="#acc486">
           <h1>Demo</h1>
-          <p data-height="697" data-theme-id="1345" data-slug-hash="NxdbzL" data-default-tab="result" data-user="Rumyra" data-embed-version="2" data-preview="true" class="codepen">See the Pen <a href="http://codepen.io/Rumyra/pen/NxdbzL/">Web MIDI API Example</a> by Rumyra (<a href="http://codepen.io/Rumyra">@Rumyra</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <p data-height="697" data-theme-id="1345" data-slug-hash="NxdbzL" data-default-tab="result" data-user="Rumyra" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/Rumyra/pen/NxdbzL/">Web MIDI API Example</a> by Rumyra (<a href="http://codepen.io/Rumyra">@Rumyra</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
           <aside class="notes">
             <p>So if I plug in a MIDI instrument or controller and instigate the web MIDI api in my brwoser - this is the data you'll get</p>
@@ -745,10 +755,10 @@ function onMIDISuccess(midiControl) {
             <h1>Important bits?</h1>
             <ul>
               <li><h2>Loading sounds</h2></li>
-              <li class="fragment fade-in"><h2>Buffers</h2></li>
-              <li class="fragment fade-in"><h2>Nodes</h2></li>
-              <li class="fragment fade-in"><h2>Time</h2></li>
-              <li class="fragment fade-in"><h2>MIDI API</h2></li>
+              <li class="fragment fade-in"><p>Buffers</p></li>
+              <li class="fragment fade-in"><p>Nodes</p></li>
+              <li class="fragment fade-in"><p>Time</p></li>
+              <li class="fragment fade-in"><p>MIDI API</p></li>
             </ul>
           </div>
           <aside class="notes">
@@ -760,10 +770,12 @@ function onMIDISuccess(midiControl) {
 
         <section data-background-color="#8c4c6f">
           <h1>Audio Design</h1>
-          <h2>in</h2>
-          <h1>Web Design</h1>
+          <p>in</p>
+          <h1 style="border-top:2px solid #efefef;border-bottom:none;">Web Design</h1>
           <aside class="notes">
-            <p>think about sound - think about it as part of design, it can be something simple (forms), animation is always enhanced - it's 2017, we don't need horrible load blaring music when we land on a page, we have all this power at our fingertips to make it really mature</p>
+            <p>I know that the demos here aren't really what you'd put on a site. Although pls someone build a site with a laser button. But I do hope the techniques demonstrated are ones to use and really get you started with the api and help you understnad what's possible and why.</p>
+            <p>Think about sound - think about it as part of design, it can be something simple (forms), animation is always enhanced - it's 2017, we don't need horrible load blaring music when we land on a page, we have all this power at our fingertips to make it really mature</p>
+            <p>We're so quick to pick up grid systems, animation apis, 3d, games, vr on the web, all great things. But when it comes to something as simple as ear magic we're reluctant and dismissive. Please think twice, I think we can be thoughtful - start a new wave of sound in our code.</p>
           </aside>
         </section>
 
@@ -820,9 +832,9 @@ analyser.getByteFrequencyData(dataArray);
             <h1>Resources</h1>
             <ul>
               <li><h2><a href="https://www.html5rocks.com/en/tutorials/audio/scheduling/">Chris Wilson: A Tale of Two Clocks</a></h2></li>
-              <li class="fragment fade-in"><h2><a href="https://www.html5rocks.com/en/tutorials/webaudio/games/">Boris Smus: Game Audio with Web Audio API</a></h2></li>
-              <li class="fragment fade-in"><h2><a href="https://developer.mozilla.org/en-US/docs/Games/Techniques/Audio_for_Web_Games">MDN: Audio for Web Games</a></h2></li>
-              <li class="fragment fade-in"><h2><a href="https://www.sitepoint.com/creating-accessible-breakout-game-using-web-audio-svg/">David Rousset: Accessible Breakout using Web Audio</a></h2></li>
+              <li class="fragment fade-in"><h2><a href="https://www.html5rocks.com/en/tutorials/webaudio/intro/">Boris Smus: Getting Started with Web Audio API</a></h2></li>
+              <li class="fragment fade-in"><h2><a href="https://dev.opera.com/articles/drum-sounds-webaudio/">Chris Lowis: Sythesising Drum Sounds</a></h2></li>
+              <li class="fragment fade-in"><h2><a href="https://jakearchibald.com/2016/sounds-fun/">Jake Archibald: Sounds Fun</a></h2></li>
             </ul>
           </div>
           <aside class="notes">

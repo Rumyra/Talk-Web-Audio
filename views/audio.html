@@ -21,8 +21,8 @@
   </section>
 
   <section id="space">
-    <span data-object="source">Source</span>
-    <span data-object="listener">Listener</span>
+    <span data-object="source"></span>
+    <span data-object="listener"></span>
   </section>
 </div>
 
@@ -106,22 +106,52 @@ fetch('media/808CHH.wav')
   // turn into raw audio data
   .then(arrayBuffer => context.decodeAudioData(arrayBuffer))
   .then(audioBuffer => {
-
     hhButton.addEventListener("click", function(evt) {
-      const hh = context.createBufferSource();
-      hh.buffer = audioBuffer;
-      hh.connect(context.destination);
-      hh.start();
-      hh.stop(context.currentTime+0.5);
+      
+      // hh.buffer = audioBuffer;
+      // hh.connect(context.destination);
+      // hh.start();
+      // hh.stop(context.currentTime+0.6);
+      // playHh(audioBuffer, context.currentTime);
+      var startTime = context.currentTime + 0.100;
+      var tempo = 100; // BPM (beats per minute)
+      var eighthNoteTime = (60 / tempo) / 2;
+
+      // Play 2 bars of the following:
+      for (var bar = 0; bar < 2; bar++) {
+        var time = startTime + bar * 8 * eighthNoteTime;
+        // Play the bass (kick) drum on beats 1, 5
+        // playSound(kick, time);
+        // playSound(kick, time + 4 * eighthNoteTime);
+
+        // Play the snare drum on beats 3, 7
+        // playSound(snare, time + 2 * eighthNoteTime);
+        // playSound(snare, time + 6 * eighthNoteTime);
+
+        // Play the hi-hat every eighthh note.
+        for (var i = 0; i < 8; ++i) {
+          playHh(audioBuffer, time + i * eighthNoteTime);
+        }
+      }
+      
+      
     });
 
   })
+
+function playHh(buffer, time) {
+  const hh = context.createBufferSource();
+  hh.buffer = buffer;
+  hh.connect(context.destination);
+  hh.start(time);
+  hh.stop(time+0.6);
+}
 
 
 function playLaser() {
   const laser = context.createOscillator();
   laser.frequency.value = 523.251;
-  laser.type = 'square';
+  laser.type = 'triangle';
   laser.frequency.exponentialRampToValueAtTime(10, context.currentTime+1);
 
   const laserGain = context.createGain();
@@ -240,6 +270,11 @@ fetch('media/100_C_G_Arps_SP_01.wav')
 
       this.addEventListener("mousemove", function(evt) {
         soundSource.setPosition((evt.clientX-startPosX)/10, (evt.clientY-startPosY)/10, (evt.clientY-startPosY)/10);
+        spaceSource.style.transform = 'translate('+(evt.clientX-startPosX)+'px, '+(evt.clientY-startPosY)+'px)';
+
+        this.addEventListener("mouseup", function(evt) {
+          music.stop();
+        })
       })
     })
 
