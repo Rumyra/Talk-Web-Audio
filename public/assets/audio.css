@@ -36,6 +36,7 @@ button {
   cursor:pointer;
 }
 .slides button {max-width:40%; font-size: 1.2em; margin:50px auto 0px;}
+.slides #synth button {max-width: 100%; margin-top: 20px;}
 button:hover, button.on {
   background-color:hsla(280,45%,50%,1);
   border-color:hsla(280,45%,60%,1);
@@ -44,14 +45,14 @@ button:hover, button.on {
     hsla(280,45%,55%,1),
     hsla(280,45%,50%,1));
 }
-button[data-sound="laser"], button[data-sound="osc"] {
+button[data-sound="laser"], button[data-sound="osc"], button[data-sound="m-laser"] {
   background-color:hsla(70,45%,40%,1);
   background-image: linear-gradient(0deg,
     hsla(70,45%,45%,1),
     hsla(70,45%,50%,1));
   border-color: hsla(70,45%,50%,1);
 }
-button[data-sound="laser"]:hover, button[data-sound="laser"].on, button[data-sound="osc"]:hover, button[data-sound="osc"].on {
+button[data-sound="laser"]:hover, button[data-sound="laser"].on, button[data-sound="osc"]:hover, button[data-sound="osc"].on, button[data-sound="m-laser"]:hover, button[data-sound="m-laser"].on {
   background-color:hsla(70,45%,50%,1);
   border-color:hsla(70,45%,60%,1);
   background-image: linear-gradient(0deg,
@@ -59,14 +60,14 @@ button[data-sound="laser"]:hover, button[data-sound="laser"].on, button[data-sou
     hsla(70,45%,55%,1),
     hsla(70,45%,50%,1));
 }
-button[data-sound="kick"] {
+button[data-sound="kick"], button[data-sound="m-kick"] {
   background-color:hsla(0,45%,40%,1);
   background-image: linear-gradient(0deg,
     hsla(0,45%,45%,1),
     hsla(0,45%,50%,1));
   border-color: hsla(0,45%,50%,1);
 }
-button[data-sound="kick"]:hover, button[data-sound="kick"].on {
+button[data-sound="kick"]:hover, button[data-sound="kick"].on, button[data-sound="m-kick"]:hover, button[data-sound="m-kick"].on {
   background-color:hsla(0,45%,50%,1);
   border-color:hsla(0,45%,60%,1);
   background-image: linear-gradient(0deg,
@@ -74,14 +75,14 @@ button[data-sound="kick"]:hover, button[data-sound="kick"].on {
     hsla(0,45%,55%,1),
     hsla(0,45%,50%,1));
 }
-button[data-sound="snare"] {
+button[data-sound="snare"], button[data-sound="m-snare"] {
   background-color:hsla(230,45%,40%,1);
   background-image: linear-gradient(0deg,
     hsla(230,45%,45%,1),
     hsla(230,45%,50%,1));
   border-color: hsla(230,45%,50%,1);
 }
-button[data-sound="snare"]:hover, button[data-sound="snare"].on {
+button[data-sound="snare"]:hover, button[data-sound="snare"].on, button[data-sound="m-snare"]:hover, button[data-sound="m-snare"].on {
   background-color:hsla(230,45%,50%,1);
   border-color:hsla(230,45%,60%,1);
   background-image: linear-gradient(0deg,
@@ -89,14 +90,14 @@ button[data-sound="snare"]:hover, button[data-sound="snare"].on {
     hsla(230,45%,55%,1),
     hsla(230,45%,50%,1));
 }
-button[data-sound="hh"] {
+button[data-sound="hh"], button[data-sound="m-hh"] {
   background-color:hsla(190,45%,40%,1);
   background-image: linear-gradient(0deg,
     hsla(190,45%,45%,1),
     hsla(190,45%,50%,1));
   border-color: hsla(190,45%,50%,1);
 }
-button[data-sound="hh"]:hover, button[data-sound="hh"].on {
+button[data-sound="hh"]:hover, button[data-sound="hh"].on, button[data-sound="m-hh"]:hover, button[data-sound="m-hh"].on {
   background-color:hsla(190,45%,50%,1);
   border-color:hsla(190,45%,60%,1);
   background-image: linear-gradient(0deg,
@@ -107,7 +108,7 @@ button[data-sound="hh"]:hover, button[data-sound="hh"].on {
 
 /*svg graph ~~~~~~~~~~~~~~~~~~*/
 #wave-graph {
-  width:90vw; height:70vh;
+  width:90vh; height:70vh;
   padding-left:20px;
   transform: translateX(-10%);
   font-family: "Montserrat";

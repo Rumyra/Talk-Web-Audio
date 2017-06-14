@@ -39,12 +39,14 @@
 </head>
 
 <!--
-$brown: #463c34
+
 $green: #acc486
 $orange: #ea8d88
 $purple: #8c4c6f
 
+$brown: #463c34
 $cream: #eee5c4
+
 $grey: #bebebe
 -->
 
@@ -75,8 +77,8 @@ $grey: #bebebe
           <aside class="notes">
             <p>Hey! Web API Day!</p>
             <p>Speak slowly</p>
-            <p>So this is the part of the talk where I introduce myself, and tell you what my job title is... </p>
             <p>My name is Ruth, I'm here to talk to u about audio & midi, on the web.</p>
+            <p>So this is the part of the talk where I introduce myself, and tell you what my job title is... </p>
           </aside>
         </section>
 
@@ -128,24 +130,25 @@ $grey: #bebebe
         </section>
         <!-- it's amazing u can do cool stuff with it-->
 
-        <section data-background-color="#eee5c4" data-background-video="media/chord.mp4">
-          <aside class="notes">
-            <p>This is Jake Alburgh's appegiator - it's on codepen. It's such a simple idea, but it's illustrates soemthing so perfectly. The match between maths and music. I'm not going to go into it - but you should really check it out.</p>
-            <p>It also illustrates the amazing things you can do with the audio api</p>
-          </aside>
-        </section>
-
         <section data-background-color="#eee5c4" data-background-video="media/block.mp4">
           <aside class="notes">
             <p>This is blokdust. Built by Luke Twyman, Luke Phillips and Edward Silverton in Brighton.</p>
             <p>It's well mental. A beautiful interface for a synth - you just pull things in, sound inputs, add effects, chain them together and output them. You can add controls.</p>
             <p>Note this interface - it'll be important later.</p>
-            <p>And it's not just synths & appediators - there's art too</p>
+            <p>And it's not just synths & appeGiators - there's art too</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#eee5c4" data-background-video="media/chord.mp4">
+          <aside class="notes">
+            <p>This is Jake Alburgh's appegiator - it's on codepen. It's such a simple idea, but it's illustrates soemthing so perfectly. Change patterns, rythum, tone. I'm not going to go into it - but you should really check it out.</p>
+            <p>It also illustrates the amazing things you can do with the audio api</p>
           </aside>
         </section>
 
         <section data-background-color="#eee5c4" data-background-image="media/piano.jpg">
           <aside class="notes">
+            <p>And there's not just websites or codepens</p>
             <p>This is piano - an art installation built with three.js and p5.js by Patrik Hubner - it harnesses web audio and web midi.</p>
             <p>An audio visualisation is displayed in a window and MIDI controller used to by passers by to interact with it.</p>
           </aside>
@@ -179,7 +182,7 @@ $grey: #bebebe
           <aside class="notes">
             <p>sers</p>
             <p>There are all these fabulous things being built with the web audio api</p>
-            <p>We'll get to what a sythesiser is later in the talk... but for now, back to audio... web audio. I mean look at this where do you even begin, it's big, it's complicated, you have to have a background in audio to begin to understand it.</p>
+            <p>But for now, back to audio... web audio. I mean look at this where do you even begin, it's big, it's complicated, you have to have a background in audio to begin to understand it.</p>
             <p>And people are reluctant to use audio on the web. When ever you mention audio on websites you imagine this...</p>
           </aside>
         </section>
@@ -189,6 +192,7 @@ $grey: #bebebe
           <aside class="notes">
             <p>A website playing background music - the modern version of which is something like this:</p>
             <p>Real website - camerons worls</p>
+            <p>Then there's the modern day equivilant.</p>
           </aside>
         </section>
 
@@ -196,7 +200,7 @@ $grey: #bebebe
           <aside class="notes">
             <p>An annoying advert that autoplays - yes I know.</p>
             <p>http://afternooncareer.com/lp/int/uk/dn24/clx.htm</p>
-            <p>If someone asks you to build this btw, stand up and walk away. You're a developer, there is work for you. Do the right thing. Stand up. Walk away.</p>
+            <p>I mean this is intrusive and pretty horrible, ur probably trying to read an article</p>
             <p>But actually there's some really great examples of audio just being used on plain ol' websites.</p>
           </aside>
         </section>
@@ -216,8 +220,7 @@ $grey: #bebebe
           <p>futurelibrary.no</p>
           <aside class="notes">
             <p>This is my favourite, this is a project from Norway called future library, where they're growing a forest and getting authors to write books for every tree and every year.</p>
-            <p>Sounds are playing throughout, but it really enhances the experience.</p>
-            <p>Mute fades it out</p>
+            <p>Sounds are playing throughout, but beautiful & well thought out even mute fades it out</p>
           </aside>
         </section>
 
@@ -226,7 +229,7 @@ $grey: #bebebe
           <p>86andahalfyears.com</p>
           <aside class="notes">
             <p>This is 86 and half years. A story website about the musings of an 86 1/2 yesr old man. But presented so excellently.</p>
-            <p>None of the sounds on these websites are intrusive, they enhance the experience, these aren't websites you flick to, you sit and discover them. There is a place for audio.</p>
+            <p>None of the sounds on these websites are intrusive, they enhance the experience, these aren't websites you flick to, or just read, you discover them. There is a place for audio here.</p>
           </aside>
         </section>
 
@@ -240,10 +243,13 @@ $grey: #bebebe
           
           <!-- mute controls -->
           <aside class="notes">
+            <p>One bear in mind</p>
             <p>Forest has a mute control</p>
             <p>Years doesn't - although at the start it does say, best experience with headphones.</p>
             <p>Both very thoughtful features. We'll get back to mute in a minute because</p>
-            <p>So I wanted to take out the more practical parts of the audio api - there's simply not enough time to go through it all. So as an introduction, let's have a quick overview of digital audio, as I think that will help.</p>
+            <p>There's not enough time to go through the whole api</p>
+            <p>Take through the practical parts - help discover</p>
+            <p>So as an introduction, let's have a quick overview of digital audio, as I think that will help.</p>
           </aside>
         </section>
 
@@ -255,35 +261,36 @@ $grey: #bebebe
           </aside>
         </section>
 
-        <section data-background-color="#eee5c4">
+        <section data-background-color="#eee5c4" data-state="play-sin">
           <h1>Digital Audio</h1>
           <svg id="wave-graph"></svg>
           <aside class="notes">
             <p>You've probably seen a dipiction of a sound wave that looks a little something like this - this is what we call a sine wave, it's a nice pure wave, a nice pure sound.</p>
             <p>On the x axis is time and the y axis is amplitude, or volume.</p>
-            <p>You might have more than one wave, one at a different frequency. (higher freq higher pitch). If we added them together we'd get a wave that looks something like this.</p>
             <p>In reality, sounds aren't likely to be this pure - as I'm talking to you - the sound my voice makes is made up of lots and lots of waves, some of which will be distorted, there maybe other sounds around you too, if you add all of these together you get something like this.</p>
             <p>Now what we do when we record this digitally, is we take the amplitude value at a given time, we record that and that's what we're interpreting when we're playing it back.</p>
-            <p>So for example a # wav, would record 48,000 amplitude values per second. Essentially the nitty gritty is an audio track is just numbers.</p>
+            <p>Common rate is 44.1 khz - means taking 44,100 samples per second. Just numbers.</p>
+            <p>Let's begin - super code heavy</p>
           </aside>
         </section>
 
-        <section data-background-color="#eee5c4">
+        <!-- <section data-background-color="#eee5c4">
           <h1>Loading & Playing Sounds</h1>
           <aside class="notes">
             <p>Now let's say you want to load a sound to use - this can be for anything, website, app, your crazy synth, you have to make sure the audio api can understand this data</p>
             <p>So here comes the code - are you ready? The first thing we have to do is create an instance of the api to use it</p>
           </aside>
-        </section>
+        </section> -->
 
         <!-- create new audio api - recording studio -->
         <section data-background-color="#463c34">
           <h1>Audio Context</h1>
           <pre><code class="js">const context = new window.AudioContext</code></pre>
           <aside class="notes">
-            <p>A concept to understand when you are working with web audio is the context</p>
-            <p>This is sort of the area where everything happens.</p>
-            <p>Think of it like a sound track. You have a start, middle, end. You have loads of intruments, there's volume, effects, soundscape. This is the context you're instantiating.</p>
+            <p>So let's begin - the first thing we need to do...</p>
+            <p>Here I'm creating an instance of the audio context to be used within my application - I only need to do this once, this is the audio api. It gives me all the methods I'm going to need in endless supply.</p>
+            <p>The context is sort of the area where everything happens.</p>
+            <p>Think of it like a recroding studio. Instruments, mixing desks, effects.</p>
             <p>prefix still needed in safari everyone</p>
           </aside>
         </section>
@@ -305,9 +312,10 @@ fetch('soundFile.mp4')
   // then play (see https://jakearchibald.com/2016/sounds-fun/)
           </code></pre>
           <aside class="notes">
+            <p>Once you have that, you need some sounds.</p>
             <p>Let's start with loading sounds - on a website this is important.</p>
             <p>There are three main ways of loading sounds into this context.</p>
-            <p>buffers are containers data - samples. sample rate. create your own</p>
+            <p>buffers are containers data - samples. sample rate. create your own. Files are compressed, mp3, m4a, FLAC.</p>
             <p>With the top two we by pass the buffer stuff, but there's no preload - when we fetch the file in the last method we load it into memory and get retreive it at any time. As a rule top one for not many and long tracks. Middle for streams, last for lots of short sounds.</p>
           </aside>
         </section>
@@ -339,13 +347,14 @@ source.start();
         <h1>Audio Graph & Nodes</h1>
         <!-- picture of graph here -->
           <aside class="notes">
-            <p>So this is a representation of what we have just created. This is what we call an audio graph, it shows the parts of the audio scape we have. So far a source and destination. These boxes you can see joined together we call nodes and as we add more effects we will add more nodes to this graph.</p>
+            <p>So this is where I can start to talk about nodes.</p>
+            <p>So this is a representation of what we have just created. This is what we call an audio graph. So far a source and destination. These boxes you can see joined together we call nodes and as we add more effects we will add more nodes to this graph.</p>
             <p>Let's say we want to add mute functionality - we can do that with a gain node.</p>
           </aside>
         </section>
 
         <section data-background-color="#463c34">
-        <h1>Gain Node</h1>
+        <h1>Mute: Gain Node</h1>
         <pre><code data-trim class="js">// create gain node
 const gainNode = context.createGain();
 
@@ -358,7 +367,9 @@ source.connect(gainNode).connect(context.destination);
 source.start();
           </code></pre>
           <aside class="notes">
-            <p>This controls volume. 0 value is nothing, 1 value is max. By setting it to 0 it will mute our audio.</p>
+            <p>Create another node.</p>
+            <p>This controls volume. 0 value is nothing, 1 value is normal. 0.5 half. By setting it to 0 it will mute our audio. We can set this value to anything.</p>
+            <p>Need to connect it.</p>
           </aside>
         </section>
 
@@ -390,10 +401,6 @@ var compressor = context.createDynamicsCompressor();
 
 // delay sound
 const delay = context.createDelay(5.0);
-
-// panning
-const simplePanner = context.createStereoPanner();
-
           </code></pre>
           <aside class="notes">
             <p>Here are some other simple nodes we can use to modify sounds.</p>
@@ -405,29 +412,30 @@ const simplePanner = context.createStereoPanner();
         <section data-background-color="#ea8d88" data-background-image="media/howler.png" data-transition="none">
           <h1>howler.js</h1>
           <aside class="notes">
-            <p>Howler is the big one - has everything I just spoke about, but it makes it easier to use and has cross platform support as well.</p>
-            <p>It's a bit like the jquery of the audio api at the moment.</p>
+            <p>Want to mention a library at this point - howler</p>
+            <p>Good all rounder & cross platform support as well. It has all the functionality of the api, but abstracts away the code writing.</p>
             <p>Supports codecs, sound sprites etc...</p>
+            <p>Also supports sound spriting, this is a technique used on the web, like image spriting to download one file of lots of small sounds. Used heavily in game dev.</p>
           </aside>
         </section>
 
         <!-- Other reasons u may use it -->
         <!-- Games & VR - very different things, but methods similar -->
 
-        <section data-background-color="#463c34">
+        <!-- <section data-background-color="#463c34">
         <h1>Sound Spriting</h1>
         <p>Loading lots of sounds in one file</p>
           <aside class="notes">
             <p>This is the idea you actually have a lot of little sounds in one file, so you only have to load it once. A little like image spriting we're I'm sure we're all used to doing here.</p>
           </aside>
-        </section>
+        </section> -->
 
         <section data-background-color="#463c34" data-background-image="media/gamesvr.jpg">
         <h1>HTML Games & VR</h1>
         <!-- picture of graph here -->
           <aside class="notes">
-            <p>It's pretty popular when making games, which heavily uses the web audio api.</p>
-            <p>I've lumped this use case in with VR even tho they are slightly different things, in the cases of audio I can start talking aa api methods that both use.</p>
+            <p>It's pretty popular when making games, which big use case the web audio api along with VR</p>
+            <p>One thing the audio API gives us that is useful in this area of dev is...</p>
           </aside>
         </section>
 
@@ -445,10 +453,13 @@ soundSource.setPosition(0, 0, 0);
 // also set orientation, velocity, cones of panner
           </code></pre>
           <aside class="notes">
-            <p>The panner node gives us a 3D sound scape to work with.</p>
-            <p>For this you need a sound source - where sound is coming from and a listener, where it is picked up from.</p>
+            <p>Spatialisation, I'm making sound, person listing, I move, sound moves. This emulates it.</p>
+            <p>This is the aptly named panner node.</p>
+            <p>3D sound scape to work with.</p>
+            <p>Create sound source - where sound is coming from and a listener, where it is picked up from.</p>
             <p>We can make sounds appear as if they are infront or you, above you, to the left to the right.</p>
             <p>Cones are like lights - ambient and spotlight.</p>
+            <p>PROPERTIES! on SOURCE</p>
           </aside>
         </section>
         <!-- VR example? or phone -->
@@ -460,6 +471,19 @@ soundSource.setPosition(0, 0, 0);
           </div>
           <aside class="notes">
             <p>A frame?</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#463c34">
+          <h1>Stereo Panner</h1>
+          <pre><code data-trim class="js">
+// simple stereo panning
+const simplePanner = context.createStereoPanner();
+          </code></pre>
+          <aside class="notes">
+            <p>Here are some other simple nodes we can use to modify sounds.</p>
+            <p>Ear is a clever thing, it can here very quiet sound & very loud sounds. It evens them out for you. It's a very good dynamic compressor.</p>
+            <p>Panner takes into account distance, orientation adn 3D space. There's a whole bunch of params to set for this one - I strongly suggest looking at the docs.</p>
           </aside>
         </section>
         
@@ -495,6 +519,7 @@ oscillator.setPeriodicWave(wave);
             <p>Instead of loading sounds, like we saw before, we can create them. There's an osciallator node. The sin wave you saw ealier, this can create one of those.</p>
             <p>It can also create a number of default waves (specifically ones that are easy to generate) - square, triangle and sawtooth.</p>
             <p>You can even make your own wave form to be generated. The PeriodicWave interface defines a periodic waveform that can be used to shape the output of an OscillatorNode.</p>
+            <p>This sounds a bit like this 'e'</p>
           </aside>
         </section>
 
@@ -510,13 +535,15 @@ oscillator.setPeriodicWave(wave);
         <section data-background-color="#463c34">
         <h1>Built in stuff</h1>
         <pre><code data-trim class="js">// jump frequency down
-oscillator.frequency.exponentialRampToValueAtTime(10, context.currentTime+1);
+oscillator.frequency.exponentialRampToValueAtTime(10,
+  context.currentTime+1);
 
 // jump volume down too!
-gainNode.gain.exponentialRampToValueAtTime(0.001, context.currentTime+0.9);
+gainNode.gain.exponentialRampToValueAtTime(0.001,
+  context.currentTime+0.9);
           </code></pre>
           <aside class="notes">
-            <p>The audio api comes with some nice mathods - here's a good one - I use it commonly, so I wanted to share it.</p>
+            <p>The audio api comes with some nice methods use on parameters - here's a good one - I use it commonly, so I wanted to share it.</p>
             <p>exponential ramp to value at time</p>
             <p>changes the value of the node at a set time - use it on frequency of osc AND if we create a gain node before, change volume</p>
             <p>also linear value at time method. Exponential ramp is curve & nicer to hear.</p>
@@ -533,15 +560,15 @@ gainNode.gain.exponentialRampToValueAtTime(0.001, context.currentTime+0.9);
 
         <!-- maybe put kick example in here -->
 
-        <section data-background-color="#ea8d88" data-background-image="media/tuna.png" data-transition="none">
+        <!-- <section data-background-color="#ea8d88" data-background-image="media/tuna.png" data-transition="none">
           <h1>Tuna</h1>
           <aside class="notes">
             <p>Tuna - sound effects library. Useful for games.</p>
             <p>The other way to create sounds is to create your own data for a buffer rather than an oscialltor.</p>
           </aside>
-        </section>
+        </section> -->
 
-        <section data-background-color="#463c34">
+        <section data-background-color="#463c34" data-state="white">
         <h1>Buffers</h1>
         <pre><code data-trim class="js">// make your own!
 const node = context.createBufferSource(),
@@ -560,14 +587,14 @@ node.buffer = buffer;
             <!-- play noise here? -->
             <p>That audio buffer we passed the file data into earlier, to load the file. We don't have to load a file into a buffer, we can create that data ourselves. We know now it's just numbers.</p>
             <p>The loop you see in the code here creates numbers that when passed into the buffer and played play white noise.</p>
-            <p>Are you ready it doesn't sound great.</p>
+            <p>Are you ready it doesn't sound great. </p>
             <p>Pink noise is better than white noise, it's softer, it reduces the harsher tones, we can use a function for that, or we can use another of the built in methods the api gives us.</p>
             <p>And this is where we can really start to have some fun with the other filter nodes the api gives us.</p>
           </aside>
         </section>
 
 
-        <section data-background-color="#463c34">
+        <section data-background-color="#463c34" data-state="pink">
           <h1>Alter sounds</h1>
           <pre><code data-trim class="js">// filter/accentuate frequencies
 const biquadFilter = context.audioCtx.createBiquadFilter();
@@ -656,7 +683,7 @@ reverb.buffer = bufferedFile;
         <section data-background-color="#acc486" data-background-video="media/cameronsworld.mp4">
           <h1>This is not MIDI</h1>
           <aside class="notes">
-            <p>Those bleepy noises, that is audio - that is what we just spent the talk doing, MIDI is simple data, a protocol built around musical instruments.</p>
+            <p>Those bleepy noises, that is audio - that is what we just spent the talk doing, MIDI is simple data, a protocol built around musical instruments. We use it to control sounds.</p>
           </aside>
         </section>
 
@@ -673,7 +700,7 @@ reverb.buffer = bufferedFile;
 
         <section data-background-color="#acc486" data-background-image="media/techSpec.jpg">
           <h1>MIDI</h1>
-          <h2 class="fragment fade-in">Data</h2>
+          <h2>Data</h2>
           <aside class="notes">
             <p>Data protocal and a pretty basic one at that.</p>
             <p>The spec has moved on - 1->2. There have been other specs. DMX controls lighting heavily based on MIDI. Pyrotechnics use something similar too. There's a BLE spec, a polyphonic spec, visual spec.</p>
@@ -716,16 +743,6 @@ reverb.buffer = bufferedFile;
         </section> -->
 
         <section data-background-color="#acc486">
-          <h1>Demo</h1>
-          <p data-height="697" data-theme-id="1345" data-slug-hash="NxdbzL" data-default-tab="result" data-user="Rumyra" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/Rumyra/pen/NxdbzL/">Web MIDI API Example</a> by Rumyra (<a href="http://codepen.io/Rumyra">@Rumyra</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
-          <aside class="notes">
-            <p>So if I plug in a MIDI instrument or controller and instigate the web MIDI api in my brwoser - this is the data you'll get</p>
-            <p>You should all see a keyboard - one of the most common MIDI enabled instruments. Now this is the data that the web MIDI api passes back to us when a MIDI device is plugged in. So let's take a look at the code.</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#acc486">
           <h1>Web MIDI API</h1>
           <h2>[144, 60, 100]</h2>
           <pre><code data-trim>// call requestMIDIAccess
@@ -749,16 +766,42 @@ function onMIDISuccess(midiControl) {
           </aside>
         </section>
 
+        <section data-background-color="#acc486">
+          <h1>Demo</h1>
+          <p data-height="697" data-theme-id="1345" data-slug-hash="NxdbzL" data-default-tab="result" data-user="Rumyra" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/Rumyra/pen/NxdbzL/">Web MIDI API Example</a> by Rumyra (<a href="http://codepen.io/Rumyra">@Rumyra</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+          <aside class="notes">
+            <p>So if I plug in a MIDI instrument or controller and instigate the web MIDI api in my brwoser - this is the data you'll get</p>
+            <p>You should all see a keyboard - one of the most common MIDI enabled instruments. Now this is the data that the web MIDI api passes back to us when a MIDI device is plugged in. So let's take a look at the code.</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#463c34" data-state="midi">
+        <div id="synth">
+          <button data-sound="m-arps">Arps</button>
+          <button data-sound="m-laser">Laser</button>
+          <button data-sound="m-kick">Kick</button>
+          <button data-sound="m-snare">Snare</button>
+          <button data-sound="m-hh">Hi Hat</button>
+        </div>
+          <aside class="notes">
+            <p>Then if we do what we did before and add a little gain drop odd - boom, we got a snare!</p>
+          </aside>
+        </section>
+
+        
+
 
         <section data-background-color="#8c4c6f" class="lists">
           <div class="list-right">
-            <h1>Important bits?</h1>
+            <h1>Quick Review</h1>
             <ul>
-              <li><h2>Loading sounds</h2></li>
-              <li class="fragment fade-in"><p>Buffers</p></li>
-              <li class="fragment fade-in"><p>Nodes</p></li>
-              <li class="fragment fade-in"><p>Time</p></li>
-              <li class="fragment fade-in"><p>MIDI API</p></li>
+              <li><p>Loading sounds (Buffers)</p></li>
+              <li class="fragment fade-in"><p>Audio Graph & Nodes</p></li>
+              <li class="fragment fade-in"><p>Modified Sound</p></li>
+              <li class="fragment fade-in"><p>Create Sound</p></li>
+              <li class="fragment fade-in"><p>Timing is important</p></li>
+              <li class="fragment fade-in"><p>MIDI!</p></li>
             </ul>
           </div>
           <aside class="notes">
@@ -775,7 +818,7 @@ function onMIDISuccess(midiControl) {
           <aside class="notes">
             <p>I know that the demos here aren't really what you'd put on a site. Although pls someone build a site with a laser button. But I do hope the techniques demonstrated are ones to use and really get you started with the api and help you understnad what's possible and why.</p>
             <p>Think about sound - think about it as part of design, it can be something simple (forms), animation is always enhanced - it's 2017, we don't need horrible load blaring music when we land on a page, we have all this power at our fingertips to make it really mature</p>
-            <p>We're so quick to pick up grid systems, animation apis, 3d, games, vr on the web, all great things. But when it comes to something as simple as ear magic we're reluctant and dismissive. Please think twice, I think we can be thoughtful - start a new wave of sound in our code.</p>
+            <p>We're so quick to pick up grid systems, animation apis, 3d, games, vr on the web, all great things. (why we have it) But we have it now! We have all this power. W hen it comes to something as simple as ear magic we're reluctant and dismissive. Please think twice, I think we can be thoughtful - start a new wave of sound in our code.</p>
           </aside>
         </section>
 

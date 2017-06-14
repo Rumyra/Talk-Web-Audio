@@ -103,7 +103,7 @@ var sinPathOne,
 var svg = d3.select('#wave-graph')
   .append('g').attr('transform', "translate(" + graphMargin.left + ", " + graphMargin.top + ")");
 // svg.append("defs").append("clipPath").attr("id", "clip").append("rect").attr("width", w).attr("height", h);
-svg.append('g').attr('class', 'x axis').attr("transform", "translate(0," + (svgDomDi.height-40) + ")").call(xAxis).append('text').text('time').attr('transform','translate('+(svgDomDi.width-100)+',-10)');
+svg.append('g').attr('class', 'x axis').attr("transform", "translate(0," + (svgDomDi.height-40) + ")").call(xAxis).append('text').text('time (ms)').attr('transform','translate('+(svgDomDi.width-100)+',-10)');
 svg.append('g').attr('class', 'y axis').call(yAxis).append('text').text('amp').attr('transform','translate(20,50)rotate(-90)');
 
 line = d3.svg.line().x(function(d, i){
@@ -130,6 +130,23 @@ const context = new window.AudioContext;
 const playArpsButton = document.querySelector('button[data-sound="play-arps"]'),
   arpsButton = document.querySelector('button[data-sound="arps"]');
 
+Reveal.addEventListener('play-sin', function(ev) {
+
+  window.addEventListener("keydown", function(evt) {
+
+    if (evt.key === 'd') {
+
+      const sin = context.createOscillator();
+      sin.frequency.value = 440;
+
+      sin.connect(context.destination);
+      sin.start(context.currentTime);
+      sin.stop(context.currentTime+1);
+    }
+
+  });
+});
+
 // play arps
 Reveal.addEventListener( 'play-arps', function(ev) {
 
@@ -148,13 +165,9 @@ Reveal.addEventListener( 'play-arps', function(ev) {
         if (evt.key === 'q') {
           arpsSource.start();
           playArpsButton.classList.add('on');
-
-          window.addEventListener("keydown", function(evt) {
-            if (evt.key === 'w') {
-              arpsSource.stop();
-              playArpsButton.classList.remove('on');
-            }
-          });
+          arpsSource.onended = function() {
+            playArpsButton.classList.remove('on');
+          }
         }
 
       });
@@ -180,7 +193,7 @@ Reveal.addEventListener( 'mute-arps', function(ev) {
 
       window.addEventListener("keydown", function(evt) {
 
-        if (evt.key === 'e') {
+        if (evt.key === 'w') {
 
           if (arpsButton.dataset.mute === "true") {
             arpsGain.gain.value = 1;
@@ -251,7 +264,7 @@ Reveal.addEventListener( 'osc', function(ev) {
 
   window.addEventListener("keydown", function(evt) {
 
-    if (evt.key === 'r') {
+    if (evt.key === 'e') {
       oscButton.classList.add('on');
 
       const osc = context.createOscillator();
@@ -298,6 +311,67 @@ Reveal.addEventListener( 'laser', function(ev) {
     }
   });
     
+});
+
+Reveal.addEventListener('white', function(ev) {
+
+  window.addEventListener("keydown", function(evt) {
+
+    if (evt.key === 'g') {
+
+      const whiteBufferSize = context.sampleRate;
+      // pass in channels, frame count, sample rate
+      const whiteBuffer = context.createBuffer(1, whiteBufferSize, context.sampleRate);
+      const white = context.createBufferSource();
+
+      // create some data for the buffer
+      var whiteData = whiteBuffer.getChannelData(0);
+
+      for (let i=0; i<whiteBufferSize; i++) {
+        whiteData[i] = Math.random()*2 - 1;
+      }
+
+      white.buffer = whiteBuffer;
+
+      white.connect(context.destination);
+      white.start(context.currentTime);
+      white.stop(context.currentTime+0.5);
+    }
+  });
+});
+
+Reveal.addEventListener('pink', function(ev) {
+
+  window.addEventListener("keydown", function(evt) {
+
+    if (evt.key === 'h') {
+
+      const pinkBufferSize = context.sampleRate;
+      // pass in channels, frame count, sample rate
+      const pinkBuffer = context.createBuffer(1, pinkBufferSize, context.sampleRate);
+      const pink = context.createBufferSource();
+
+      // create some data for the buffer
+      var pinkData = pinkBuffer.getChannelData(0);
+
+      for (let i=0; i<pinkBufferSize; i++) {
+        pinkData[i] = Math.random()*2 - 1;
+      }
+
+      pink.buffer = pinkBuffer;
+
+      // create a filter
+      const pinkFilter = context.createBiquadFilter();
+      pinkFilter.type = "bandpass";
+      pinkFilter.frequency = 15000;
+      pinkFilter.Q = 0.0001;
+
+      
+      pink.connect(pinkFilter).connect(context.destination);
+      pink.start(context.currentTime);
+      pink.stop(context.currentTime+0.5);
+    }
+  });
 });
 
 Reveal.addEventListener( 'snare', function(ev) {
@@ -386,15 +460,186 @@ function playHh(buffer, time) {
   hh.stop(time+0.6);
 }
 
-// Reveal.addEventListener( 'stop-arps', function(ev) {
-//   playArpsButton.classList.remove('on');
-// });
+function playKick() {
+  const kick = context.createOscillator();
+  kick.frequency = 150;
+  kick.frequency.setValueAtTime(150, context.currentTime);
+  kick.frequency.exponentialRampToValueAtTime(0.01, context.currentTime+0.5);
 
-// Reveal.addEventListener( 'stop-arps', function(ev) {
-//   playArpsButton.classList.remove('on');
-// });
+  kickGain = context.createGain();
+  kickGain.gain.setValueAtTime(2,context.currentTime);
+  kickGain.gain.exponentialRampToValueAtTime(0.01,context.currentTime+0.4);
 
+  kick.connect(kickGain).connect(context.destination);
+  kick.start(context.currentTime);
+  kick.stop(context.currentTime+0.5);
+}
+
+function playLaser() {
+  const laser = context.createOscillator();
+  laser.frequency.value = 523.251;
+  laser.type = 'triangle';
+  laser.frequency.exponentialRampToValueAtTime(10, context.currentTime+1);
+
+  const laserGain = context.createGain();
+  // set gain value to 1 'now'
+  laserGain.gain.setValueAtTime(1, context.currentTime)
+  // decease suddenly but smoothly
+  laserGain.gain.exponentialRampToValueAtTime(0.001, context.currentTime+0.9);
+  laser.connect(laserGain).connect(context.destination);
+  laser.start(context.currentTime);
+  laser.stop(context.currentTime+1);
+}
+
+// midi stuff ~~~~~~~~~~~~~~~~~~~~~~
+var midi, data = [0,0,0], threshold;
+// request MIDI access
+if (navigator.requestMIDIAccess) {
+    navigator.requestMIDIAccess({
+        sysex: false
+    }).then(onMIDISuccess, function() {console.log('failed')});
+} else {
+    alert("No MIDI support in your browser.");
+}
+
+// midi functions
+function onMIDISuccess(midiAccess) {
+  // when we get a succesful response, run this code
+  midi = midiAccess; // this is our raw MIDI data, inputs, outputs, and sysex status
+
+  var inputs = midi.inputs.values();
+  // loop over all available inputs and listen for any MIDI input
+  for (var input = inputs.next(); input && !input.done; input = inputs.next()) {
+      // each time there is a midi message call the onMIDIMessage function
+      input.value.onmidimessage = onMIDIMessage;
+  }
+}
+
+const arpsSource = context.createBufferSource();
+const arpsGain = context.createGain();
+
+const mArpsBut = document.querySelector('button[data-sound="m-arps"]'),
+  mLaserBut = document.querySelector('button[data-sound="m-laser"]'),
+  mKickBut = document.querySelector('button[data-sound="m-kick"]'),
+  mSnareBut = document.querySelector('button[data-sound="m-snare"]'),
+  mHhBut = document.querySelector('button[data-sound="m-hh"]');
+
+function onMIDIMessage(message) {
+  data = message.data; // this gives us our [command/channel, note, velocity] data.
+  console.log(data);
+
+  // fetch arps
+  if ( (data[0]===144) && (data[1]===32) && (data[2]===0) ) {
+
+    fetch('media/100_C_G_Arps_SP_01.wav')
+    // read into memory as array buffer
+    .then(response => response.arrayBuffer())
+    // turn into raw audio data
+    .then(arrayBuffer => context.decodeAudioData(arrayBuffer))
+    .then(audioBuffer => {
+      console.log('fetch arps');
+      arpsSource.buffer = audioBuffer;
+      arpsGain.gain.value = 0;
+      arpsSource.connect(arpsGain).connect(context.destination);
+      arpsSource.start();
+      arpsSource.loop = true;
+
+    })
+
+  }
+
+  if ( (data[0] === 144) && (data[2] === 64) ) {
+
+    switch (data[1]) {
+      case 2:
+        arpsSource.stop();
+        mArpsBut.classList.remove('on');
+      break;
+      // kick
+      case 3:
+        console.log('kick');
+        playKick();
+        mKickBut.classList.add('on');
+      break;
+      // laser
+      case 4:
+        console.log('laser');
+        playLaser();
+        mLaserBut.classList.add('on');
+      break;
+      // arps
+      case 5:
+        console.log('play arps');
+        arpsGain.gain.value = 0;
+        mArpsBut.classList.remove('on');
+      break;
+      // drums
+      case 6:
+
+      fetch('media/808CHH.wav')
+      // read into memory as array buffer
+      .then(response => response.arrayBuffer())
+      // turn into raw audio data
+      .then(arrayBuffer => context.decodeAudioData(arrayBuffer))
+      .then(audioBuffer => {
+        var startTime = context.currentTime + 0.100;
+        var tempo = 100; // BPM (beats per minute)
+        var eighthNoteTime = (60 / tempo) / 2;
+
+        // Play 2 bars of the following:
+        for (var bar = 0; bar < 2; bar++) {
+          var time = startTime + bar * 8 * eighthNoteTime;
+
+          // Play the hi-hat every eighthh note.
+          for (var i = 0; i < 8; ++i) {
+            playHh(audioBuffer, time + i * eighthNoteTime);
+          }
+        }
+      });
+      break;
+
+    }
+  }
+
+  if ( (data[0] === 144) && (data[2] === 0) ) {
+
+    switch (data[1]) {
+      // kick
+      case 3:
+        mKickBut.classList.remove('on');
+      break;
+      // laser
+      case 4:
+        mLaserBut.classList.remove('on');
+      break;
+      // arps
+      case 5:
+        arpsGain.gain.value = 1;
+        mArpsBut.classList.add('on');
+      break;
+      // drums
+      case 6:
+      break;
+
+    }
+  }
+
+  // if ( (data[0]===144) && (data[1]===5) && (data[2]===64) ) {
+  //   console.log('mute arps');
+  //   arpsGain.gain.value = 1;
+  // }
+
+}
+
+
+
+
+
+
+Reveal.addEventListener('midi', function(ev) {
+  console.log(data);
   
+});  
 
 
 
