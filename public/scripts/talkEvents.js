@@ -259,13 +259,13 @@ Reveal.addEventListener( 'space', function(ev) {
 
 });
 
-Reveal.addEventListener( 'osc', function(ev) {
-  const oscButton = document.querySelector('button[data-sound="osc"]');
+Reveal.addEventListener('osc', function(ev) {
+  // const oscButton = document.querySelector('button[data-sound="osc"]');
 
   window.addEventListener("keydown", function(evt) {
 
     if (evt.key === 'e') {
-      oscButton.classList.add('on');
+      // oscButton.classList.add('on');
 
       const osc = context.createOscillator();
       osc.frequency.value = 440;
@@ -274,9 +274,9 @@ Reveal.addEventListener( 'osc', function(ev) {
       osc.connect(context.destination);
       osc.start(context.currentTime);
       osc.stop(context.currentTime+1);
-      osc.onended = function() {
-        oscButton.classList.remove('on');
-      }
+      // osc.onended = function() {
+      //   oscButton.classList.remove('on');
+      // }
     }
 
   });
@@ -460,6 +460,37 @@ function playHh(buffer, time) {
   hh.stop(time+0.6);
 }
 
+function playSnare(time) {
+  const snareBufferSize = context.sampleRate;
+  // pass in channels, frame count, sample rate
+  const snareBuffer = context.createBuffer(1, snareBufferSize, context.sampleRate);
+  const snare = context.createBufferSource();
+
+  // create some data for the buffer
+  var snareData = snareBuffer.getChannelData(0);
+
+  for (let i=0; i<snareBufferSize; i++) {
+    snareData[i] = Math.random()*2 - 1;
+  }
+
+  snare.buffer = snareBuffer;
+
+  // create a filter
+  const snareFilter = context.createBiquadFilter();
+  snareFilter.type = "bandpass";
+  snareFilter.frequency = 10000;
+  snareFilter.Q = 0.0001;
+
+  // create gain
+  const snareGain = context.createGain();
+  snareGain.gain.setValueAtTime(1.5,context.currentTime);
+  snareGain.gain.exponentialRampToValueAtTime(0.01, context.currentTime+0.2);
+
+  snare.connect(snareFilter).connect(snareGain).connect(context.destination);
+  snare.start(time);
+  snare.stop(time+0.3);
+}
+
 function playKick() {
   const kick = context.createOscillator();
   kick.frequency = 150;
@@ -548,6 +579,10 @@ function onMIDIMessage(message) {
 
   }
 
+  if ( (data[0]===144) && (data[1]===33) && (data[2]===0) ) {
+    arpsSource.start();
+  }
+
   if ( (data[0] === 144) && (data[2] === 64) ) {
 
     switch (data[1]) {
@@ -575,6 +610,8 @@ function onMIDIMessage(message) {
       break;
       // drums
       case 6:
+        mHhBut.classList.add('on');
+        mSnareBut.classList.add('on');
 
       fetch('media/808CHH.wav')
       // read into memory as array buffer
@@ -587,8 +624,14 @@ function onMIDIMessage(message) {
         var eighthNoteTime = (60 / tempo) / 2;
 
         // Play 2 bars of the following:
-        for (var bar = 0; bar < 2; bar++) {
+        for (var bar = 0; bar < 8; bar++) {
           var time = startTime + bar * 8 * eighthNoteTime;
+
+          playSnare(time + 0 * eighthNoteTime);
+          playSnare(time + 3 * eighthNoteTime);
+          playSnare(time + 6 * eighthNoteTime);
+
+          playHh(audioBuffer, time + 1.75 * eighthNoteTime);
 
           // Play the hi-hat every eighthh note.
           for (var i = 0; i < 8; ++i) {

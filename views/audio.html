@@ -118,15 +118,18 @@ fetch('media/808CHH.wav')
       var eighthNoteTime = (60 / tempo) / 2;
 
       // Play 2 bars of the following:
-      for (var bar = 0; bar < 2; bar++) {
+      for (var bar = 0; bar < 8; bar++) {
         var time = startTime + bar * 8 * eighthNoteTime;
         // Play the bass (kick) drum on beats 1, 5
         // playSound(kick, time);
         // playSound(kick, time + 4 * eighthNoteTime);
 
         // Play the snare drum on beats 3, 7
-        // playSound(snare, time + 2 * eighthNoteTime);
-        // playSound(snare, time + 6 * eighthNoteTime);
+        playSnare(time + 0 * eighthNoteTime);
+        playSnare(time + 3 * eighthNoteTime);
+        playSnare(time + 6 * eighthNoteTime);
+
+        playHh(audioBuffer, time + 1.75 * eighthNoteTime);
 
         // Play the hi-hat every eighthh note.
         for (var i = 0; i < 8; ++i) {
@@ -139,12 +142,47 @@ fetch('media/808CHH.wav')
 
   })
 
+function playSnare(time) {
+  const snareBufferSize = context.sampleRate;
+  // pass in channels, frame count, sample rate
+  const snareBuffer = context.createBuffer(1, snareBufferSize, context.sampleRate);
+  const snare = context.createBufferSource();
+
+  // create some data for the buffer
+  var snareData = snareBuffer.getChannelData(0);
+
+  for (let i=0; i<snareBufferSize; i++) {
+    snareData[i] = Math.random()*2 - 1;
+  }
+
+  snare.buffer = snareBuffer;
+
+  // create a filter
+  const snareFilter = context.createBiquadFilter();
+  snareFilter.type = "bandpass";
+  snareFilter.frequency = 10000;
+  snareFilter.Q = 0.0001;
+
+  // create gain
+  const snareGain = context.createGain();
+  snareGain.gain.setValueAtTime(1.5,time);
+  snareGain.gain.exponentialRampToValueAtTime(0.01, time+0.2);
+
+  snare.connect(snareFilter).connect(snareGain).connect(context.destination);
+  snare.start(time);
+  snare.stop(time+0.3);
+}
+
 function playHh(buffer, time) {
+  hhButton.classList.add('on');
   const hh = context.createBufferSource();
   hh.buffer = buffer;
   hh.connect(context.destination);
   hh.start(time);
   hh.stop(time+0.6);
+  hh.onended = function() {
+    hhButton.classList.remove('on');
+  }
 }
 
 
@@ -164,36 +202,36 @@ function playLaser() {
   laser.stop(context.currentTime+1);
 }
 
-function playSnare() {
-  const snareBufferSize = context.sampleRate;
-  // pass in channels, frame count, sample rate
-  const snareBuffer = context.createBuffer(1, snareBufferSize, context.sampleRate);
-  const snare = context.createBufferSource();
+// function playSnare() {
+//   const snareBufferSize = context.sampleRate;
+//   // pass in channels, frame count, sample rate
+//   const snareBuffer = context.createBuffer(1, snareBufferSize, context.sampleRate);
+//   const snare = context.createBufferSource();
 
-  // create some data for the buffer
-  var snareData = snareBuffer.getChannelData(0);
+//   // create some data for the buffer
+//   var snareData = snareBuffer.getChannelData(0);
 
-  for (let i=0; i<snareBufferSize; i++) {
-    snareData[i] = Math.random()*2 - 1;
-  }
+//   for (let i=0; i<snareBufferSize; i++) {
+//     snareData[i] = Math.random()*2 - 1;
+//   }
 
-  snare.buffer = snareBuffer;
+//   snare.buffer = snareBuffer;
 
-  // create a filter
-  const snareFilter = context.createBiquadFilter();
-  snareFilter.type = "bandpass";
-  snareFilter.frequency = 15000;
-  snareFilter.Q = 0.0001;
+//   // create a filter
+//   const snareFilter = context.createBiquadFilter();
+//   snareFilter.type = "bandpass";
+//   snareFilter.frequency = 15000;
+//   snareFilter.Q = 0.0001;
 
-  // create gain
-  const snareGain = context.createGain();
-  snareGain.gain.setValueAtTime(3,context.currentTime);
-  snareGain.gain.exponentialRampToValueAtTime(0.01, context.currentTime+0.3);
+//   // create gain
+//   const snareGain = context.createGain();
+//   snareGain.gain.setValueAtTime(3,context.currentTime);
+//   snareGain.gain.exponentialRampToValueAtTime(0.01, context.currentTime+0.3);
 
-  snare.connect(snareFilter).connect(snareGain).connect(context.destination);
-  snare.start(context.currentTime);
-  snare.stop(context.currentTime+0.5);
-}
+//   snare.connect(snareFilter).connect(snareGain).connect(context.destination);
+//   snare.start(context.currentTime);
+//   snare.stop(context.currentTime+0.5);
+// }
 
 function playKick() {
   const kick = context.createOscillator();
