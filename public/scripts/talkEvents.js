@@ -483,8 +483,8 @@ function playSnare(time) {
 
   // create gain
   const snareGain = context.createGain();
-  snareGain.gain.setValueAtTime(1.5,context.currentTime);
-  snareGain.gain.exponentialRampToValueAtTime(0.01, context.currentTime+0.2);
+  snareGain.gain.setValueAtTime(1.5,time);
+  snareGain.gain.exponentialRampToValueAtTime(0.01, time+0.2);
 
   snare.connect(snareFilter).connect(snareGain).connect(context.destination);
   snare.start(time);
@@ -570,9 +570,9 @@ function onMIDIMessage(message) {
     .then(audioBuffer => {
       console.log('fetch arps');
       arpsSource.buffer = audioBuffer;
-      arpsGain.gain.value = 0;
+      arpsGain.gain.value = 1;
       arpsSource.connect(arpsGain).connect(context.destination);
-      arpsSource.start();
+      // arpsSource.start();
       arpsSource.loop = true;
 
     })
@@ -627,6 +627,7 @@ function onMIDIMessage(message) {
         for (var bar = 0; bar < 8; bar++) {
           var time = startTime + bar * 8 * eighthNoteTime;
 
+          // Play the snare drum on beats 3, 7
           playSnare(time + 0 * eighthNoteTime);
           playSnare(time + 3 * eighthNoteTime);
           playSnare(time + 6 * eighthNoteTime);
