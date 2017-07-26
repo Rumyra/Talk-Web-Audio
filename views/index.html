@@ -265,7 +265,7 @@ $grey: #bebebe
           <h1>Digital Audio</h1>
           <svg id="wave-graph"></svg>
           <aside class="notes">
-            <p>You've probably seen a dipiction of a sound wave that looks a little something like this - this is what we call a sine wave, it's a nice pure wave, a nice pure sound. like 'd'</p>
+            <p>[d] You've probably seen a dipiction of a sound wave that looks a little something like this - this is what we call a sine wave, it's a nice pure wave, a nice pure sound. like 'd'</p>
             <p>On the x axis is time and the y axis is amplitude, or volume.</p>
             <p>In reality, sounds aren't likely to be this pure - as I'm talking to you - the sound my voice is more distorted - more jaggy wave.</p>
             <p>Now what we do when we record this digitally, is we take the amplitude value at a given time, we record that and that's what we're interpreting when we're playing it back.</p>
@@ -338,7 +338,7 @@ source.start();
         <h1>Play Sounds</h1>
         <button data-sound="play-arps">Arps</button>
           <aside class="notes">
-            <p>Now using the code that we have just seen, I've done this. I've got a sound, I've loaded it into a buffer, attached it to an event listener so I can set it to play when the button is pressed.</p>
+            <p>[q] Now using the code that we have just seen, I've done this. I've got a sound, I've loaded it into a buffer, attached it to an event listener so I can set it to play when the button is pressed.</p>
             <p>Great</p>
           </aside>
         </section>
@@ -377,7 +377,7 @@ source.start();
         <h1>Mute Sounds</h1>
         <button data-sound="arps" data-mute="undef">Arps</button>
           <aside class="notes">
-            <p>Now using the code that we have just seen, I've done this. I've got a sound, I've loaded it into a buffer, attached it to an event listener so I can set it to play when the button is pressed.</p>
+            <p>[w] Now using the code that we have just seen, I've done this. I've got a sound, I've loaded it into a buffer, attached it to an event listener so I can set it to play when the button is pressed.</p>
             <p>Great</p>
           </aside>
         </section>
@@ -516,7 +516,7 @@ var wave = context.createPeriodicWave(real, imag, constraints);
 oscillator.setPeriodicWave(wave);
           </code></pre>
           <aside class="notes">
-            <p>Instead of loading sounds, like we saw before, we can create them. There's an osciallator node. The sin wave you saw ealier, this can create one of those.</p>
+            <p>[e] Instead of loading sounds, like we saw before, we can create them. There's an osciallator node. The sin wave you saw ealier, this can create one of those.</p>
             <p>It can also create a number of default waves (specifically ones that are easy to generate) - square, triangle and sawtooth.</p>
             <p>You can even make your own wave form to be generated. The PeriodicWave interface defines a periodic waveform that can be used to shape the output of an OscillatorNode.</p>
             <p>This sounds a bit like this 'e'</p>
@@ -554,7 +554,7 @@ gainNode.gain.exponentialRampToValueAtTime(0.001,
         <h1>Laser</h1>
         <button data-sound="laser">Laser</button>
           <aside class="notes">
-            <p>So by simply adding a bit of built in functionality - boom we have a laser. With an oscillator.</p>
+            <p>[t] So by simply adding a bit of built in functionality - boom we have a laser. With an oscillator.</p>
           </aside>
         </section>
 
@@ -585,7 +585,7 @@ node.buffer = buffer;
           </code></pre>
           <aside class="notes">
             <!-- play noise here? -->
-            <p>That audio buffer we passed the file data into earlier, to load the file. We don't have to load a file into a buffer, we can create that data ourselves. We know now it's just numbers.</p>
+            <p>[g] That audio buffer we passed the file data into earlier, to load the file. We don't have to load a file into a buffer, we can create that data ourselves. We know now it's just numbers.</p>
             <p>The loop you see in the code here creates numbers that when passed into the buffer and played play white noise.</p>
             <p>Are you ready it doesn't sound great. </p>
             <p>Pink noise is better than white noise, it's softer, it reduces the harsher tones, we can use a function for that, or we can use another of the built in methods the api gives us.</p>
@@ -611,7 +611,7 @@ const reverb = context.createConvolver();
 reverb.buffer = bufferedFile;
           </code></pre>
           <aside class="notes">
-            <p>Here are some ways to alter sounds - remember these can be used on any nodes.</p>
+            <p>[h] Here are some ways to alter sounds - remember these can be used on any nodes.</p>
             <p>Biquad filter - algorithms on data - to enhance frequencies or filter them out. There's lots of types. High pass, low pass, high shelf, low sheif, peaking</p>
             <p>Defines an array of numbers to multiply to the sample</p>
             <p>often generated by recording a percussive noise or frequency sweep in a space. Does this all sound convoluted? Well, technically, it is!</p>
@@ -623,7 +623,7 @@ reverb.buffer = bufferedFile;
         <h1>Snare</h1>
         <button data-sound="snare">Snare</button>
           <aside class="notes">
-            <p>Then if we do what we did before and add a little gain drop odd - boom, we got a snare!</p>
+            <p>[y] Then if we do what we did before and add a little gain drop odd - boom, we got a snare!</p>
           </aside>
         </section>
 
@@ -645,7 +645,7 @@ reverb.buffer = bufferedFile;
         <h1>Hi Hat</h1>
         <button data-sound="hh">Hi Hat</button>
           <aside class="notes">
-            <p>Then if we do what we did before and add a little gain drop odd - boom, we got a snare!</p>
+            <p>[u] Then if we do what we did before and add a little gain drop odd - boom, we got a snare!</p>
           </aside>
         </section>
 

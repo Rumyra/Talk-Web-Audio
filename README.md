@@ -5,6 +5,7 @@ This is the Web Audio & A Little MIDI by [Ruth John](https:/twitter.com/Rumyra)
 Versions of this talk have been seen at:
 
 - [CSS Day, Amsterdam. 15th-16th June '17'](https://cssday.nl/2017)
+- [JS Monthly, London. 25th July '17'](https://www.meetup.com/js-monthly/events/241720619/)
 
 ## About
 
