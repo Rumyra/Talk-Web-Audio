@@ -1,6 +1,6 @@
 # Web Audio & A Little MIDI
 
-This is the Web Audio & A Little MIDI by [Ruth John](https:/twitter.com/Rumyra)
+This is the Web Audio & A Little MIDI talk by [Ruth John](https:/twitter.com/Rumyra)
 
 Versions of this talk have been seen at:
 
@@ -25,7 +25,7 @@ There are recordings of the talk
 
 I don't upload my slides due to some problems I've had with copyright infringement.
 
-You can find all the slides within the talk in the [index file](https://github.com/Rumyra/Talk-Web-Audio/blob/master/views/index.html) within this build. It's just an HTML file so pretty easy to navigate - all my slide notes are there, as well within the markup.
+You can find all the slides within the talk in the [index file](https://github.com/Rumyra/Talk-Web-Audio/blob/master/views/index.html) within this build. It's just an HTML file so pretty easy to navigate - all my slide notes are there as well, within the markup.
 
 For each conference I branch, so just choose the correct branch for the correct index (no two talks are the same).
 
