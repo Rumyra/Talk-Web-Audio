@@ -35,8 +35,14 @@ For each conference I branch, so just choose the correct branch for the correct 
 - [Apeggiator](https://codepen.io/jakealbaugh/pen/qNrZyw)
 - [Piano](https://www.patrik-huebner.com/portfolio-item/piano-3d-audio-reactive-typography/)
 - [Ableton's Learning Music](https://learningmusic.ableton.com)
+- [Play Drums Online](https://www.playdrumsonline.com/)
+- [Typatone](https://typatone.com)
+- [Mix Analogue](https://mixanalog.com/)
 - [Future Library](https:/futurelibrary.no)
 - [86 and a half years](https:/86andahalfyears.com)
+- [Laurie Cape - web MIDI controlling typography](https://www.youtube.com/watch?v=CuB0Z-f9ylE&feature=youtu.be)
+- [Madeon's Adventure Machine](http://www.madeon.fr/adventuremachine/)
+- [Dot Piano](https://dotpiano.com/qA7v2AOq3OD)
 
 ## Demos
 
@@ -50,6 +56,18 @@ Please bear in mind these are talk demos and code is very rough :)
 - [Chris Lowis: Sythesising Drum Sounds](https://dev.opera.com/articles/drum-sounds-webaudio/)
 - [Jake Archibald: Sounds Fun](https://jakearchibald.com/2016/sounds-fun/)
 - [Chris Wilson: A Tale of Two Clocks](https://www.html5rocks.com/en/tutorials/audio/scheduling/)
+
+## Learn to Code Links
+
+- [egghead.io](https://egghead.io/)
+- [freecodecamp.org](https://www.freecodecamp.org/)
+- [coderbyte.com](https://coderbyte.com/)
+- [Treehouse](https://teamtreehouse.com/)
+- [udacity.com](https://www.udacity.com/)
+- [codewars.com](https://www.codewars.com/)
+- [watchandcode.com](https://watchandcode.com/)
+- [codecademy.com](https://www.codecademy.com/)
+
 
 ## Get in touch
 
