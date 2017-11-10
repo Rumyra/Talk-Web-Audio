@@ -25,7 +25,7 @@
   <!-- <script src="https://js.pusher.com/3.0/pusher.min.js"></script> -->
   <!-- <link rel="stylesheet" href="visuals.css"> -->
 
-  <!--<style type="text/css">
+  <style type="text/css">
     #screen {
       position: absolute; top:0px; left:0px;
       margin: 0px; padding: 0px;
@@ -34,7 +34,7 @@
       display: none;
     }
     svg {width: 100vw; height: 100vh; padding:0px; margin:0px;}
-  </style>-->
+  </style>
   
 </head>
 
@@ -227,14 +227,25 @@ $grey: #bebebe
           <aside class="notes">
             <p>Now js is key here - the history of js is key here. It started just as a sort of small loose layer to web pages - but it's sort of exploded over the past few years.</p>
             <p>The languages you see here are all client side - it's what the user sees and accesses. But there's also server side languages - php, ruby, .net. These all deal with or access data or functionality *not* on the client side</p>
-            <p>Thing is js went server side a few years ago, people who did client side stuff where like super cool and people who did server side stuff were like super cool and now every writes js</p>
-            <p>JS is sort of everywhere - desktop, chromebook, hardware, switch</p>
-            <p>And then JS arrived on the desktop - there's electron and nwjs</p>
+            <p>Thing is js went server side a few years ago, people who did client side stuff where like super cool and people who did server side stuff were like super cool and now every writes javascript</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#acc486" data-background="media/jsEver.jpg">
+          <h1>JS Everywhere</h1>
+          <aside class="notes">
+            <p>But that means that javascript sort of got everywhere - desktop, chromebook, hardware, switch</p>
+            <p>And then JS arrived on the desktop</p>
+            <p>And on the server</p>
+            <p>And on the desktop electron and nwjs</p>
+            <p>It's on hardware</p>
+            <p>I found out this</p>
+            <p>I found out this week you can put it on a switch</p>
             <p>JS is popular as a coding language - really popular</p>
           </aside>
         </section>
 
-        <section data-background-color="#eee5c4" data-background="media/learn.jpg">
+        <section data-background-color="#acc486" data-background="media/learn.jpg">
           <aside class="notes">
             <p>It's also not that hard to pick up if you wanted to learn a programming language</p>
             <p>Here's some places on the internet that you can do some tutorials and lessons for free.</p>
@@ -331,7 +342,7 @@ source.start();
           </aside>
         </section>
 
-        <section data-background-color="#eee5c4" data-background-image="media/mute.jpg" class="lists">
+        <section data-background-color="#acc486" data-background-image="media/mute.jpg" class="lists">
           <div class="list-left">
             <h2>Mute 👍</h2>
           </div>
@@ -551,7 +562,9 @@ reverb.buffer = bufferedFile;
 
         <section data-background-color="#463c34">
           <h1>Audio Worklets</h1>
-          <pre><code class="js">const now = context.currentTime</code></pre>
+          <p>googlechromelabs.github.io/web-audio-samples/</p>
+          <pre><code class="js">let worklet = new AudioWorkletNode(context, 'worketModule');
+source.connect(worklet).connect(context.destination);</code></pre>
           <aside class="notes">
             <p>They're kinda here</p>
             <p>So this takes all that number crunching off the main thread too - there's a few bits and bobs being done at the moment in regards to number crunching, better syntax</p>
@@ -567,7 +580,7 @@ reverb.buffer = bufferedFile;
           </aside>
         </section>
 
-        <section data-background-color="#eee5c4">
+        <section data-background-color="#ea8d88">
           <h1>Reason #1</h1>
           <p>Interface</p>
           <aside class="notes">
@@ -593,15 +606,14 @@ reverb.buffer = bufferedFile;
           </aside>
         </section>
 
-        <section data-background-color="#eee5c4" data-background="media/dotPiano.mp4">
+        <section data-background-color="#eee5c4" data-background-video="media/dotPiano.mp4">
           <p>dotpiano.com</p>
           <aside class="notes">
             <p>But then there's simpler things - like just visualising a piano</p>
-            <p>Visualising a piano</p>
           </aside>
         </section>
 
-        <section data-background-color="#eee5c4" data-background-image="media/fistBump.gif">
+        <section data-background-color="#ea8d88">
           <h1>Reason #2</h1>
           <p>Reach</p>
           <aside class="notes">
@@ -611,7 +623,7 @@ reverb.buffer = bufferedFile;
           </aside>
         </section>
 
-        <section data-background-color="#eee5c4" data-background-image="media/abletonSite.jpg">
+        <section data-background-color="#ea8d88" data-background-image="media/abletonSite.jpg">
           <!-- ableton learn music -->
           <p>learningmusic.ableton.com</p>
           <aside class="notes">
@@ -620,7 +632,7 @@ reverb.buffer = bufferedFile;
           </aside>
         </section>
 
-        <section data-background-color="#eee5c4" data-background-image="media/playDrums.jpg">
+        <section data-background-color="#ea8d88" data-background-image="media/playDrums.jpg">
           <!-- ableton learn music -->
           <p>playdrumsonline.com/</p>
           <aside class="notes">
@@ -629,7 +641,7 @@ reverb.buffer = bufferedFile;
         </section>
 
 
-        <section data-background-color="#eee5c4" data-background-image="media/fistBump.gif">
+        <section data-background-color="#ea8d88">
           <h1>Reason #3</h1>
           <p>Connectivity</p>
           <aside class="notes">
@@ -645,7 +657,7 @@ reverb.buffer = bufferedFile;
           </aside>
         </section>
 
-        <section data-background-color="#eee5c4" data-background-image="media/mixanalogue.png">
+        <section data-background-color="#ea8d88" data-background-image="media/mixanalogue.png">
           <p>mixanalog.com</p>
           <aside class="notes">
             <p>If you'd rather be making music maybe mix analogue is your thing</p>
@@ -656,7 +668,7 @@ reverb.buffer = bufferedFile;
         <!-- demos! -->
 
         
-        <section data-background-color="#eee5c4" data-background-image="media/browserapis.jpg">
+        <section data-background-color="#ea8d88">
           <h1>Reason #4</h1>
           <p>All the other things</p>
           <aside class="notes">
@@ -664,7 +676,14 @@ reverb.buffer = bufferedFile;
           </aside>
         </section>
 
-        <section data-background-color="#eee5c4" data-background-image="media/threea.jpg">
+        <section data-background-color="#ea8d88" data-background-image="media/browserapis.jpg">
+          <h1>Browser APIs</h1>
+          <aside class="notes">
+            <p>And I mean all the other things - this is just a handful of what the browser gives you</p>
+          </aside>
+        </section>
+
+        <section data-background-color="#ea8d88" data-background-image="media/threea.jpg">
           <h1>Web GL</h1>
           <h2>three.js & A-Frame</h2>
           <aside class="notes">
@@ -698,7 +717,7 @@ soundSource.setPosition(0, 0, 0);
           </aside>
         </section>
         <!-- VR example? or phone -->
-        <section data-background-color="#acc486" data-state="space">
+        <!-- <section data-background-color="#acc486" data-state="space">
           <h1>Demo</h1>
           <div id="space">
             <span data-object="source"></span>
@@ -707,9 +726,9 @@ soundSource.setPosition(0, 0, 0);
           <aside class="notes">
             <p>A frame?</p>
           </aside>
-        </section>
+        </section> -->
 
-        <section data-background-color="#eee5c4" data-background-image="media/resonance.png">
+        <section data-background-color="#ea8d88" data-background-image="media/resonance.png">
           <!-- ableton learn music -->
           <p>developers.google.com/resonance-audio/</p>
           <aside class="notes">
@@ -731,7 +750,7 @@ const simplePanner = context.createStereoPanner();
           </aside>
         </section>
         
-        <section data-background-color="#eee5c4" data-background-image="media/harry.png">
+        <section data-background-color="#ea8d88" data-background-image="media/harry.png">
           <!-- portfolio -->
           <h1>Pottermore</h1>
           <p>my.pottermore.com/hogwarts</p>
@@ -743,7 +762,7 @@ const simplePanner = context.createStereoPanner();
           </aside>
         </section>
 
-        <section data-background-color="#ea8d88">
+        <section data-background-color="#8c4c6f">
           <h1>MIDI</h1>
           <aside class="notes">
             <p>The web midi api is a different api altogether and I will explain why...</p>
@@ -752,7 +771,7 @@ const simplePanner = context.createStereoPanner();
           </aside>
         </section>
 
-        <section data-background-color="#eee5c4" data-background-image="media/controllers.jpg" data-transition="none">
+        <section data-background-color="#8c4c6f" data-background-image="media/controllers.jpg" data-transition="none">
           <aside class="notes">
             <p>We can hook up any MIDI instrument or controller to our browser - seriously</p>
           </aside>
@@ -782,7 +801,7 @@ function onMIDISuccess(midiControl) {
           </aside>
         </section>
 
-        <section data-background-color="#ea8d88">
+        <section data-background-color="#8c4c6f">
           <h1>Demo</h1>
           <p data-height="697" data-theme-id="1345" data-slug-hash="NxdbzL" data-default-tab="result" data-user="Rumyra" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/Rumyra/pen/NxdbzL/">Web MIDI API Example</a> by Rumyra (<a href="http://codepen.io/Rumyra">@Rumyra</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
@@ -793,7 +812,7 @@ function onMIDISuccess(midiControl) {
           </aside>
         </section>
 
-        <section data-background-color="#eee5c4" data-background-image="media/madeon.png">
+        <section data-background-color="#8c4c6f" data-background-image="media/madeon.png">
           <p>madeon.fr/adventuremachine</p>
           <aside class="notes">
             <p>I mean god forbid you build a website that you can control with a midi controller</p>
@@ -804,17 +823,23 @@ function onMIDISuccess(midiControl) {
           <p>Laurie Cape</p>
           <aside class="notes">
             <p>or in fact use it for meaningless things like this guy who's literally just trying out font styles</p>
-          </aside>
-        </section>
-
-        <section data-background-color="#eee5c4" data-background-image="media/loopDrop.jpg">
-          <p>Loop Drop</p>
-          <aside class="notes">
             <p>and with all these things I wouldn't even dare think about how there's no piece of software on the market that satisfy's both your making music and playing live needs so you build your own - which is exactly what Matt McKegg did</p>
           </aside>
         </section>
 
-        <section data-background-color="#eee5c4" data-background-image="media/modV.jpg">
+        <section data-background-color="#eee5c4" data-background-image="media/loopDrop.jpg" data-state="no-visuals">
+          <p>Loop Drop</p>
+          <aside class="notes">
+            
+          </aside>
+        </section>
+
+        <section data-background-color="#ea8d88" data-state="vis_canvas">
+          <aside class="notes">
+          </aside>
+        </section>
+
+        <section data-background-color="#eee5c4" data-background-image="media/modV.jpg" data-state="no-visuals">
           <p>Mod V</p>
           <aside class="notes">
             <p>and I didn't even get to start about analysing audio - cos you can do that too and then make visuals - that's super cool!</p>
@@ -838,7 +863,7 @@ function onMIDISuccess(midiControl) {
         </section>
 
         <section data-background-color="#eee5c4" data-background-image="media/livejs.jpg">
-          <h1>{ Live : JS }</h1>
+          <h1>livejs.network</h1>
           <aside class="notes">
             <p>Well we did that - all because once upon a time we decided to learn how to build websites</p>
           </aside>
