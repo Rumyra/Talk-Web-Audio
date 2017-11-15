@@ -66,32 +66,32 @@ Reveal.initialize({
 // sine wave graph ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // all
-const svgDom = document.querySelector('#wave-graph'),
-  svgDomDi = {
-    width: Math.floor(svgDom.getBoundingClientRect().width),
-    height: Math.floor(svgDom.getBoundingClientRect().height)
-  };
-var line,
-  samples = Math.PI * 3,
-  graphMargin = {
-    top: 10,
-    right: 10,
-    bottom: 40,
-    left: 40
-  },
-  xScale = d3.scale.linear().domain([0, samples - 1]).range([0, svgDomDi.width-50]),
-  yScale = d3.scale.linear().domain([-1, 1]).range([svgDomDi.height-50, 0]),
-  xAxis = d3.svg.axis().scale(xScale).ticks(10).orient('bottom'),
-  yAxis = d3.svg.axis().scale(yScale).ticks(5).orient('left');
+// const svgDom = document.querySelector('#wave-graph'),
+//   svgDomDi = {
+//     width: Math.floor(svgDom.getBoundingClientRect().width),
+//     height: Math.floor(svgDom.getBoundingClientRect().height)
+//   };
+// var line,
+//   samples = Math.PI * 3,
+//   graphMargin = {
+//     top: 10,
+//     right: 10,
+//     bottom: 40,
+//     left: 40
+//   },
+//   xScale = d3.scale.linear().domain([0, samples - 1]).range([0, svgDomDi.width-50]),
+//   yScale = d3.scale.linear().domain([-1, 1]).range([svgDomDi.height-50, 0]),
+//   xAxis = d3.svg.axis().scale(xScale).ticks(10).orient('bottom'),
+//   yAxis = d3.svg.axis().scale(yScale).ticks(5).orient('left');
 
-// lineOne
-function generateSineDataOne(samples){
-  return d3.range(0, 100).map(function(i){
-    return Math.sin(i*2)*1.9;
-  });
-}
-var sinPathOne,
-  dataOne = generateSineDataOne(samples);
+// // lineOne
+// function generateSineDataOne(samples){
+//   return d3.range(0, 100).map(function(i){
+//     return Math.sin(i*2)*1.9;
+//   });
+// }
+// var sinPathOne,
+//   dataOne = generateSineDataOne(samples);
   
 // lineTwo
 
@@ -100,26 +100,26 @@ var sinPathOne,
 // lineFour
 
 
-var svg = d3.select('#wave-graph')
-  .append('g').attr('transform', "translate(" + graphMargin.left + ", " + graphMargin.top + ")");
-// svg.append("defs").append("clipPath").attr("id", "clip").append("rect").attr("width", w).attr("height", h);
-svg.append('g').attr('class', 'x axis').attr("transform", "translate(0," + (svgDomDi.height-40) + ")").call(xAxis).append('text').text('time (ms)').attr('transform','translate('+(svgDomDi.width-100)+',-10)');
-svg.append('g').attr('class', 'y axis').call(yAxis).append('text').text('amp').attr('transform','translate(20,50)rotate(-90)');
+// var svg = d3.select('#wave-graph')
+//   .append('g').attr('transform', "translate(" + graphMargin.left + ", " + graphMargin.top + ")");
+// // svg.append("defs").append("clipPath").attr("id", "clip").append("rect").attr("width", w).attr("height", h);
+// svg.append('g').attr('class', 'x axis').attr("transform", "translate(0," + (svgDomDi.height-40) + ")").call(xAxis).append('text').text('time (ms)').attr('transform','translate('+(svgDomDi.width-100)+',-10)');
+// svg.append('g').attr('class', 'y axis').call(yAxis).append('text').text('amp').attr('transform','translate(20,50)rotate(-90)');
 
-line = d3.svg.line().x(function(d, i){
-  return xScale(i);
-}).y(function(d, i){
-  return yScale(d);
-}).interpolate('basis');
+// line = d3.svg.line().x(function(d, i){
+//   return xScale(i);
+// }).y(function(d, i){
+//   return yScale(d);
+// }).interpolate('basis');
 
-// g = svg.append('g').attr('clip-path', 'url(#clip)');
-var gOne = svg.append('g');
-sinPathOne = gOne.append('path')
-  .attr('class', 'sinPathOne')
-  .data([dataOne]).attr('d', line)
-  .style('fill', 'none')
-  .style('stroke', 'white')
-  .style('stroke-width', '2px');
+// // g = svg.append('g').attr('clip-path', 'url(#clip)');
+// var gOne = svg.append('g');
+// sinPathOne = gOne.append('path')
+//   .attr('class', 'sinPathOne')
+//   .data([dataOne]).attr('d', line)
+//   .style('fill', 'none')
+//   .style('stroke', 'white')
+//   .style('stroke-width', '2px');
 
 
 
@@ -675,17 +675,127 @@ function onMIDIMessage(message) {
 
 }
 
-
-
-
-
-
 Reveal.addEventListener('midi', function(ev) {
   console.log(data);
   
 });  
 
+// variables
+var analyserNode,
+    frequencyData = new Uint8Array(124),
+    animateDom = function() {};
+    
+const screenVals = {
+  width: window.innerWidth,
+  height: window.innerHeight,
+  maxRadius: (window.innerHeight-(window.innerWidth/6))/2,
+  minRadius: (window.innerHeight/10)/2
+};
 
+let currentAnimation = 'vis_speakers',
+  allEls,
+  totalEls,
+  screen = document.getElementById('screen'),
+  useMic = false;
+
+// create an audio API analyser node and connect to source
+function createAnalyserNode(audioSource) {
+  analyserNode = context.createAnalyser();
+  analyserNode.fftSize = 256;
+  audioSource.connect(analyserNode);
+}
+
+// getUserMedia success callback -> pipe audio stream into audio API
+var gotStream = function(stream) {
+  // Create an audio input from the stream.
+  var audioSource = context.createMediaStreamSource(stream);
+  createAnalyserNode(audioSource);
+  animate();
+  console.log('got stream')
+}
+
+// pipe in analysing to getUserMedia
+navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+  .then(gotStream);
+
+
+function drawHex(ctx, sideLength, startX, startY) {
+
+  // maths mother fucker
+  const moveX = Math.sin(Math.radians(30))*sideLength;
+  const moveY = Math.cos(Math.radians(30))*sideLength;
+
+  // I actually want the origin to be in the centre
+  var startX = startX-(sideLength/2);
+  var startY = startY-moveY;
+
+  ctx.beginPath(); // instigate
+  ctx.moveTo(startX, startY); // start at pos
+  ctx.lineTo(startX+sideLength, startY); // go right along top (we're drawing clockwise from top left)
+
+  ctx.lineTo(startX+sideLength+moveX, startY+moveY);
+  ctx.lineTo(startX+sideLength, startY+(moveY*2));
+  ctx.lineTo(startX, startY+(moveY*2));
+  ctx.lineTo(startX-moveX, startY+moveY);
+  ctx.lineTo(startX, startY);
+  ctx.closePath();
+}
+// Converts from degrees to radians.
+Math.radians = function(degrees) {
+  return degrees * Math.PI / 180;
+};
+
+Reveal.addEventListener('vis_canvas',
+  function(ev) {
+    screen.style.display = 'block';
+    currentAnimation = ev.type;
+    screen.innerHTML = '<canvas id="canvas"></canvas>';
+
+    var canvas = document.querySelector('#canvas');
+    canvas.width = screenVals.width;
+    canvas.height = screenVals.height;
+    var ctx = canvas.getContext('2d');
+
+    // var bigData;
+
+    animateDom = function() {
+      ctx.fillStyle = "#000";
+      ctx.fillRect(0,0,canvas.width, canvas.height);
+      ctx.globalCompositeOperation = "hard-light";
+      ctx.lineWidth = 2;
+
+      // var frequencies = adjustFreqData(128);
+      // var newData = frequencies.newFreqs;
+      // bigData = newFreqData.concat(newFreqData).concat(newFreqData).concat(newFreqData).concat(newFreqData).concat(newFreqData);
+
+      for(var i=0;i<frequencyData.length;i++) {
+        var d = frequencyData[i];
+        // ctx.beginPath();
+        drawHex(ctx, d, (i%24)*80, (i%14)*50);
+        ctx.strokeStyle = "hsla("+(i*3)+",60%,80%,1)";
+        ctx.fillStyle = "hsla("+(i*3)+",60%,"+d/2+"%,0.4)";
+        // ctx.arc(x, y, d/(j*5), 0, Math.PI*2);
+        ctx.fill();
+        ctx.stroke();
+
+      }
+
+    }
+  }
+)
+
+Reveal.addEventListener( 'no-visuals', function() {
+  screen.style.display = 'none';
+}, false);
+
+
+function animate() {
+  requestAnimationFrame(animate);
+  analyserNode.getByteFrequencyData(frequencyData);
+  // newFreqData = adjustFreqData();
+  // frequencyData.forEach(newData);
+  animateDom();
+}
 
 
 
