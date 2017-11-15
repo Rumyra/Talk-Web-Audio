@@ -19,7 +19,7 @@ And if all that wasn't enough, there's just a sprinkling of MIDI to go on top.
 
 There are recordings of the talk
 
-- [To come]
+- [CSS Day Amsterdam](https://vimeo.com/channels/cssday/234000272)
 
 ## Slides
 
