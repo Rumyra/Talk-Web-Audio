@@ -66,33 +66,33 @@ Reveal.initialize({
 // sine wave graph ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // all
-// const svgDom = document.querySelector('#wave-graph'),
-//   svgDomDi = {
-//     width: Math.floor(svgDom.getBoundingClientRect().width),
-//     height: Math.floor(svgDom.getBoundingClientRect().height)
-//   };
-// var line,
-//   samples = Math.PI * 3,
-//   graphMargin = {
-//     top: 10,
-//     right: 10,
-//     bottom: 40,
-//     left: 40
-//   },
-//   xScale = d3.scale.linear().domain([0, samples - 1]).range([0, svgDomDi.width-50]),
-//   yScale = d3.scale.linear().domain([-1, 1]).range([svgDomDi.height-50, 0]),
-//   xAxis = d3.svg.axis().scale(xScale).ticks(10).orient('bottom'),
-//   yAxis = d3.svg.axis().scale(yScale).ticks(5).orient('left');
+const svgDom = document.querySelector('#wave-graph'),
+  svgDomDi = {
+    width: Math.floor(svgDom.getBoundingClientRect().width),
+    height: Math.floor(svgDom.getBoundingClientRect().height)
+  };
+var line,
+  samples = Math.PI * 3,
+  graphMargin = {
+    top: 10,
+    right: 10,
+    bottom: 40,
+    left: 40
+  },
+  xScale = d3.scale.linear().domain([0, samples - 1]).range([0, svgDomDi.width-50]),
+  yScale = d3.scale.linear().domain([-1, 1]).range([svgDomDi.height-50, 0]),
+  xAxis = d3.svg.axis().scale(xScale).ticks(10).orient('bottom'),
+  yAxis = d3.svg.axis().scale(yScale).ticks(5).orient('left');
 
-// // lineOne
-// function generateSineDataOne(samples){
-//   return d3.range(0, 100).map(function(i){
-//     return Math.sin(i*2)*1.9;
-//   });
-// }
-// var sinPathOne,
-//   dataOne = generateSineDataOne(samples);
-  
+// lineOne
+function generateSineDataOne(samples){
+  return d3.range(0, 100).map(function(i){
+    return Math.sin(i*2)*1.9;
+  });
+}
+var sinPathOne,
+  dataOne = generateSineDataOne(samples);
+
 // lineTwo
 
 // lineThree
@@ -100,26 +100,26 @@ Reveal.initialize({
 // lineFour
 
 
-// var svg = d3.select('#wave-graph')
-//   .append('g').attr('transform', "translate(" + graphMargin.left + ", " + graphMargin.top + ")");
-// // svg.append("defs").append("clipPath").attr("id", "clip").append("rect").attr("width", w).attr("height", h);
-// svg.append('g').attr('class', 'x axis').attr("transform", "translate(0," + (svgDomDi.height-40) + ")").call(xAxis).append('text').text('time (ms)').attr('transform','translate('+(svgDomDi.width-100)+',-10)');
-// svg.append('g').attr('class', 'y axis').call(yAxis).append('text').text('amp').attr('transform','translate(20,50)rotate(-90)');
+var svg = d3.select('#wave-graph')
+  .append('g').attr('transform', "translate(" + graphMargin.left + ", " + graphMargin.top + ")");
+// svg.append("defs").append("clipPath").attr("id", "clip").append("rect").attr("width", w).attr("height", h);
+svg.append('g').attr('class', 'x axis').attr("transform", "translate(0," + (svgDomDi.height-40) + ")").call(xAxis).append('text').text('time (ms)').attr('transform','translate('+(svgDomDi.width-100)+',-10)');
+svg.append('g').attr('class', 'y axis').call(yAxis).append('text').text('amp').attr('transform','translate(20,50)rotate(-90)');
 
-// line = d3.svg.line().x(function(d, i){
-//   return xScale(i);
-// }).y(function(d, i){
-//   return yScale(d);
-// }).interpolate('basis');
+line = d3.svg.line().x(function(d, i){
+  return xScale(i);
+}).y(function(d, i){
+  return yScale(d);
+}).interpolate('basis');
 
-// // g = svg.append('g').attr('clip-path', 'url(#clip)');
-// var gOne = svg.append('g');
-// sinPathOne = gOne.append('path')
-//   .attr('class', 'sinPathOne')
-//   .data([dataOne]).attr('d', line)
-//   .style('fill', 'none')
-//   .style('stroke', 'white')
-//   .style('stroke-width', '2px');
+// g = svg.append('g').attr('clip-path', 'url(#clip)');
+var gOne = svg.append('g');
+sinPathOne = gOne.append('path')
+  .attr('class', 'sinPathOne')
+  .data([dataOne]).attr('d', line)
+  .style('fill', 'none')
+  .style('stroke', 'white')
+  .style('stroke-width', '2px');
 
 
 
@@ -161,7 +161,7 @@ Reveal.addEventListener( 'play-arps', function(ev) {
         const arpsSource = context.createBufferSource();
         arpsSource.buffer = audioBuffer;
         arpsSource.connect(context.destination);
-        
+
         if (evt.key === 'q') {
           arpsSource.start();
           playArpsButton.classList.add('on');
@@ -212,7 +212,7 @@ Reveal.addEventListener( 'mute-arps', function(ev) {
           }
 
         }
-        
+
       });
     })
 });
@@ -281,7 +281,7 @@ Reveal.addEventListener('osc', function(ev) {
 
   });
 
-      
+
 });
 
 Reveal.addEventListener( 'laser', function(ev) {
@@ -310,7 +310,7 @@ Reveal.addEventListener( 'laser', function(ev) {
       }
     }
   });
-    
+
 });
 
 Reveal.addEventListener('white', function(ev) {
@@ -366,7 +366,7 @@ Reveal.addEventListener('pink', function(ev) {
       pinkFilter.frequency = 15000;
       pinkFilter.Q = 0.0001;
 
-      
+
       pink.connect(pinkFilter).connect(context.destination);
       pink.start(context.currentTime);
       pink.stop(context.currentTime+0.5);
@@ -432,7 +432,7 @@ Reveal.addEventListener( 'hi-hat', function(ev) {
       // turn into raw audio data
       .then(arrayBuffer => context.decodeAudioData(arrayBuffer))
       .then(audioBuffer => {
-          
+
         var startTime = context.currentTime + 0.100;
         var tempo = 100; // BPM (beats per minute)
         var eighthNoteTime = (60 / tempo) / 2;
@@ -446,7 +446,7 @@ Reveal.addEventListener( 'hi-hat', function(ev) {
             playHh(audioBuffer, time + i * eighthNoteTime);
           }
         }
-          
+
       });
     }
   });
@@ -560,7 +560,7 @@ function onMIDIMessage(message) {
   console.log(data);
 
   // fetch arps
-  if ( (data[0]===144) && (data[1]===32) && (data[2]===0) ) {
+  if ( (data[0]===176) && (data[1]===104) && (data[2]===127) ) {
 
     fetch('media/100_C_G_Arps_SP_01.wav')
     // read into memory as array buffer
@@ -579,37 +579,37 @@ function onMIDIMessage(message) {
 
   }
 
-  if ( (data[0]===144) && (data[1]===33) && (data[2]===0) ) {
+  if ( (data[0]===144) && (data[1]===0) && (data[2]===127) ) {
     arpsSource.start();
   }
 
-  if ( (data[0] === 144) && (data[2] === 64) ) {
+  if ( (data[0] === 144) && (data[2] === 0) ) {
 
     switch (data[1]) {
-      case 2:
+      case 0:
         arpsSource.stop();
         mArpsBut.classList.remove('on');
       break;
       // kick
-      case 3:
+      case 1:
         console.log('kick');
         playKick();
         mKickBut.classList.add('on');
       break;
       // laser
-      case 4:
+      case 2:
         console.log('laser');
         playLaser();
         mLaserBut.classList.add('on');
       break;
       // arps
-      case 5:
+      case 3:
         console.log('play arps');
         arpsGain.gain.value = 0;
         mArpsBut.classList.remove('on');
       break;
       // drums
-      case 6:
+      case 4:
         mHhBut.classList.add('on');
         mSnareBut.classList.add('on');
 
@@ -649,24 +649,32 @@ function onMIDIMessage(message) {
 
     switch (data[1]) {
       // kick
-      case 3:
+      case 1:
         mKickBut.classList.remove('on');
       break;
       // laser
-      case 4:
+      case 2:
         mLaserBut.classList.remove('on');
       break;
       // arps
-      case 5:
+      case 3:
         arpsGain.gain.value = 1;
         mArpsBut.classList.add('on');
       break;
       // drums
-      case 6:
+      case 4:
       break;
 
     }
   }
+
+  if ( (data[0]===144) && (data[1]===119) && (data[2]===127) ) {
+    canvas.style.filter = 'invert(100%)';
+  }
+  if ( (data[0]===144) && (data[1]===119) && (data[2]===0) ) {
+    canvas.style.filter = 'invert(0%)';
+  }
+
 
   // if ( (data[0]===144) && (data[1]===5) && (data[2]===64) ) {
   //   console.log('mute arps');
@@ -677,14 +685,14 @@ function onMIDIMessage(message) {
 
 Reveal.addEventListener('midi', function(ev) {
   console.log(data);
-  
-});  
+
+});
 
 // variables
 var analyserNode,
     frequencyData = new Uint8Array(124),
     animateDom = function() {};
-    
+
 const screenVals = {
   width: window.innerWidth,
   height: window.innerHeight,
@@ -745,15 +753,17 @@ Math.radians = function(degrees) {
   return degrees * Math.PI / 180;
 };
 
+
 Reveal.addEventListener('vis_canvas',
   function(ev) {
     screen.style.display = 'block';
     currentAnimation = ev.type;
     screen.innerHTML = '<canvas id="canvas"></canvas>';
 
-    var canvas = document.querySelector('#canvas');
-    canvas.width = screenVals.width;
-    canvas.height = screenVals.height;
+var canvas = document.querySelector('#canvas');
+canvas.width = screenVals.width;
+canvas.height = screenVals.height;
+
     var ctx = canvas.getContext('2d');
 
     // var bigData;
@@ -781,6 +791,8 @@ Reveal.addEventListener('vis_canvas',
       }
 
     }
+
+
   }
 )
 
