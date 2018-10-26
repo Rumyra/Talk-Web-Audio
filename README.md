@@ -1,21 +1,22 @@
-# The Browser as Your Studio
+# A New Soundscape
 ## Web Audio & MIDI
 
 This is the Web Audio & A Little MIDI talk by [Ruth John](https:/twitter.com/Rumyra)
 
 Versions of this talk have been seen at:
 
+- [Mozilla's Viewsource, London, '18](https://events.mozilla.org/viewsource2018)
 - [Ableton's Loop, Berlin. 10th Nov '17](https://loop.ableton.com/2017/program/activity/your-browser-studio-new-developments-web-audio-and-web-midi/)
 - [JS Monthly, London. 25th July '17](https://www.meetup.com/js-monthly/events/241720619/)
 - [CSS Day, Amsterdam. 15th-16th June '17](https://cssday.nl/2017)
 
 ## About
 
-Audio with web technologies; it doesn't always have to be annoying background music that starts playing when you open a new tab.
+Shall we talk about audio? I mean there's no place for that in a browser right? Annoying background sound, auto playing videos 🙄... but wait! What about games, apps, XR, web assembly giving us the power to compile a whole new world in this environment?
 
-The Web Audio API is extremely powerful, we can create sounds, load them, analyse them, modify them in an insane amount of different ways. This is an in-depth talk into the different methods of the API and not just the details, but how best we could use them in our development work flow. What techniques really come in useful when loading and manipulating sounds? We'll outline just that so you can go away feeling more confident knowing you that yes you can use audio!
+With new policies being discussed to make it less offensive, and technologies to make it run smoothly, audio is coming of age. After rocky beginnings back in the nineties, single thread issue with the birth of the Web Audio API, things are changing and really it's here to stay.
 
-And if all that wasn't enough, there's just a sprinkling of MIDI to go on top.
+Ruth takes us through the basics, best practises and these changes. Welcome to a whole new exciting world of sound, a world where the browser suddenly stops shouting and becomes an adult.
 
 ## Videos
 
@@ -55,6 +56,18 @@ For each conference I branch, so just choose the correct branch for the correct 
 - [Piano](https://www.patrik-huebner.com/portfolio-item/piano-3d-audio-reactive-typography/)-->
 
 
+## MDN Tutorial Links
+
+- [Beginning with the Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Using_Web_Audio_API)
+- [Spacialisation and the panner node](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Web_audio_spatialization_basics)
+- [IIR Filter](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Using_IIR_filters)
+- [Advanced techniques](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Advanced_techniques)
+
+
+## Demos
+
+All the demos are based on similar techniques used in the MDN demos [which can be found in this codepen collection](https://codepen.io/collection/nLyrjE/)
+
 ## Resources & Further Reading
 
 - [Web Audio Spec](https://www.w3.org/TR/webaudio/)
@@ -76,11 +89,6 @@ For each conference I branch, so just choose the correct branch for the correct 
 - [watchandcode.com](https://watchandcode.com/)
 - [codecademy.com](https://www.codecademy.com/)
 
-## Demos
-
-Very rough version of the buttons and spacialisation demo can be found in [this file](https://github.com/Rumyra/Talk-Web-Audio/blob/master/views/audio.html)
-
-Please bear in mind these are talk demos and code is very rough :)
 
 ## Get in touch
 
